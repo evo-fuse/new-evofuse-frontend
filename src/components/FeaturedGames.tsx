@@ -5,7 +5,7 @@ import thumbFlappy from '@thumbnails/flappy_bird.jpg'
 import thumbOthello from '@thumbnails/Othelo.jpg'
 import thumbCarcassonne from '@thumbnails/carcassonne.png'
 
-function GameBanner({ title, subtitle, imageSrc, description }: { title: string; subtitle: string; imageSrc: string; description: string }) {
+function GameBanner({ title, imageSrc, description }: { title: string; imageSrc: string; description: string }) {
   return (
     <div className="game-item">
       <div className="game-banner">
@@ -13,7 +13,6 @@ function GameBanner({ title, subtitle, imageSrc, description }: { title: string;
       </div>
       <div className="game-banner-info">
         <div className="game-title">{title}</div>
-        <div className="game-subtitle">{subtitle}</div>
         <div className="game-separator"></div>
         <div className="game-description">{description}</div>
       </div>
@@ -34,13 +33,15 @@ function FeaturedGames({ limit }: { limit?: number }) {
       subtitle: 'Play & Earn', 
       imageSrc: thumb2048, 
       popularity: 5,
-      description: "Forget the old math game — this is evolution gone wild. Tiles fuse, worlds unfold, and every merge writes a new chapter of your journey. Welcome to the 2048 that actually *means* something."
+      category: 'top' as const,
+      description: "Forget the old math game — this is evolution gone wild. Tiles fuse, worlds unfold, and every merge writes a new chapter of your journey. Welcome to the 2048 that actually means something."
     },
     { 
       title: 'Othello', 
       subtitle: 'Crypto Kings', 
       imageSrc: thumbOthello, 
       popularity: 4,
+      category: 'top' as const,
       description: 'No quiet board game here — this is mind warfare on-chain. Outsmart, outflip, and outshine as your every move earns power, pride, and maybe a few DWAT brags.'
     },
     { 
@@ -48,6 +49,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
       subtitle: 'Crypto Flight', 
       imageSrc: thumbFlappy, 
       popularity: 3,
+      category: 'coming-soon' as const,
       description: "He's back — and he's learned to fly for tokens. Dodge chaos, chase destiny, and flap your way through the most ridiculous, rewarding sky in blockchain history."
     },
     { 
@@ -55,77 +57,133 @@ function FeaturedGames({ limit }: { limit?: number }) {
       subtitle: 'Strategic Build', 
       imageSrc: thumbCarcassonne, 
       popularity: 2,
+      category: 'coming-soon' as const,
       description: 'Build your medieval empire tile by tile, strategy by strategy. Every placement is a decision, every city a victory, and every game a chance to earn your place in the leaderboard.'
     },
   ]
 
-  const itemsPerPage = 6
-  const [currentPage, setCurrentPage] = useState(1)
-
-  const sortedGames = [...allGames].sort((a, b) => b.popularity - a.popularity)
+  // Group games by category
+  const topGames = allGames.filter(game => game.category === 'top').sort((a, b) => b.popularity - a.popularity)
+  const comingSoonGames = allGames.filter(game => game.category === 'coming-soon').sort((a, b) => b.popularity - a.popularity)
 
   if (limit) {
-    const games = sortedGames.slice(0, limit)
+    const games = topGames.slice(0, limit)
     return (
       <section className="section">
         <h2 className="section-title">Top Games</h2>
         <div className="card-grid">
           {games.map((game, index) => (
-            <GameBanner key={index} title={game.title} subtitle={game.subtitle} imageSrc={game.imageSrc} description={game.description} />
+            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} />
           ))}
         </div>
       </section>
     )
   }
 
-  const totalPages = Math.ceil(sortedGames.length / itemsPerPage)
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  const games = sortedGames.slice(startIndex, endIndex)
+  const itemsPerPage = 6
+  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPageComingSoon, setCurrentPageComingSoon] = useState(1)
 
-  const handlePageChange = (page: number) => {
+  const topTotalPages = Math.ceil(topGames.length / itemsPerPage)
+  const topStartIndex = (currentPage - 1) * itemsPerPage
+  const topEndIndex = topStartIndex + itemsPerPage
+  const topGamesPage = topGames.slice(topStartIndex, topEndIndex)
+
+  const comingSoonTotalPages = Math.ceil(comingSoonGames.length / itemsPerPage)
+  const comingSoonStartIndex = (currentPageComingSoon - 1) * itemsPerPage
+  const comingSoonEndIndex = comingSoonStartIndex + itemsPerPage
+  const comingSoonGamesPage = comingSoonGames.slice(comingSoonStartIndex, comingSoonEndIndex)
+
+  const handleTopPageChange = (page: number) => {
     setCurrentPage(page)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  const handleComingSoonPageChange = (page: number) => {
+    setCurrentPageComingSoon(page)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
-    <section className="section">
-      <h2 className="section-title">Top Games</h2>
-      <div className="card-grid">
-        {games.map((game, index) => (
-          <GameBanner key={index} title={game.title} subtitle={game.subtitle} imageSrc={game.imageSrc} description={game.description} />
-        ))}
-      </div>
-      {totalPages > 1 && (
-        <div className="pagination">
-          <button 
-            className="pagination-btn" 
-            onClick={() => handlePageChange(currentPage - 1)} 
-            disabled={currentPage === 1}
-            aria-label="Previous page"
-          >
-            <FaChevronLeft />
-          </button>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <button
-              key={page}
-              className={`pagination-page ${currentPage === page ? 'active' : ''}`}
-              onClick={() => handlePageChange(page)}
-            >
-              {page}
-            </button>
+    <>
+      <section className="section">
+        <h2 className="section-title">Top Games</h2>
+        <div className="card-grid">
+          {topGamesPage.map((game, index) => (
+            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} />
           ))}
-          <button 
-            className="pagination-btn" 
-            onClick={() => handlePageChange(currentPage + 1)} 
-            disabled={currentPage === totalPages}
-            aria-label="Next page"
-          >
-            <FaChevronRight />
-          </button>
         </div>
-      )}
-    </section>
+        {topTotalPages > 1 && (
+          <div className="pagination">
+            <button 
+              className="pagination-btn" 
+              onClick={() => handleTopPageChange(currentPage - 1)} 
+              disabled={currentPage === 1}
+              aria-label="Previous page"
+            >
+              <FaChevronLeft />
+            </button>
+            {Array.from({ length: topTotalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                className={`pagination-page ${currentPage === page ? 'active' : ''}`}
+                onClick={() => handleTopPageChange(page)}
+              >
+                {page}
+              </button>
+            ))}
+            <button 
+              className="pagination-btn" 
+              onClick={() => handleTopPageChange(currentPage + 1)} 
+              disabled={currentPage === topTotalPages}
+              aria-label="Next page"
+            >
+              <FaChevronRight />
+            </button>
+          </div>
+        )}
+      </section>
+      
+      <div style={{ width: '100%', height: '1px', background: 'rgba(255,255,255,0.1)', margin: '40px 0' }}></div>
+      
+      <section className="section">
+        <h2 className="section-title">Coming Soon</h2>
+        <div className="card-grid">
+          {comingSoonGamesPage.map((game, index) => (
+            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} />
+          ))}
+        </div>
+        {comingSoonTotalPages > 1 && (
+          <div className="pagination">
+            <button 
+              className="pagination-btn" 
+              onClick={() => handleComingSoonPageChange(currentPageComingSoon - 1)} 
+              disabled={currentPageComingSoon === 1}
+              aria-label="Previous page"
+            >
+              <FaChevronLeft />
+            </button>
+            {Array.from({ length: comingSoonTotalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                className={`pagination-page ${currentPageComingSoon === page ? 'active' : ''}`}
+                onClick={() => handleComingSoonPageChange(page)}
+              >
+                {page}
+              </button>
+            ))}
+            <button 
+              className="pagination-btn" 
+              onClick={() => handleComingSoonPageChange(currentPageComingSoon + 1)} 
+              disabled={currentPageComingSoon === comingSoonTotalPages}
+              aria-label="Next page"
+            >
+              <FaChevronRight />
+            </button>
+          </div>
+        )}
+      </section>
+    </>
   )
 }
 

@@ -42,6 +42,7 @@ function BlogDetailPage() {
         <article className="blog-detail page-fade-in">
           <header className="blog-detail-header">
             <h1 className="blog-detail-title">{post.title}</h1>
+            <div className="blog-detail-separator"></div>
             <div className="blog-detail-meta">
               <span>{post.author}</span>
               <span>•</span>
