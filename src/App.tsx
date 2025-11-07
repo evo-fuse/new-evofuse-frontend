@@ -9,6 +9,7 @@ import LeaderboardPage from './pages/LeaderboardPage'
 import TermsPage from './pages/TermsPage'
 import ContactUsPage from './pages/ContactUsPage'
 import BlogDetailPage from './pages/BlogDetailPage'
+import AboutUsPage from './pages/AboutUsPage'
 import PageLoader from './components/PageLoader'
 import PreSaleBanner from './components/PreSaleBanner'
 
@@ -17,7 +18,7 @@ function AppContent() {
   const location = useLocation()
   
   // Routes that should only show skeleton, not the circle ring loader
-  const skeletonOnlyRoutes = ['/games', '/blog', '/leaderboard', '/terms']
+  const skeletonOnlyRoutes = ['/games', '/blog', '/leaderboard', '/terms', '/about']
   const isSkeletonOnlyRoute = skeletonOnlyRoutes.some(route => 
     location.pathname === route || location.pathname.startsWith('/blog/')
   )
@@ -32,6 +33,7 @@ function AppContent() {
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogDetailPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/about" element={<AboutUsPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/contact" element={<ContactUsPage />} />
         </Route>
