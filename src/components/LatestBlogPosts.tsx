@@ -1,0 +1,163 @@
+import { useState } from 'react'
+import { FaChevronLeft, FaChevronRight, FaBookOpen } from 'react-icons/fa'
+import blog1 from '@assets/blog/1.png'
+import blog2 from '@assets/blog/2.png'
+import blog3 from '@assets/blog/3.png'
+import blog4 from '@assets/blog/4.png'
+import blog5 from '@assets/blog/5.png'
+import blog6 from '@assets/blog/6.png'
+
+function BlogCard({ title, imageSrc, variant, category, author, postedDate, readingTime }: { 
+  title: string
+  imageSrc: string
+  variant: 'light' | 'dark'
+  category: 'game' | 'crypto' | 'server' | 'new'
+  author: string
+  postedDate: string
+  readingTime: string
+}) {
+  return (
+    <div className={`blog-card blog-card-${variant}`}>
+      <div className={`blog-category-banner blog-category-${category}`}>
+        <span className="blog-category-text">{category}</span>
+      </div>
+      <div className="blog-content">
+        <div className="blog-image-container">
+          <img src={imageSrc} alt={title} className="blog-image" />
+          <div className="blog-image-overlay"></div>
+          <div className="blog-title">{title}</div>
+        </div>
+        <div className="blog-meta">
+          <div className="blog-meta-info">
+            <span className="blog-author">{author}</span>
+            <span className="blog-separator">•</span>
+            <span className="blog-date">{postedDate}</span>
+            <span className="blog-separator">•</span>
+            <span className="blog-reading-time">{readingTime}</span>
+          </div>
+        </div>
+        <div className="blog-read-btn-wrapper">
+          <button className="btn btn-primary blog-read-btn">
+            <FaBookOpen className="blog-read-icon" />
+            Read
+          </button>
+        </div>
+      </div>
+      {variant === 'light' && (
+        <>
+          <div className="blog-coins">🪙🪙🪙</div>
+          <div className="blog-sprite">👾</div>
+        </>
+      )}
+      {variant === 'dark' && (
+        <div className="blog-patterns">
+          <span className="star">✦</span>
+          <span className="star">✦</span>
+          <span className="star">✦</span>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function LatestBlogPosts({ limit }: { limit?: number }) {
+  const allPosts = [
+    { title: 'How to Earn Crypto Playing Games!', imageSrc: blog1, variant: 'light' as const, category: 'game' as const, author: 'John Doe', postedDate: 'Jan 15, 2024', readingTime: '5 min read', dateValue: new Date('2024-01-15') },
+    { title: 'Now to Earn Alert: Othello Playing Fimes!', imageSrc: blog2, variant: 'dark' as const, category: 'crypto' as const, author: 'Jane Smith', postedDate: 'Jan 12, 2024', readingTime: '3 min read', dateValue: new Date('2024-01-12') },
+    { title: 'Chamelon Coin Utility & Roadmap', imageSrc: blog3, variant: 'dark' as const, category: 'crypto' as const, author: 'Mike Johnson', postedDate: 'Jan 10, 2024', readingTime: '7 min read', dateValue: new Date('2024-01-10') },
+    { title: 'Market Trends & Analytics', imageSrc: blog4, variant: 'dark' as const, category: 'new' as const, author: 'Sarah Williams', postedDate: 'Jan 8, 2024', readingTime: '4 min read', dateValue: new Date('2024-01-08') },
+    { title: 'Launch Updates & Roadmap', imageSrc: blog5, variant: 'light' as const, category: 'server' as const, author: 'David Brown', postedDate: 'Jan 5, 2024', readingTime: '6 min read', dateValue: new Date('2024-01-05') },
+    { title: 'Achievements & Milestones', imageSrc: blog6, variant: 'dark' as const, category: 'game' as const, author: 'Emily Davis', postedDate: 'Jan 3, 2024', readingTime: '5 min read', dateValue: new Date('2024-01-03') },
+  ]
+
+  const itemsPerPage = 6
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const sortedPosts = [...allPosts].sort((a, b) => b.dateValue.getTime() - a.dateValue.getTime())
+
+  if (limit) {
+    const posts = sortedPosts.slice(0, limit)
+    return (
+      <section className="section">
+        <h2 className="section-title">Top Voices</h2>
+        <div className="card-grid">
+          {posts.map((post, index) => (
+            <BlogCard 
+              key={index}
+              title={post.title} 
+              imageSrc={post.imageSrc} 
+              variant={post.variant}
+              category={post.category}
+              author={post.author}
+              postedDate={post.postedDate}
+              readingTime={post.readingTime}
+            />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  const totalPages = Math.ceil(sortedPosts.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const posts = sortedPosts.slice(startIndex, endIndex)
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  return (
+    <section className="section">
+      <h2 className="section-title">Top Voices</h2>
+      <div className="card-grid">
+        {posts.map((post, index) => (
+          <BlogCard 
+            key={index}
+            title={post.title} 
+            imageSrc={post.imageSrc} 
+            variant={post.variant}
+            category={post.category}
+            author={post.author}
+            postedDate={post.postedDate}
+            readingTime={post.readingTime}
+          />
+        ))}
+      </div>
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button 
+            className="pagination-btn" 
+            onClick={() => handlePageChange(currentPage - 1)} 
+            disabled={currentPage === 1}
+            aria-label="Previous page"
+          >
+            <FaChevronLeft />
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              className={`pagination-page ${currentPage === page ? 'active' : ''}`}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </button>
+          ))}
+          <button 
+            className="pagination-btn" 
+            onClick={() => handlePageChange(currentPage + 1)} 
+            disabled={currentPage === totalPages}
+            aria-label="Next page"
+          >
+            <FaChevronRight />
+          </button>
+        </div>
+      )}
+    </section>
+  )
+}
+
+export default LatestBlogPosts
+
+
