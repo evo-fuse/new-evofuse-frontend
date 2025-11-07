@@ -38,11 +38,15 @@
 .brand-sub { font-size: 12px; opacity: 0.8; }
 
 .nav { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
-.nav-item { color: #fff; opacity: 0.9; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: 500; transition: text-shadow 0.3s ease, color 0.3s ease; }
+.nav-item { color: #fff; opacity: 0.9; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: 500; transition: text-shadow 0.3s ease, color 0.3s ease; display: flex; align-items: center; gap: 8px; }
+.nav-icon { font-size: 16px; flex-shrink: 0; }
+.nav-text { white-space: nowrap; }
 .nav-item:hover { text-shadow: 0 0 20px rgba(46, 39, 39, 0.3); color: #ffffff50; }
 .nav-item.active { opacity: 1; }
 
-.btn-contact { background: #fff; color: #0a1924; border: none; padding: 10px 24px; border-radius: 24px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease; }
+.btn-contact { background: #fff; color: #0a1924; border: none; padding: 10px 24px; border-radius: 24px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 8px; }
+.btn-contact-icon { font-size: 14px; flex-shrink: 0; }
+.btn-contact-text { white-space: nowrap; }
 .btn-contact:hover { background: rgba(255, 255, 255, 0.9); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
 
 .actions { display: flex; gap: 10px; }
@@ -82,14 +86,14 @@
 .slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* fill the image area */
+  object-fit: cover;
   object-position: center;
   border-radius: 0;
   display: block;
 }
 /* slide content beside image */
 .slide-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; height: 100%; gap: 16px; }
-.slide-inner img { order: 1; }
+.slide-inner img { order: 1; width: 100%; height: 100%; object-fit: cover; }
 .slide-caption { order: 2; }
 .slide.reverse .slide-inner { grid-template-columns: 1fr 1fr; }
 .slide.reverse .slide-inner img { order: 2; }
@@ -415,6 +419,9 @@
 /* Games page spacing */
 .games-page { padding: 24px 0 64px; }
 .games-page .card-grid { gap: 24px; }
+
+/* Section separator */
+.section-separator { width: 100%; height: 1px; background: rgba(255,255,255,0.1); margin: 40px 0; }
 
 /* Blog page spacing to match games */
 .blog-page { padding: 24px 0 64px; }
@@ -802,6 +809,11 @@
 .content-shell .container .section + .section { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; margin-top: 24px; }
 
 /* Responsive */
+@media (max-width: 1200px) {
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+  .blog-detail-content { max-width: 700px; padding: 0 20px; }
+}
+
 @media (max-width: 900px) {
   .content-shell { padding: 8px; }
   .tabs { overflow-x: auto; gap: 6px; padding: 0 10px; }
@@ -814,14 +826,29 @@
   .presale { grid-template-columns: 1fr; }
   .presale-right { justify-items: stretch; }
   .presale-inputs { grid-template-columns: 1fr; }
-  .nav { display: none; }
-  .hero-slideshow { max-width: 100%; }
-  .slideshow-container { height: 280px; }
-  .slide-inner { grid-template-columns: 1fr; }
-  .slide-caption { text-align: left; }
-  .slide.reverse .slide-caption { text-align: left; }
-  .slide-inner img { order: 1; }
-  .slide-caption { order: 2; margin-top: 6px; }
+  
+  /* Header responsive - show only icons */
+  .nav { gap: 12px; }
+  .nav-text { display: none; }
+  .nav-icon { font-size: 18px; }
+  .nav-item { padding: 8px; min-width: 40px; justify-content: center; }
+  .brand-text { display: none; }
+  .logo-img { height: 28px; }
+  .btn-contact { padding: 8px 16px; font-size: 12px; }
+  .btn-contact-icon { font-size: 12px; }
+  .user { gap: 12px; padding: 12px 16px; }
+  .user-bar { top: 8px; left: 8px; right: 8px; }
+  .section-title { font-size: 16px; }
+  .btn { font-size: 13px; padding: 8px 12px; }
+  .hero-slideshow { max-width: 100vw; margin: 0 auto 16px; padding: 0; width: 100%; }
+  .slideshow-container { height: auto; min-height: 300px; position: relative; width: 100%; margin: 0; overflow: hidden; }
+  .slide { position: absolute; height: auto; min-height: 300px; width: 100%; }
+  .slide.active { position: relative; }
+  .slide-inner { grid-template-columns: 1fr; height: auto; gap: 0; padding: 0; display: flex; flex-direction: column; width: 100%; }
+  .slide-inner img { order: 1; width: 100%; height: auto; min-height: 200px; max-height: 300px; object-fit: cover; object-position: center; display: block; }
+  .slide-caption { order: 2; text-align: left; margin-top: 12px; width: 100%; padding: 12px 16px; }
+  .slide.reverse .slide-inner img { order: 1; }
+  .slide.reverse .slide-caption { order: 2; text-align: left; }
   .slide .title { font-size: 22px; }
   .slide .desc { font-size: 14px; }
   .timer-grid { grid-template-columns: repeat(4, 1fr); max-width: 100%; gap: 10px; }
@@ -836,6 +863,25 @@
   .presale-timer { gap: 12px; }
   .timer-cta { margin-top: 4px; }
   .sale-progress { max-width: 100%; }
+
+  /* Blog and Games responsive */
+  .blog-detail-title { font-size: 28px; }
+  .blog-detail-content { max-width: 100%; padding: 0 16px; font-size: 15px; }
+  .blog-detail-content h2 { font-size: 22px; }
+  .blog-detail-content p { font-size: 15px; }
+  .blog-detail-hero img { height: 300px; }
+  .blog-detail { padding: 16px; }
+  .game-title { font-size: 20px; }
+  .game-description { font-size: 12px; }
+  .game-banner { height: 170px; }
+  .games-page { padding: 20px 0 48px; }
+  .blog-page { padding: 20px 0 48px; }
+  .games-page .card-grid { gap: 16px; }
+  .blog-page .card-grid { gap: 16px; }
+  .leaderboard-select { min-width: auto; width: 100%; }
+  .pagination { flex-wrap: wrap; gap: 6px; }
+  .pagination-btn, .pagination-page { min-width: 40px; height: 40px; font-size: 13px; }
+  .section-separator { margin: 24px 0; }
 
   /* Footer responsive */
   .footer-main {
@@ -861,7 +907,11 @@
 }
 
 @media (max-width: 600px) {
-  .slideshow-container { height: 240px; }
+  .slideshow-container { height: auto; min-height: 250px; }
+  .slide-inner img { min-height: 180px; max-height: 250px; width: 100%; }
+  .slide-caption { padding: 10px 12px; }
+  .slide .title { font-size: 20px; }
+  .slide .desc { font-size: 13px; }
   .slide-nav { width: 36px; height: 36px; font-size: 22px; }
   .slide-prev { left: 6px; }
   .slide-next { right: 6px; }
@@ -881,6 +931,48 @@
   .timer-cta .btn { padding: 8px 12px; font-size: 14px; }
   .progress-track { height: 10px; }
   .sale-top { font-size: 12px; }
+  
+  /* Header responsive for mobile */
+  .nav { gap: 8px; }
+  .nav-icon { font-size: 16px; }
+  .nav-item { padding: 6px; min-width: 36px; }
+  .brand-text { display: none; }
+  .logo-img { height: 24px; }
+  .btn-contact { padding: 6px 12px; font-size: 11px; }
+  .btn-contact-icon { font-size: 11px; }
+  .user { gap: 8px; padding: 10px 12px; }
+  .user-bar { top: 4px; left: 4px; right: 4px; border-radius: 12px; }
+  .section-title { font-size: 15px; }
+  .btn { font-size: 12px; padding: 7px 10px; }
+  
+  /* Blog and Games responsive for mobile */
+  .blog-detail-title { font-size: 24px; }
+  .blog-detail-content { padding: 0 12px; font-size: 14px; }
+  .blog-detail-content h2 { font-size: 20px; margin: 12px 0 6px; }
+  .blog-detail-content p { font-size: 14px; line-height: 1.7; }
+  .blog-detail-hero img { height: 240px; }
+  .blog-detail { padding: 12px; }
+  .blog-detail-meta { font-size: 12px; gap: 6px; }
+  .blog-detail-separator { margin: 12px 0; }
+  .blog-detail-footer { margin-top: 16px; }
+  .blog-detail-footer .btn { padding: 10px 16px; font-size: 14px; }
+  .game-title { font-size: 18px; }
+  .game-description { font-size: 11px; }
+  .game-banner { height: 150px; }
+  .game-item { padding: 10px; }
+  .game-banner-cta .btn { padding: 8px 12px; font-size: 13px; min-width: 40px; }
+  .games-page { padding: 16px 0 40px; }
+  .blog-page { padding: 16px 0 40px; }
+  .games-page .card-grid { gap: 12px; }
+  .blog-page .card-grid { gap: 12px; }
+  .section-title { font-size: 16px; }
+  .section { padding: 16px; margin-top: 16px; }
+  .section-separator { margin: 20px 0; }
+  .blog-title { font-size: 14px; }
+  .blog-meta-info { font-size: 11px; gap: 6px; }
+  .blog-read-btn { padding: 8px 16px; font-size: 12px; }
+  .blog-card { padding: 16px; min-height: 180px; }
+  .leaderboard-select { font-size: 12px; padding: 8px 16px; padding-right: 36px; }
   
   /* Footer responsive for small devices */
   .footer-main {
@@ -907,6 +999,12 @@
 }
 
 @media (max-width: 400px) {
+  .slideshow-container { height: auto; min-height: 220px; }
+  .slide-inner img { min-height: 160px; max-height: 220px; width: 100%; }
+  .slide-caption { padding: 8px 10px; }
+  .slide .title { font-size: 18px; }
+  .slide .desc { font-size: 12px; }
+  .slide-nav { width: 32px; height: 32px; font-size: 18px; }
   .timer-grid { grid-template-columns: repeat(4, 1fr); gap: 3px; }
   .presale-timer .ring { --size: 30px; }
   .presale-timer .ring-small { --size: 28px; }
@@ -920,6 +1018,47 @@
   .presale-kicker { font-size: 12px; }
   .presale-timer { gap: 6px; }
   .timer-cta .btn { padding: 6px 10px; font-size: 12px; }
+  
+  /* Header responsive for very small devices */
+  .nav { gap: 6px; }
+  .nav-icon { font-size: 14px; }
+  .nav-item { padding: 5px; min-width: 32px; }
+  .brand-text { display: none; }
+  .logo-img { height: 20px; }
+  .btn-contact { padding: 6px; min-width: 32px; justify-content: center; font-size: 10px; }
+  .btn-contact-text { display: none; }
+  .btn-contact-icon { font-size: 12px; }
+  .user { gap: 6px; padding: 8px 10px; }
+  .user-bar { top: 2px; left: 2px; right: 2px; border-radius: 10px; }
+  .section-title { font-size: 14px; }
+  .btn { font-size: 11px; padding: 6px 8px; }
+  
+  /* Blog and Games responsive for very small devices */
+  .blog-detail-title { font-size: 20px; }
+  .blog-detail-content { padding: 0 8px; font-size: 13px; }
+  .blog-detail-content h2 { font-size: 18px; margin: 10px 0 5px; }
+  .blog-detail-content p { font-size: 13px; line-height: 1.6; }
+  .blog-detail-hero img { height: 200px; }
+  .blog-detail { padding: 10px; }
+  .blog-detail-meta { font-size: 11px; }
+  .game-title { font-size: 16px; }
+  .game-description { font-size: 10px; }
+  .game-banner { height: 130px; }
+  .game-item { padding: 8px; }
+  .game-banner-cta .btn { padding: 6px 10px; font-size: 12px; min-width: 36px; }
+  .games-page { padding: 12px 0 32px; }
+  .blog-page { padding: 12px 0 32px; }
+  .games-page .card-grid { gap: 10px; }
+  .blog-page .card-grid { gap: 10px; }
+  .section-title { font-size: 14px; }
+  .section { padding: 12px; margin-top: 12px; }
+  .section-separator { margin: 16px 0; }
+  .blog-title { font-size: 13px; }
+  .blog-meta-info { font-size: 10px; gap: 4px; }
+  .blog-read-btn { padding: 6px 12px; font-size: 11px; }
+  .blog-card { padding: 12px; min-height: 160px; }
+  .leaderboard-select { font-size: 11px; padding: 6px 12px; padding-right: 32px; }
+  .pagination-btn, .pagination-page { min-width: 36px; height: 36px; font-size: 11px; }
 }
 
 /* Leaderboard */

@@ -144,7 +144,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
         )}
       </section>
       
-      <div style={{ width: '100%', height: '1px', background: 'rgba(255,255,255,0.1)', margin: '40px 0' }}></div>
+      <div className="section-separator"></div>
       
       <section className="section">
         <h2 className="section-title">Coming Soon</h2>

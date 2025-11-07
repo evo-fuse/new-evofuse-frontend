@@ -1,5 +1,6 @@
 import siteLogo from '@assets/logo.png'
 import { Link, NavLink } from 'react-router-dom'
+import { FaHome, FaGamepad, FaBookOpen, FaTrophy, FaEnvelope } from 'react-icons/fa'
 
 function Header() {
   return (
@@ -14,13 +15,28 @@ function Header() {
           </Link>
         </div>
         <nav className="nav">
-          <NavLink to="/" end className="nav-item">Home</NavLink>
-          <NavLink to="/games" className="nav-item">Games</NavLink>
-          <NavLink to="/blog" className="nav-item">Blog</NavLink>
-          <NavLink to="/leaderboard" className="nav-item">Leaderboard</NavLink>
+          <NavLink to="/" end className="nav-item">
+            <FaHome className="nav-icon" />
+            <span className="nav-text">Home</span>
+          </NavLink>
+          <NavLink to="/games" className="nav-item">
+            <FaGamepad className="nav-icon" />
+            <span className="nav-text">Games</span>
+          </NavLink>
+          <NavLink to="/blog" className="nav-item">
+            <FaBookOpen className="nav-icon" />
+            <span className="nav-text">Blog</span>
+          </NavLink>
+          <NavLink to="/leaderboard" className="nav-item">
+            <FaTrophy className="nav-icon" />
+            <span className="nav-text">Leaderboard</span>
+          </NavLink>
         </nav>
         <div className="user-actions">
-          <button className="btn btn-contact">Contact Us</button>
+          <button className="btn btn-contact">
+            <FaEnvelope className="btn-contact-icon" />
+            <span className="btn-contact-text">Contact Us</span>
+          </button>
         </div>
       </div>
     </div>
