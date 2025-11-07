@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage'
 import GamesPage from './pages/GamesPage'
 import BlogPage from './pages/BlogPage'
 import LeaderboardPage from './pages/LeaderboardPage'
+import TermsPage from './pages/TermsPage'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/games" element={<GamesPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
+        <Route path="/terms" element={<TermsPage />} />
       </Route>
     </Routes>
   )

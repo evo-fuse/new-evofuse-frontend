@@ -420,6 +420,18 @@
 .blog-page { padding: 24px 0 64px; }
 .blog-page .card-grid { gap: 24px; }
 
+/* Page loader (light overlay with spinner) */
+.page-loader-overlay { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(10, 25, 36, 0.35); backdrop-filter: blur(4px); z-index: 999; animation: fade-in 200ms ease forwards; }
+.page-loader-spinner { width: 40px; height: 40px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.25); border-top-color: #27d5ff; animation: spin 900ms linear infinite; box-shadow: 0 0 10px rgba(39,213,255,0.35); }
+
+/* Soft content fade-in */
+.page-fade-in { opacity: 0; animation: fade-in 380ms ease forwards; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 /* Generic fade-in-up */
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(14px); }
