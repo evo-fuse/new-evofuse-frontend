@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FaMinus, FaTimes } from 'react-icons/fa'
+import { FaMinus, FaPlus, FaTimes } from 'react-icons/fa'
 
 function PreSaleBanner() {
   const [timeLeft, setTimeLeft] = useState({
@@ -56,7 +56,7 @@ function PreSaleBanner() {
             onClick={() => setIsMinimized(!isMinimized)}
             aria-label={isMinimized ? 'Expand' : 'Minimize'}
           >
-            <FaMinus />
+            {isMinimized ? <FaPlus /> : <FaMinus />}
           </button>
           <button 
             className="presale-control-btn" 
