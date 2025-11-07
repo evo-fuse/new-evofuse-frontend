@@ -6,7 +6,7 @@ function MainLayout() {
   return (
     <div className="page">
       <Header />
-      <div style={{ marginTop: '80px' }}>
+      <div style={{ marginTop: '80px', paddingBottom: '40px' }}>
         <div className="content-shell">
           <main className="container">
             <Outlet />

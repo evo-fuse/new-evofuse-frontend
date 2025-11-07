@@ -2,7 +2,6 @@ import { useState } from 'react'
 import siteLogo from '@assets/logo.png'
 import { FaTwitter, FaDiscord, FaLinkedin, FaYoutube } from 'react-icons/fa'
 import { FaTiktok } from 'react-icons/fa6'
-import { Link } from 'react-router-dom'
 
 function Footer() {
   const [email, setEmail] = useState('')
@@ -52,7 +51,6 @@ function Footer() {
         <div className="footer-bottom-content">
           <div className="footer-copyright">© 2025 EvoFuse. All rights reserved.</div>
           <div className="footer-legal-links">
-            <Link to="/terms" className="footer-legal-link">Terms & Conditions</Link>
             {/* <a href="#" className="footer-legal-link">Privacy Policy</a>
             <a href="#" className="footer-legal-link">Cookies Policy</a>
             <a href="#" className="footer-legal-link">Modern Slavery Act</a>

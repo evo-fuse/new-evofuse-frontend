@@ -1,13 +1,14 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { FaChevronLeft, FaChevronRight, FaPlay } from 'react-icons/fa'
 import thumb2048 from '@thumbnails/2048.jpg'
 import thumbFlappy from '@thumbnails/flappy_bird.jpg'
 import thumbOthello from '@thumbnails/Othello.jpg'
 import thumbCarcassonne from '@thumbnails/carcassonne.png'
 
-function GameBanner({ title, imageSrc, description }: { title: string; imageSrc: string; description: string }) {
+function GameBanner({ title, imageSrc, description, slug }: { title: string; imageSrc: string; description: string; slug: string }) {
   return (
-    <div className="game-item">
+    <Link to={`/game/${slug}`} className="game-item" style={{ textDecoration: 'none' }}>
       <div className="game-banner">
         <img className="game-banner-img" src={imageSrc} alt={title} />
       </div>
@@ -17,12 +18,12 @@ function GameBanner({ title, imageSrc, description }: { title: string; imageSrc:
         <div className="game-description">{description}</div>
       </div>
       <div className="game-banner-cta">
-        <button className="btn btn-primary" aria-label="Play">
+        <div className="btn btn-primary" aria-label="Play">
           <FaPlay/>
           Play
-        </button>
+        </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
@@ -34,6 +35,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
       imageSrc: thumb2048, 
       popularity: 5,
       category: 'top' as const,
+      slug: '2048',
       description: "Forget the old math game — this is evolution gone wild. Tiles fuse, worlds unfold, and every merge writes a new chapter of your journey. Welcome to the 2048 that actually means something."
     },
     { 
@@ -42,6 +44,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
       imageSrc: thumbOthello, 
       popularity: 4,
       category: 'top' as const,
+      slug: 'othello',
       description: 'No quiet board game here — this is mind warfare on-chain. Outsmart, outflip, and outshine as your every move earns power, pride, and maybe a few DWAT brags.'
     },
     { 
@@ -50,6 +53,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
       imageSrc: thumbFlappy, 
       popularity: 3,
       category: 'top' as const,
+      slug: 'flappy-bird',
       description: "He's back — and he's learned to fly for tokens. Dodge chaos, chase destiny, and flap your way through the most ridiculous, rewarding sky in blockchain history."
     },
     { 
@@ -58,6 +62,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
       imageSrc: thumbCarcassonne, 
       popularity: 2,
       category: 'coming-soon' as const,
+      slug: 'carcassonne',
       description: 'Build your medieval empire tile by tile, strategy by strategy. Every placement is a decision, every city a victory, and every game a chance to earn your place in the leaderboard.'
     },
   ]
@@ -73,7 +78,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
         <h2 className="section-title">Top Games</h2>
         <div className="card-grid">
           {games.map((game, index) => (
-            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} />
+            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} slug={game.slug} />
           ))}
         </div>
       </section>
@@ -110,7 +115,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
         <h2 className="section-title">Top Games</h2>
         <div className="card-grid">
           {topGamesPage.map((game, index) => (
-            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} />
+            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} slug={game.slug} />
           ))}
         </div>
         {topTotalPages > 1 && (
@@ -150,7 +155,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
         <h2 className="section-title">Coming Soon</h2>
         <div className="card-grid">
           {comingSoonGamesPage.map((game, index) => (
-            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} />
+            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} slug={game.slug} />
           ))}
         </div>
         {comingSoonTotalPages > 1 && (
