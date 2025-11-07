@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import thumb2048 from '@thumbnails/2048.jpg'
 import thumbFlappy from '@thumbnails/flappy_bird.jpg'
-import thumbOthello from '@thumbnails/Othelo.jpg'
+import thumbOthello from '@thumbnails/othelo.jpg'
 import thumbCarcassonne from '@thumbnails/carcassonne.png'
 import slideRunning from '@slides/running.png'
 import slideImagine from '@slides/imaginzation.png'
@@ -17,7 +17,7 @@ import blog4 from '@assets/blog/4.png'
 import blog5 from '@assets/blog/5.png'
 import blog6 from '@assets/blog/6.png'
 import siteLogo from '@assets/logo.png'
-import { FaTwitter, FaDiscord, FaLinkedin, FaMusic, FaGamepad, FaRegComments, FaHome, FaTrophy, FaCoins, FaBlog, FaChartLine, FaRocket, FaAward, FaPlay, FaServer, FaStar, FaShieldAlt, FaUser, FaYoutube, FaBookOpen } from 'react-icons/fa'
+import { FaTwitter, FaDiscord, FaLinkedin, FaMusic, FaGamepad, FaRegComments, FaHome, FaTrophy, FaCoins, FaBlog, FaChartLine, FaRocket, FaAward, FaPlay, FaServer, FaStar, FaShieldAlt, FaUser, FaYoutube, FaBookOpen, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { FaTiktok } from 'react-icons/fa6'
 
 // type TabKey = 'Home' | 'Games' | 'Blog' | 'Leaderboar' | 'TOKENOMICS'
@@ -30,14 +30,15 @@ function App() {
   return (
     <div className="page">
       <UserBar />
-      <HeroSlideshow />
-      <div className="content-shell">
-        <HeroTabs active={activeTab} setActive={setActiveTab} />
-        <main className="container">
-          <TabContent activeTab={activeTab} />
-        </main>
+      <div style={{ marginTop: '80px' }}>
+        <HeroSlideshow />
+        <div className="content-shell">
+          <HeroTabs active={activeTab} setActive={setActiveTab} />
+          <main className="container">
+            <TabContent activeTab={activeTab} />
+          </main>
+        </div>
       </div>
-
       <Footer />
     </div>
   )
@@ -46,18 +47,20 @@ function App() {
 function UserBar() {
   return (
     <div className="user-bar">
-      <div className="user container">
+      <div className="user">
         <div className="brand">
           <img className="logo-img" src={siteLogo} alt="EvoFuse" />
           <div className="brand-text">
             <div className="brand-title">EVOFUSE</div>
-            <div className="brand-sub">GAMES</div>
           </div>
         </div>
-        {/* <div className="user-actions">
-          <button className="btn btn-outline small btn-chip">Sign in</button>
-          <button className="btn btn-primary small btn-glow">Sign up</button>
-        </div> */}
+        <nav className="nav">
+          <a href="#" className="nav-item">About Us</a>
+          <a href="#" className="nav-item">Teams</a>
+        </nav>
+        <div className="user-actions">
+          <button className="btn btn-contact">Contact Us</button>
+        </div>
       </div>
     </div>
   )
@@ -87,8 +90,35 @@ function HeroTabs({ active, setActive }: { active: TabKey; setActive: (tab: TabK
 }
 
 function TabContent({ activeTab }: { activeTab: TabKey }) {
+  const [wrapperHeight, setWrapperHeight] = useState<number>(0)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (wrapperRef.current) {
+        const activePanel = wrapperRef.current.querySelector('.tab-panel.active')
+        if (activePanel) {
+          // Create a clone to measure height without affecting layout
+          const clone = activePanel.cloneNode(true) as HTMLElement
+          clone.style.position = 'absolute'
+          clone.style.visibility = 'hidden'
+          clone.style.height = 'auto'
+          clone.style.width = activePanel.getBoundingClientRect().width + 'px'
+          wrapperRef.current.appendChild(clone)
+          const height = clone.scrollHeight
+          wrapperRef.current.removeChild(clone)
+          setWrapperHeight(height)
+        }
+      }
+    }
+    
+    // Small delay to ensure DOM has updated
+    const timeoutId = setTimeout(updateHeight, 50)
+    return () => clearTimeout(timeoutId)
+  }, [activeTab])
+
   return (
-    <div className="tab-content-wrapper">
+    <div ref={wrapperRef} className="tab-content-wrapper" style={{ height: wrapperHeight || 'auto', minHeight: wrapperHeight || 400 }}>
       <div className={`tab-panel ${activeTab === 'Home' ? 'active' : ''}`}>
         <FeaturedGames limit={3} />
         {/* <TokenPreSale /> */}
@@ -131,7 +161,7 @@ function HeroSlideshow() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % slides.length)
-    }, 5000) // Change slide every 5 seconds
+    }, 10000) // Change slide every 10 seconds
 
     return () => clearInterval(interval)
   }, [slides.length])
@@ -159,14 +189,9 @@ function HeroSlideshow() {
             <div className="slide-inner">
               <img src={slide.src} alt={slide.title} />
               <div className="slide-caption">
-                {/* <div className="badge">{slide.badge}</div> */}
                 <div className="title">{slide.title}</div>
                 <div className="slide-separator"></div>
                 <div className="desc">{slide.desc}</div>
-                {/* <div className="slide-actions">
-                  <button className="btn btn-primary cta">{slide.cta}</button>
-                  <button className="btn btn-outline cta alt">Learn More</button>
-                </div> */}
               </div>
             </div>
           </div>
@@ -194,32 +219,112 @@ function HeroSlideshow() {
 
 function FeaturedGames({ limit }: { limit?: number }) {
   const allGames = [
-    { title: "2048", subtitle: "Play & Earn", imageSrc: thumb2048, popularity: 5 },
-    { title: "Othello", subtitle: "Crypto Kings", imageSrc: thumbOthello, popularity: 4 },
-    { title: "Flappy Bird", subtitle: "Crypto Flight", imageSrc: thumbFlappy, popularity: 3 },
-    { title: "Carcassonne", subtitle: "Strategic Build", imageSrc: thumbCarcassonne, popularity: 2 },
+    { 
+      title: "2048", 
+      subtitle: "Play & Earn", 
+      imageSrc: thumb2048, 
+      popularity: 5,
+      description: "Forget the old math game — this is evolution gone wild. Tiles fuse, worlds unfold, and every merge writes a new chapter of your journey. Welcome to the 2048 that actually *means* something."
+    },
+    { 
+      title: "Othello", 
+      subtitle: "Crypto Kings", 
+      imageSrc: thumbOthello, 
+      popularity: 4,
+      description: "No quiet board game here — this is mind warfare on-chain. Outsmart, outflip, and outshine as your every move earns power, pride, and maybe a few DWAT brags."
+    },
+    { 
+      title: "Flappy Bird", 
+      subtitle: "Crypto Flight", 
+      imageSrc: thumbFlappy, 
+      popularity: 3,
+      description: "He's back — and he's learned to fly for tokens. Dodge chaos, chase destiny, and flap your way through the most ridiculous, rewarding sky in blockchain history."
+    },
+    { 
+      title: "Carcassonne", 
+      subtitle: "Strategic Build", 
+      imageSrc: thumbCarcassonne, 
+      popularity: 2,
+      description: "Build your medieval empire tile by tile, strategy by strategy. Every placement is a decision, every city a victory, and every game a chance to earn your place in the leaderboard."
+    },
   ]
   
-  // Sort by popularity and limit
-  const games = limit 
-    ? [...allGames].sort((a, b) => b.popularity - a.popularity).slice(0, limit)
-    : allGames
+  const itemsPerPage = 6
+  const [currentPage, setCurrentPage] = useState(1)
+  
+  // Sort by popularity
+  const sortedGames = [...allGames].sort((a, b) => b.popularity - a.popularity)
+  
+  // If limit is provided, just show limited items without pagination
+  if (limit) {
+    const games = sortedGames.slice(0, limit)
+    return (
+      <section className="section">
+        <h2 className="section-title">Top Games</h2>
+        <div className="card-grid">
+          {games.map((game, index) => (
+            <GameBanner key={index} title={game.title} subtitle={game.subtitle} imageSrc={game.imageSrc} description={game.description} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+  
+  // Pagination logic
+  const totalPages = Math.ceil(sortedGames.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const games = sortedGames.slice(startIndex, endIndex)
+  
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
     <section className="section">
-      <h2 className="section-title">Featured Games</h2>
+      <h2 className="section-title">Top Games</h2>
       <div className="card-grid">
         {games.map((game, index) => (
-          <GameBanner key={index} title={game.title} subtitle={game.subtitle} imageSrc={game.imageSrc} />
+          <GameBanner key={index} title={game.title} subtitle={game.subtitle} imageSrc={game.imageSrc} description={game.description} />
         ))}
       </div>
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button 
+            className="pagination-btn" 
+            onClick={() => handlePageChange(currentPage - 1)} 
+            disabled={currentPage === 1}
+            aria-label="Previous page"
+          >
+            <FaChevronLeft />
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              className={`pagination-page ${currentPage === page ? 'active' : ''}`}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </button>
+          ))}
+          <button 
+            className="pagination-btn" 
+            onClick={() => handlePageChange(currentPage + 1)} 
+            disabled={currentPage === totalPages}
+            aria-label="Next page"
+          >
+            <FaChevronRight />
+          </button>
+        </div>
+      )}
     </section>
   )
 }
 
-type GameBannerProps = { title: string; subtitle: string; imageSrc: string }
+type GameBannerProps = { title: string; subtitle: string; imageSrc: string; description: string }
 
-function GameBanner({ title, subtitle, imageSrc }: GameBannerProps) {
+function GameBanner({ title, subtitle, imageSrc, description }: GameBannerProps) {
   return (
     <div className="game-item">
       <div className="game-banner">
@@ -227,7 +332,8 @@ function GameBanner({ title, subtitle, imageSrc }: GameBannerProps) {
       </div>
       <div className="game-banner-info">
         <div className="game-title">{title}</div>
-        <div className="game-subtitle">{subtitle}</div>
+        <div className="game-separator"></div>
+        <div className="game-description">{description}</div>
       </div>
       <div className="game-banner-cta">
         <button className="btn btn-primary" aria-label="Play">
@@ -239,104 +345,104 @@ function GameBanner({ title, subtitle, imageSrc }: GameBannerProps) {
   )
 }
 
-// function TokenPreSale() {
-//   // Demo deadline: 3 days, 12 hours, 34 minutes from now
-//   const [target] = useState(() => Date.now() + ((3 * 24 + 12) * 60 + 34) * 60 * 1000)
-//   const [now, setNow] = useState(Date.now())
-//   const [saleProgress, setSaleProgress] = useState(0)
-//   const saleProgressTarget = 75
+function TokenPreSale() {
+  // Demo deadline: 3 days, 12 hours, 34 minutes from now
+  const [target] = useState(() => Date.now() + ((3 * 24 + 12) * 60 + 34) * 60 * 1000)
+  const [now, setNow] = useState(Date.now())
+  const [saleProgress, setSaleProgress] = useState(0)
+  const saleProgressTarget = 75
 
-//   useEffect(() => {
-//     const id = setInterval(() => setNow(Date.now()), 1000)
-//     return () => clearInterval(id)
-//   }, [])
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000)
+    return () => clearInterval(id)
+  }, [])
 
-//   // Animate sale progress to target
-//   useEffect(() => {
-//     if (saleProgress >= saleProgressTarget) return
-//     const step = () => setSaleProgress((p) => Math.min(saleProgressTarget, p + 1))
-//     const t = setTimeout(step, 20)
-//     return () => clearTimeout(t)
-//   }, [saleProgress, saleProgressTarget])
+  // Animate sale progress to target
+  useEffect(() => {
+    if (saleProgress >= saleProgressTarget) return
+    const step = () => setSaleProgress((p) => Math.min(saleProgressTarget, p + 1))
+    const t = setTimeout(step, 20)
+    return () => clearTimeout(t)
+  }, [saleProgress, saleProgressTarget])
 
-//   const remainingMs = Math.max(0, target - now)
-//   const totalSeconds = Math.floor(remainingMs / 1000)
-//   const days = Math.floor(totalSeconds / (24 * 3600))
-//   const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600)
-//   const minutes = Math.floor((totalSeconds % 3600) / 60)
-//   const seconds = totalSeconds % 60
+  const remainingMs = Math.max(0, target - now)
+  const totalSeconds = Math.floor(remainingMs / 1000)
+  const days = Math.floor(totalSeconds / (24 * 3600))
+  const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600)
+  const minutes = Math.floor((totalSeconds % 3600) / 60)
+  const seconds = totalSeconds % 60
 
-//   // Progress for rings
-//   const pctDays = ((days % 30) / 30) * 100
-//   const pctHours = (hours / 24) * 100
-//   const pctMinutes = (minutes / 60) * 100
-//   const pctSeconds = (seconds / 60) * 100
+  // Progress for rings
+  const pctDays = ((days % 30) / 30) * 100
+  const pctHours = (hours / 24) * 100
+  const pctMinutes = (minutes / 60) * 100
+  const pctSeconds = (seconds / 60) * 100
 
-//   return (
-//     <section className="section presale-timer">
-//       <div className="presale-heading">
-//         <div className="presale-kicker">PLAY, EARN AND OWN YOUR GAMES!</div>
-//       </div>
+  return (
+    <section className="section presale-timer">
+      <div className="presale-heading">
+        <div className="presale-kicker">PLAY, EARN AND OWN YOUR GAMES!</div>
+      </div>
 
-//       <div className="timer-grid">
-//         <TimerRing value={days} label="DAYS" pct={pctDays} />
-//         <TimerRing value={hours} label="HRS" pct={pctHours} highlight />
-//         <TimerRing value={minutes} label="MINS" pct={pctMinutes} />
-//         <TimerRing value={seconds} label="SECS" pct={pctSeconds} small />
-//       </div>
+      <div className="timer-grid">
+        <TimerRing value={days} label="DAYS" pct={pctDays} />
+        <TimerRing value={hours} label="HRS" pct={pctHours} highlight />
+        <TimerRing value={minutes} label="MINS" pct={pctMinutes} />
+        <TimerRing value={seconds} label="SECS" pct={pctSeconds} small />
+      </div>
 
-//       <div className="timer-cta">
-//         <button className="btn btn-primary">BUY TOKENS NOW</button>
-//       </div>
+      <div className="timer-cta">
+        <button className="btn btn-primary">BUY TOKENS NOW</button>
+      </div>
 
-//       <div className="sale-progress">
-//         <div className="sale-top">
-//           <span className="sale-label">Pre‑Sale Goal</span>
-//           <span className="sale-value">{saleProgress}% Sold</span>
-//         </div>
-//         <div className="progress-track" aria-valuemin={0} aria-valuemax={100} aria-valuenow={saleProgress} role="progressbar">
-//           <div className="progress-fill" style={{ width: `${saleProgress}%` }} />
-//         </div>
-//       </div>
-//     </section>
-//   )
-// }
+      <div className="sale-progress">
+        <div className="sale-top">
+          <span className="sale-label">Pre‑Sale Goal</span>
+          <span className="sale-value">{saleProgress}% Sold</span>
+        </div>
+        <div className="progress-track" aria-valuemin={0} aria-valuemax={100} aria-valuenow={saleProgress} role="progressbar">
+          <div className="progress-fill" style={{ width: `${saleProgress}%` }} />
+        </div>
+      </div>
+    </section>
+  )
+}
 
-// function TimerRing({ value, label, pct, highlight, small }: { value: number; label: string; pct: number; highlight?: boolean; small?: boolean }) {
-//   const display = String(Math.max(0, value)).padStart(2, '0')
-//   const size = small ? 150 : 180
-//   const stroke = 12 // thinner stroke
-//   const radius = (size - stroke) / 2
-//   const circumference = 2 * Math.PI * radius
-//   const dashOffset = circumference * (1 - pct / 100)
+function TimerRing({ value, label, pct, highlight, small }: { value: number; label: string; pct: number; highlight?: boolean; small?: boolean }) {
+  const display = String(Math.max(0, value)).padStart(2, '0')
+  const size = small ? 150 : 180
+  const stroke = 12 // thinner stroke
+  const radius = (size - stroke) / 2
+  const circumference = 2 * Math.PI * radius
+  const dashOffset = circumference * (1 - pct / 100)
 
-//   return (
-//     <div className={`ring ${highlight ? 'ring-highlight' : ''} ${small ? 'ring-small' : ''}`} style={{ ['--size' as any]: `${size}px` }}>
-//       <svg className="ring-svg" width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden>
-//         <circle className="ring-track" cx={size / 2} cy={size / 2} r={radius} strokeWidth={stroke} strokeLinecap="round" />
-//         <circle
-//           className="ring-progress"
-//           cx={size / 2}
-//           cy={size / 2}
-//           r={radius}
-//           strokeWidth={stroke}
-//           strokeDasharray={circumference}
-//           strokeDashoffset={dashOffset}
-//           strokeLinecap="round"
-//         />
-//       </svg>
-//       <div className="ring-center">
-//         <div className="ring-number">{display}</div>
-//         <div className="ring-label">{label}</div>
-//       </div>
-//       {/* Simple number display for mobile */}
-//       <div className="timer-simple">
-//         <div className="timer-number">{display}</div>
-//         <div className="timer-label">{label}</div>
-//       </div>
-//     </div>
-//   )
-// }
+  return (
+    <div className={`ring ${highlight ? 'ring-highlight' : ''} ${small ? 'ring-small' : ''}`} style={{ ['--size' as any]: `${size}px` }}>
+      <svg className="ring-svg" width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden>
+        <circle className="ring-track" cx={size / 2} cy={size / 2} r={radius} strokeWidth={stroke} strokeLinecap="round" />
+        <circle
+          className="ring-progress"
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          strokeWidth={stroke}
+          strokeDasharray={circumference}
+          strokeDashoffset={dashOffset}
+          strokeLinecap="round"
+        />
+      </svg>
+      <div className="ring-center">
+        <div className="ring-number">{display}</div>
+        <div className="ring-label">{label}</div>
+      </div>
+      {/* Simple number display for mobile */}
+      <div className="timer-simple">
+        <div className="timer-number">{display}</div>
+        <div className="timer-label">{label}</div>
+      </div>
+    </div>
+  )
+}
 
 function Leaderboard() {
   const [activeFilter, setActiveFilter] = useState<'all' | 'othello' | '2048' | 'flappy' | 'carcassonne'>('all')
@@ -483,14 +589,51 @@ function LatestBlogPosts({ limit }: { limit?: number }) {
     { title: "Achievements & Milestones", imageSrc: blog6, variant: "dark" as const, icon: <FaAward />, category: "game" as const, author: "Emily Davis", postedDate: "Jan 3, 2024", readingTime: "5 min read", dateValue: new Date("2024-01-03") },
   ]
   
-  // Sort by date (newest first) and limit
-  const posts = limit 
-    ? [...allPosts].sort((a, b) => b.dateValue.getTime() - a.dateValue.getTime()).slice(0, limit)
-    : allPosts
+  const itemsPerPage = 6
+  const [currentPage, setCurrentPage] = useState(1)
+  
+  // Sort by date (newest first)
+  const sortedPosts = [...allPosts].sort((a, b) => b.dateValue.getTime() - a.dateValue.getTime())
+  
+  // If limit is provided, just show limited items without pagination
+  if (limit) {
+    const posts = sortedPosts.slice(0, limit)
+    return (
+      <section className="section">
+        <h2 className="section-title">Top Voices</h2>
+        <div className="card-grid">
+          {posts.map((post, index) => (
+            <BlogCard 
+              key={index}
+              title={post.title} 
+              imageSrc={post.imageSrc} 
+              variant={post.variant}
+              icon={post.icon}
+              category={post.category}
+              author={post.author}
+              postedDate={post.postedDate}
+              readingTime={post.readingTime}
+            />
+          ))}
+        </div>
+      </section>
+    )
+  }
+  
+  // Pagination logic
+  const totalPages = Math.ceil(sortedPosts.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const posts = sortedPosts.slice(startIndex, endIndex)
+  
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
     <section className="section">
-      <h2 className="section-title">Latest Blog Posts</h2>
+      <h2 className="section-title">Top Voices</h2>
       <div className="card-grid">
         {posts.map((post, index) => (
           <BlogCard 
@@ -506,6 +649,35 @@ function LatestBlogPosts({ limit }: { limit?: number }) {
           />
         ))}
       </div>
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button 
+            className="pagination-btn" 
+            onClick={() => handlePageChange(currentPage - 1)} 
+            disabled={currentPage === 1}
+            aria-label="Previous page"
+          >
+            <FaChevronLeft />
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              className={`pagination-page ${currentPage === page ? 'active' : ''}`}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </button>
+          ))}
+          <button 
+            className="pagination-btn" 
+            onClick={() => handlePageChange(currentPage + 1)} 
+            disabled={currentPage === totalPages}
+            aria-label="Next page"
+          >
+            <FaChevronRight />
+          </button>
+        </div>
+      )}
     </section>
   )
 }
@@ -522,26 +694,17 @@ type BlogCardProps = {
 }
 
 function BlogCard({ title, imageSrc, variant, icon: _icon, category, author, postedDate, readingTime }: BlogCardProps) {
-  const categoryIcons = {
-    game: <FaGamepad />,
-    crypto: <FaCoins />,
-    server: <FaServer />,
-    new: <FaStar />
-  }
-
   return (
     <div className={`blog-card blog-card-${variant}`}>
       {/* <div className="blog-icon">{icon}</div> */}
+      <div className={`blog-category-banner blog-category-${category}`}>
+        <span className="blog-category-text">{category}</span>
+      </div>
       <div className="blog-content">
-        <div className="blog-category-wrapper">
-          <span className={`blog-category blog-category-${category}`}>
-            {categoryIcons[category]}
-            <span className="blog-category-text">{category}</span>
-          </span>
-        </div>
-        <div className="blog-title">{title}</div>
         <div className="blog-image-container">
           <img src={imageSrc} alt={title} className="blog-image" />
+          <div className="blog-image-overlay"></div>
+          <div className="blog-title">{title}</div>
         </div>
         <div className="blog-meta">
           <div className="blog-meta-info">
