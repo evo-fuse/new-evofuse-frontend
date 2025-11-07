@@ -29,8 +29,6 @@ function TermsPage() {
               <Lottie animationData={v14Animation} className="terms-lottie" loop={true} />
             </div>
             <h1 className="section-title">EvoFuse 2048 — Terms and Conditions</h1>
-            <p><strong>Effective Date:</strong> [Insert Date]</p>
-            <p><strong>Last Updated:</strong> [Insert Date]</p>
             <p>
               Welcome to EvoFuse 2048, a blockchain-integrated puzzle gaming experience powered by the Fuse Network and the DWAT token. By using this game, you agree to the following Terms and Conditions. If you do not agree, please discontinue use of the platform.
             </p>

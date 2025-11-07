@@ -16,6 +16,13 @@ function HeroSlideshow() {
     { src: slideMac, title: 'The Future is Player-Owned', desc: 'With betting games, NFTs, and a creator-driven economy on the horizon, EvoFuse is building the next-generation Web3 arcade—powered by you.', badge: 'Future', cta: 'Learn More' },
   ]
 
+  // Random vertical positions for each slide: 'top', 'middle', 'bottom'
+  const slidePositions: ('top' | 'middle' | 'bottom')[] = ['top', 'middle', 'bottom', 'top', 'bottom', 'middle']
+  
+  const getSlidePosition = (index: number): string => {
+    return slidePositions[index % slidePositions.length]
+  }
+
   const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
@@ -39,7 +46,7 @@ function HeroSlideshow() {
           >
             <div className="slide-inner">
               <img src={slide.src} alt={slide.title} />
-              <div className="slide-caption">
+              <div className={`slide-caption slide-caption-${getSlidePosition(index)}`}>
                 <div className="title">{slide.title}</div>
                 <div className="slide-separator"></div>
                 <div className="desc">{slide.desc}</div>

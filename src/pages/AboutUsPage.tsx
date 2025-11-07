@@ -28,7 +28,7 @@ function AboutUsPage() {
           <div className="about-content">
             {/* Team Section */}
             <div className="about-team-section">
-              <h2 className="about-section-title">Our Team</h2>
+              <h2 className="about-section-title">Evo Fuse</h2>
               <div className="about-team-description">
                 <p className="about-team-description-text">
                   EvoFuse is a wild fusion of classic games, blockchain rewards, and pure chaotic fun—where every swipe, merge, or bingo spin could earn you real DWAT tokens. It's like your favorite childhood games grew up, got on-chain, and started paying rent. Whether you're fusing history tiles or betting on SportBingo, EvoFuse turns casual gaming into a crypto-powered thrill ride.
