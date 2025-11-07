@@ -412,6 +412,14 @@
 .card-grid .blog-card:nth-child(2) .blog-image { animation-delay: 120ms; }
 .card-grid .blog-card:nth-child(3) .blog-image { animation-delay: 240ms; }
 
+/* Games page spacing */
+.games-page { padding: 24px 0 64px; }
+.games-page .card-grid { gap: 24px; }
+
+/* Blog page spacing to match games */
+.blog-page { padding: 24px 0 64px; }
+.blog-page .card-grid { gap: 24px; }
+
 /* Generic fade-in-up */
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(14px); }

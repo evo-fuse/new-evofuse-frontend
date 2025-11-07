@@ -2,7 +2,11 @@ import LatestBlogPosts from '../components/LatestBlogPosts'
 
 function BlogPage() {
   return (
-    <LatestBlogPosts />
+    <div className="blog-page">
+      <div className="container">
+        <LatestBlogPosts />
+      </div>
+    </div>
   )
 }
 

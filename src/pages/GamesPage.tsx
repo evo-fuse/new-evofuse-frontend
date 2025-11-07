@@ -2,7 +2,11 @@ import FeaturedGames from '../components/FeaturedGames'
 
 function GamesPage() {
   return (
-    <FeaturedGames />
+    <div className="games-page">
+      <div className="container">
+        <FeaturedGames />
+      </div>
+    </div>
   )
 }
 
