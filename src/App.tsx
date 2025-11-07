@@ -10,6 +10,7 @@ import TermsPage from './pages/TermsPage'
 import ContactUsPage from './pages/ContactUsPage'
 import BlogDetailPage from './pages/BlogDetailPage'
 import PageLoader from './components/PageLoader'
+import PreSaleBanner from './components/PreSaleBanner'
 
 function AppContent() {
   const { loading } = useLoading()
@@ -28,6 +29,7 @@ function AppContent() {
           <Route path="/contact" element={<ContactUsPage />} />
         </Route>
       </Routes>
+      <PreSaleBanner />
     </>
   )
 }

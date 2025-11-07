@@ -553,6 +553,21 @@
 .blog-detail-content p { margin: 0; color: rgba(214,235,255,0.9); line-height: 1.8; font-size: 16px; }
 .blog-detail-footer { margin-top: 20px; display: flex; justify-content: flex-end; }
 
+/* Pre-Sale Banner */
+.presale-banner { position: fixed; top: 240px; right: -120px; transform: translateX(-50%); z-index: 90; max-width: 400px; width: calc(100% - 32px); }
+.presale-banner-content { background: linear-gradient(135deg, rgba(18, 34, 50, 0.95) 0%, rgba(13, 26, 39, 0.95) 100%); border: 1px solid rgba(39, 213, 255, 0.3); backdrop-filter: blur(12px); border-radius: 16px; padding: 32px 24px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 24px rgba(39, 213, 255, 0.2); text-align: center; }
+.presale-banner-title { font-size: 24px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 24px; line-height: 1.2; }
+.presale-banner-timer { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.presale-timer-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.presale-timer-label { font-size: 11px; font-weight: 700; color: rgba(214, 235, 255, 0.8); text-transform: uppercase; letter-spacing: 0.5px; }
+.presale-timer-value { font-size: 36px; font-weight: 900; color: #fff; line-height: 1; text-shadow: 0 0 12px rgba(39, 213, 255, 0.5); display: flex; align-items: center; justify-content: center; }
+.presale-timer-separator { font-size: 32px; font-weight: 900; color: rgba(39, 213, 255, 0.6); margin: 0 4px; line-height: 1; display: flex; align-items: center; justify-content: center; height: 100%; }
+.presale-banner-description { font-size: 14px; color: rgba(214, 235, 255, 0.9); margin: 0 0 24px; line-height: 1.6; }
+.presale-banner-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.presale-btn-primary { padding: 12px 24px; font-size: 14px; font-weight: 700; min-width: 140px; }
+.presale-btn-secondary { padding: 12px 24px; font-size: 14px; font-weight: 700; min-width: 140px; background: rgba(39, 213, 255, 0.1); border-color: rgba(39, 213, 255, 0.4); color: #7ce6ff; }
+.presale-btn-secondary:hover { background: rgba(39, 213, 255, 0.2); border-color: #27d5ff; color: #bff3ff; }
+
 /* Contact page */
 .contact-page { padding: 24px 0 64px; }
 .contact-title { font-size: 48px; font-weight: 900; color: #fff; margin: 0 0 16px; text-align: center; }
@@ -896,6 +911,14 @@
   .blog-detail-content p { font-size: 15px; }
   .blog-detail-hero img { height: 300px; }
   .blog-detail { padding: 16px; }
+  .presale-banner { bottom: 16px; max-width: 90%; padding: 0 16px; }
+  .presale-banner-content { padding: 24px 20px; }
+  .presale-banner-title { font-size: 20px; margin-bottom: 20px; }
+  .presale-timer-value { font-size: 28px; }
+  .presale-timer-separator { font-size: 24px; }
+  .presale-banner-description { font-size: 13px; margin-bottom: 20px; }
+  .presale-banner-buttons { gap: 10px; }
+  .presale-btn-primary, .presale-btn-secondary { padding: 10px 20px; font-size: 13px; min-width: 120px; }
   .contact-page { padding: 20px 0 48px; }
   .contact-title { font-size: 36px; }
   .contact-subtitle { font-size: 16px; margin-bottom: 32px; }
@@ -984,6 +1007,15 @@
   .blog-detail-content p { font-size: 14px; line-height: 1.7; }
   .blog-detail-hero img { height: 240px; }
   .blog-detail { padding: 12px; }
+  .presale-banner { bottom: 12px; max-width: 95%; padding: 0 12px; }
+  .presale-banner-content { padding: 20px 16px; }
+  .presale-banner-title { font-size: 18px; margin-bottom: 16px; }
+  .presale-timer-value { font-size: 24px; }
+  .presale-timer-separator { font-size: 20px; }
+  .presale-timer-label { font-size: 10px; }
+  .presale-banner-description { font-size: 12px; margin-bottom: 16px; }
+  .presale-banner-buttons { flex-direction: column; width: 100%; }
+  .presale-btn-primary, .presale-btn-secondary { width: 100%; min-width: auto; padding: 10px 16px; font-size: 12px; }
   .contact-page { padding: 16px 0 40px; }
   .contact-title { font-size: 28px; }
   .contact-subtitle { font-size: 14px; margin-bottom: 24px; }
