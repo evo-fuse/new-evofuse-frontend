@@ -898,6 +898,11 @@
 .game-detail-gameplay::before { content: ''; position: absolute; top: -100%; right: 0; width: 150%; height: 150%; background: linear-gradient(135deg, transparent 0%, transparent 30%, rgba(255, 255, 255, 0.2) 40%, rgba(39, 213, 255, 0.3) 50%, rgba(124, 230, 255, 0.2) 60%, transparent 70%, transparent 100%); transform: rotate(45deg); transform-origin: center; animation: image-shimmer 3s ease-in-out infinite; z-index: 1; pointer-events: none; filter: blur(8px); }
 .game-detail-gameplay-image { width: 100%; height: auto; display: block; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); transition: all 0.4s ease; animation: image-zoom-in 1s ease-out; position: relative; z-index: 0; }
 .game-detail-gameplay-image:hover { transform: scale(1.02); box-shadow: 0 8px 32px rgba(39, 213, 255, 0.3); }
+.game-detail-watch-video-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 32px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 50px; color: #fff; font-size: 16px; font-weight: 600; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.3s ease; z-index: 2; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1); }
+.game-detail-watch-video-btn:hover { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.5); transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 40px rgba(39, 213, 255, 0.3); }
+.game-detail-watch-video-btn:active { transform: translate(-50%, -50%) scale(0.98); }
+.game-detail-watch-video-icon { font-size: 20px; }
+.game-detail-watch-video-text { white-space: nowrap; }
 
 /* Terms and Conditions Page */
 .terms-page { padding: 0px 0 64px; }
@@ -1692,6 +1697,8 @@
   .game-detail-layout::before { filter: blur(6px); opacity: 0.5; }
   .game-detail-layout::after { inset: 2px; border-radius: 16px; }
   .game-detail-layout-progress-fill { width: 20%; }
+  .game-detail-watch-video-btn { padding: 12px 24px; font-size: 14px; gap: 10px; }
+  .game-detail-watch-video-icon { font-size: 18px; }
   .game-detail-intro { padding: 20px 16px; }
   .game-detail-title { font-size: 24px; }
   .game-detail-tagline { font-size: 13px; }
@@ -1707,6 +1714,8 @@
   .game-detail-download-btn-subtitle { font-size: 10px; }
   .game-detail-download-icon { font-size: 12px; }
   .game-detail-download-btn-content { gap: 2px; }
+  .game-detail-watch-video-btn { padding: 10px 20px; font-size: 12px; gap: 8px; }
+  .game-detail-watch-video-icon { font-size: 16px; }
   .game-detail-interface { padding: 16px; }
   .game-detail-interface-title { font-size: 20px; }
   .game-detail-currency-item { font-size: 12px; padding: 5px 10px; }
