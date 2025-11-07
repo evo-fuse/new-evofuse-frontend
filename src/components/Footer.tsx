@@ -53,10 +53,10 @@ function Footer() {
           <div className="footer-copyright">© 2025 EvoFuse. All rights reserved.</div>
           <div className="footer-legal-links">
             <Link to="/terms" className="footer-legal-link">Terms & Conditions</Link>
-            <a href="#" className="footer-legal-link">Privacy Policy</a>
+            {/* <a href="#" className="footer-legal-link">Privacy Policy</a>
             <a href="#" className="footer-legal-link">Cookies Policy</a>
             <a href="#" className="footer-legal-link">Modern Slavery Act</a>
-            <a href="#" className="footer-legal-link">Anti-Bribery</a>
+            <a href="#" className="footer-legal-link">Anti-Bribery</a> */}
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { FaChevronLeft, FaChevronRight, FaPlay } from 'react-icons/fa'
 import thumb2048 from '@thumbnails/2048.jpg'
 import thumbFlappy from '@thumbnails/flappy_bird.jpg'
-import thumbOthello from '@thumbnails/Othelo.jpg'
+import thumbOthello from '@thumbnails/Othello.jpg'
 import thumbCarcassonne from '@thumbnails/carcassonne.png'
 
 function GameBanner({ title, imageSrc, description }: { title: string; imageSrc: string; description: string }) {
@@ -49,7 +49,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
       subtitle: 'Crypto Flight', 
       imageSrc: thumbFlappy, 
       popularity: 3,
-      category: 'coming-soon' as const,
+      category: 'top' as const,
       description: "He's back — and he's learned to fly for tokens. Dodge chaos, chase destiny, and flap your way through the most ridiculous, rewarding sky in blockchain history."
     },
     { 
