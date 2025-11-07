@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FaMinus, FaPlus, FaTimes, FaShoppingCart } from 'react-icons/fa'
+import { FaMinus, FaPlus, FaTimes, FaShoppingCart, FaCoins } from 'react-icons/fa'
 
 function PreSaleBanner() {
   const [timeLeft, setTimeLeft] = useState({
@@ -9,7 +9,7 @@ function PreSaleBanner() {
     seconds: 56
   })
   const [isMinimized, setIsMinimized] = useState(false)
-  const [isClosed, setIsClosed] = useState(false)
+  const [isCompact, setIsCompact] = useState(false)
   const [animatedTotalSupply, setAnimatedTotalSupply] = useState(0)
   const [animatedSoldTokens, setAnimatedSoldTokens] = useState(0)
   const [animatedProgress, setAnimatedProgress] = useState(0)
@@ -55,7 +55,7 @@ function PreSaleBanner() {
 
   // Initial animation for numbers and progress ring
   useEffect(() => {
-    if (isMinimized) return
+    if (isMinimized || isCompact) return
 
     const duration = 2000 // 2 seconds
     const steps = 60
@@ -80,11 +80,11 @@ function PreSaleBanner() {
     }, stepDuration)
 
     return () => clearInterval(animationTimer)
-  }, [isMinimized, totalTokenSupply, initialSoldTokens])
+  }, [isMinimized, isCompact, totalTokenSupply, initialSoldTokens])
 
   // Gradual increase of sold tokens with random speed
   useEffect(() => {
-    if (isMinimized) return
+    if (isMinimized || isCompact) return
 
     const maxSoldTokens = Math.min(totalTokenSupply * 0.95, 950000) // Cap at 95% to keep it realistic
 
@@ -130,8 +130,46 @@ function PreSaleBanner() {
   const displaySoldTokens = animatedSoldTokens > 0 ? Math.max(animatedSoldTokens, currentSoldTokens) : currentSoldTokens
   const offset = circumference - (displayProgress / 100) * circumference
 
-  if (isClosed) {
-    return null
+  // Compact round button view
+  if (isCompact) {
+    return (
+      <div className="presale-banner presale-banner-compact">
+        <div className="presale-compact-tooltip">Buy DWAT</div>
+        <button 
+          className="presale-compact-btn"
+          onClick={() => setIsCompact(false)}
+          aria-label="Expand presale banner"
+          title="Buy DWAT"
+        >
+          <div className="presale-compact-ring">
+            <svg className="presale-compact-ring-svg" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" style={{ overflow: 'visible' }}>
+              <circle
+                className="presale-ring-track"
+                cx="60"
+                cy="60"
+                r={radius}
+                fill="none"
+                strokeWidth="8"
+              />
+              <circle
+                className="presale-ring-progress presale-compact-progress"
+                cx="60"
+                cy="60"
+                r={radius}
+                fill="none"
+                strokeWidth="8"
+                strokeDasharray={circumference}
+                strokeDashoffset={offset}
+                transform="rotate(-90 60 60)"
+              />
+            </svg>
+            <div className="presale-compact-icon">
+              <FaCoins />
+            </div>
+          </div>
+        </button>
+      </div>
+    )
   }
 
   return (
@@ -147,8 +185,8 @@ function PreSaleBanner() {
           </button>
           <button 
             className="presale-control-btn" 
-            onClick={() => setIsClosed(true)}
-            aria-label="Close"
+            onClick={() => setIsCompact(true)}
+            aria-label="Minimize to compact view"
           >
             <FaTimes />
           </button>
