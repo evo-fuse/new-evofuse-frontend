@@ -48,12 +48,12 @@ function PreSaleBanner() {
 
   // Presale progress (example: 65% sold)
   const totalTokenSupply = 1000000
-  const soldTokens = 650000
-  const presaleProgress = Math.round((soldTokens / totalTokenSupply) * 100)
+  const initialSoldTokens = 650000
+  const [currentSoldTokens, setCurrentSoldTokens] = useState(initialSoldTokens)
   const radius = 50
   const circumference = 2 * Math.PI * radius
 
-  // Animation for numbers and progress ring
+  // Initial animation for numbers and progress ring
   useEffect(() => {
     if (isMinimized) return
 
@@ -61,25 +61,74 @@ function PreSaleBanner() {
     const steps = 60
     const stepDuration = duration / steps
     const totalSupplyStep = totalTokenSupply / steps
-    const soldTokensStep = soldTokens / steps
-    const progressStep = presaleProgress / steps
+    const soldTokensStep = initialSoldTokens / steps
+    const initialProgress = Math.round((initialSoldTokens / totalTokenSupply) * 100)
+    const progressStep = initialProgress / steps
 
     let currentStep = 0
     const animationTimer = setInterval(() => {
       currentStep++
       if (currentStep <= steps) {
         setAnimatedTotalSupply(Math.min(Math.round(currentStep * totalSupplyStep), totalTokenSupply))
-        setAnimatedSoldTokens(Math.min(Math.round(currentStep * soldTokensStep), soldTokens))
-        setAnimatedProgress(Math.min(Math.round(currentStep * progressStep), presaleProgress))
+        setAnimatedSoldTokens(Math.min(Math.round(currentStep * soldTokensStep), initialSoldTokens))
+        setAnimatedProgress(Math.min(Math.round(currentStep * progressStep), initialProgress))
       } else {
         clearInterval(animationTimer)
+        // After initial animation, start gradual increase
+        setCurrentSoldTokens(initialSoldTokens)
       }
     }, stepDuration)
 
     return () => clearInterval(animationTimer)
-  }, [isMinimized, totalTokenSupply, soldTokens, presaleProgress])
+  }, [isMinimized, totalTokenSupply, initialSoldTokens])
 
-  const offset = circumference - (animatedProgress / 100) * circumference
+  // Gradual increase of sold tokens with random speed
+  useEffect(() => {
+    if (isMinimized) return
+
+    const maxSoldTokens = Math.min(totalTokenSupply * 0.95, 950000) // Cap at 95% to keep it realistic
+
+    const updateSoldTokens = () => {
+      setCurrentSoldTokens(prev => {
+        if (prev >= maxSoldTokens) return prev
+        
+        // Random increment between 1 and 50 tokens
+        const increment = Math.floor(Math.random() * 50) + 1
+        const newValue = Math.min(prev + increment, maxSoldTokens)
+        
+        // Update animated values
+        setAnimatedSoldTokens(newValue)
+        const newProgress = Math.round((newValue / totalTokenSupply) * 100)
+        setAnimatedProgress(newProgress)
+        
+        return newValue
+      })
+    }
+
+    // Random interval between 500ms and 3000ms
+    const scheduleNextUpdate = () => {
+      const randomDelay = Math.random() * 2500 + 500 // 500ms to 3000ms
+      setTimeout(() => {
+        updateSoldTokens()
+        scheduleNextUpdate()
+      }, randomDelay)
+    }
+
+    // Start the gradual increase after initial animation
+    const startDelay = setTimeout(() => {
+      scheduleNextUpdate()
+    }, 2500) // Start after initial animation completes
+
+    return () => {
+      clearTimeout(startDelay)
+    }
+  }, [isMinimized, totalTokenSupply])
+
+  // Calculate progress based on current sold tokens
+  const currentProgress = Math.round((currentSoldTokens / totalTokenSupply) * 100)
+  const displayProgress = animatedProgress > 0 ? animatedProgress : currentProgress
+  const displaySoldTokens = animatedSoldTokens > 0 ? Math.max(animatedSoldTokens, currentSoldTokens) : currentSoldTokens
+  const offset = circumference - (displayProgress / 100) * circumference
 
   if (isClosed) {
     return null
@@ -114,7 +163,7 @@ function PreSaleBanner() {
               </div>
               <div className="presale-token-sold">
                 <span className="presale-token-label">Sold:</span>
-                <span className="presale-token-value animate-number">{animatedSoldTokens.toLocaleString()}</span>
+                <span className="presale-token-value animate-number">{displaySoldTokens.toLocaleString()}</span>
               </div>
             </div>
             <div className="presale-progress-ring">
@@ -140,7 +189,7 @@ function PreSaleBanner() {
                 />
               </svg>
               <div className="presale-ring-center">
-                <div className="presale-ring-percentage animate-number">{animatedProgress}%</div>
+                <div className="presale-ring-percentage animate-number">{displayProgress}%</div>
                 <div className="presale-ring-label">SOLD</div>
               </div>
             </div>
