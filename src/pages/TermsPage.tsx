@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { useLoading } from '../contexts/LoadingContext'
 import TermsSkeleton from '../components/TermsSkeleton'
+import Lottie from 'lottie-react'
+import v14Animation from '../assets/v1.4.json'
 
 function TermsPage() {
   const { loading, setLoading } = useLoading()
@@ -23,6 +25,9 @@ function TermsPage() {
       <div className="container">
         <section className="section page-fade-in">
           <div className="terms-content">
+            <div className="terms-header-image">
+              <Lottie animationData={v14Animation} className="terms-lottie" loop={true} />
+            </div>
             <h1 className="section-title">EvoFuse 2048 — Terms and Conditions</h1>
             <p><strong>Effective Date:</strong> [Insert Date]</p>
             <p><strong>Last Updated:</strong> [Insert Date]</p>

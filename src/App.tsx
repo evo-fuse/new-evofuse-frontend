@@ -1,5 +1,5 @@
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { LoadingProvider, useLoading } from './contexts/LoadingContext'
 import MainLayout from './layout/MainLayout'
 import HomePage from './pages/HomePage'
@@ -14,10 +14,17 @@ import PreSaleBanner from './components/PreSaleBanner'
 
 function AppContent() {
   const { loading } = useLoading()
+  const location = useLocation()
+  
+  // Routes that should only show skeleton, not the circle ring loader
+  const skeletonOnlyRoutes = ['/games', '/blog', '/leaderboard', '/terms']
+  const isSkeletonOnlyRoute = skeletonOnlyRoutes.some(route => 
+    location.pathname === route || location.pathname.startsWith('/blog/')
+  )
 
   return (
     <>
-      {loading && <PageLoader />}
+      {loading && !isSkeletonOnlyRoute && <PageLoader />}
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
