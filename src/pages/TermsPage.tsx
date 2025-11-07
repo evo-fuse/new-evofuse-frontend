@@ -1,19 +1,27 @@
-import { useEffect, useState } from 'react'
-import PageLoader from '../components/PageLoader'
+import { useEffect } from 'react'
+import { useLoading } from '../contexts/LoadingContext'
+import TermsSkeleton from '../components/TermsSkeleton'
 
 function TermsPage() {
-  const [loading, setLoading] = useState(true)
+  const { loading, setLoading } = useLoading()
 
   useEffect(() => {
+    setLoading(true)
     const t = setTimeout(() => setLoading(false), 1000)
-    return () => clearTimeout(t)
-  }, [])
+    return () => {
+      clearTimeout(t)
+      setLoading(false)
+    }
+  }, [setLoading])
+
+  if (loading) {
+    return <TermsSkeleton />
+  }
 
   return (
     <div className="terms-page">
-      {loading && <PageLoader />}
       <div className="container">
-        <section className={`section ${loading ? '' : 'page-fade-in'}`}>
+        <section className="section page-fade-in">
           <h1 className="section-title">EvoFuse 2048 — Terms and Conditions</h1>
           <p><strong>Effective Date:</strong> [Insert Date]</p>
           <p><strong>Last Updated:</strong> [Insert Date]</p>

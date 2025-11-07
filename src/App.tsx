@@ -1,23 +1,41 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
+import { LoadingProvider, useLoading } from './contexts/LoadingContext'
 import MainLayout from './layout/MainLayout'
 import HomePage from './pages/HomePage'
 import GamesPage from './pages/GamesPage'
 import BlogPage from './pages/BlogPage'
 import LeaderboardPage from './pages/LeaderboardPage'
 import TermsPage from './pages/TermsPage'
+import BlogDetailPage from './pages/BlogDetailPage'
+import PageLoader from './components/PageLoader'
+
+function AppContent() {
+  const { loading } = useLoading()
+
+  return (
+    <>
+      {loading && <PageLoader />}
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/games" element={<GamesPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogDetailPage />} />
+          <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+        </Route>
+      </Routes>
+    </>
+  )
+}
 
 function App() {
   return (
-    <Routes>
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/games" element={<GamesPage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/leaderboard" element={<LeaderboardPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-      </Route>
-    </Routes>
+    <LoadingProvider>
+      <AppContent />
+    </LoadingProvider>
   )
 }
+
 export default App

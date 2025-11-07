@@ -1,13 +1,10 @@
 import { useState } from 'react'
 import { FaChevronLeft, FaChevronRight, FaBookOpen } from 'react-icons/fa'
-import blog1 from '@assets/blog/1.png'
-import blog2 from '@assets/blog/2.png'
-import blog3 from '@assets/blog/3.png'
-import blog4 from '@assets/blog/4.png'
-import blog5 from '@assets/blog/5.png'
-import blog6 from '@assets/blog/6.png'
+import { Link } from 'react-router-dom'
+import { blogPosts } from '../data/blog'
 
-function BlogCard({ title, imageSrc, variant, category, author, postedDate, readingTime }: { 
+function BlogCard({ slug, title, imageSrc, variant, category, author, postedDate, readingTime }: { 
+  slug: string
   title: string
   imageSrc: string
   variant: 'light' | 'dark'
@@ -37,10 +34,10 @@ function BlogCard({ title, imageSrc, variant, category, author, postedDate, read
           </div>
         </div>
         <div className="blog-read-btn-wrapper">
-          <button className="btn btn-primary blog-read-btn">
+          <Link to={`/blog/${slug}`} className="btn btn-primary blog-read-btn">
             <FaBookOpen className="blog-read-icon" />
             Read
-          </button>
+          </Link>
         </div>
       </div>
       {variant === 'light' && (
@@ -61,14 +58,7 @@ function BlogCard({ title, imageSrc, variant, category, author, postedDate, read
 }
 
 function LatestBlogPosts({ limit }: { limit?: number }) {
-  const allPosts = [
-    { title: 'How to Earn Crypto Playing Games!', imageSrc: blog1, variant: 'light' as const, category: 'game' as const, author: 'John Doe', postedDate: 'Jan 15, 2024', readingTime: '5 min read', dateValue: new Date('2024-01-15') },
-    { title: 'Now to Earn Alert: Othello Playing Fimes!', imageSrc: blog2, variant: 'dark' as const, category: 'crypto' as const, author: 'Jane Smith', postedDate: 'Jan 12, 2024', readingTime: '3 min read', dateValue: new Date('2024-01-12') },
-    { title: 'Chamelon Coin Utility & Roadmap', imageSrc: blog3, variant: 'dark' as const, category: 'crypto' as const, author: 'Mike Johnson', postedDate: 'Jan 10, 2024', readingTime: '7 min read', dateValue: new Date('2024-01-10') },
-    { title: 'Market Trends & Analytics', imageSrc: blog4, variant: 'dark' as const, category: 'new' as const, author: 'Sarah Williams', postedDate: 'Jan 8, 2024', readingTime: '4 min read', dateValue: new Date('2024-01-08') },
-    { title: 'Launch Updates & Roadmap', imageSrc: blog5, variant: 'light' as const, category: 'server' as const, author: 'David Brown', postedDate: 'Jan 5, 2024', readingTime: '6 min read', dateValue: new Date('2024-01-05') },
-    { title: 'Achievements & Milestones', imageSrc: blog6, variant: 'dark' as const, category: 'game' as const, author: 'Emily Davis', postedDate: 'Jan 3, 2024', readingTime: '5 min read', dateValue: new Date('2024-01-03') },
-  ]
+  const allPosts = blogPosts
 
   const itemsPerPage = 6
   const [currentPage, setCurrentPage] = useState(1)
@@ -84,6 +74,7 @@ function LatestBlogPosts({ limit }: { limit?: number }) {
           {posts.map((post, index) => (
             <BlogCard 
               key={index}
+              slug={post.slug}
               title={post.title} 
               imageSrc={post.imageSrc} 
               variant={post.variant}
@@ -115,6 +106,7 @@ function LatestBlogPosts({ limit }: { limit?: number }) {
         {posts.map((post, index) => (
           <BlogCard 
             key={index}
+            slug={post.slug}
             title={post.title} 
             imageSrc={post.imageSrc} 
             variant={post.variant}
