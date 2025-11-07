@@ -12,4 +12,15 @@ export default defineConfig({
       '@slides': fileURLToPath(new URL('./src/assets/slides', import.meta.url)),
     },
   },
+  build: {
+    rollupOptions: {
+      onwarn(warning, warn) {
+        // Suppress eval warnings from lottie-web
+        if (warning.id?.includes('lottie') || warning.message?.includes('eval')) {
+          return
+        }
+        warn(warning)
+      }
+    }
+  }
 })
