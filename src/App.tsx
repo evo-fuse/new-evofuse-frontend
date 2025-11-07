@@ -7,6 +7,7 @@ import GamesPage from './pages/GamesPage'
 import BlogPage from './pages/BlogPage'
 import LeaderboardPage from './pages/LeaderboardPage'
 import TermsPage from './pages/TermsPage'
+import ContactUsPage from './pages/ContactUsPage'
 import BlogDetailPage from './pages/BlogDetailPage'
 import PageLoader from './components/PageLoader'
 
@@ -24,6 +25,7 @@ function AppContent() {
           <Route path="/blog/:slug" element={<BlogDetailPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/contact" element={<ContactUsPage />} />
         </Route>
       </Routes>
     </>

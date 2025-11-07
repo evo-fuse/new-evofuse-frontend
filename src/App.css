@@ -44,7 +44,7 @@
 .nav-item:hover { text-shadow: 0 0 20px rgba(46, 39, 39, 0.3); color: #ffffff50; }
 .nav-item.active { opacity: 1; }
 
-.btn-contact { background: #fff; color: #0a1924; border: none; padding: 10px 24px; border-radius: 24px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 8px; }
+.btn-contact { background: #fff; color: #0a1924; border: none; padding: 10px 24px; border-radius: 24px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 8px; text-decoration: none; }
 .btn-contact-icon { font-size: 14px; flex-shrink: 0; }
 .btn-contact-text { white-space: nowrap; }
 .btn-contact:hover { background: rgba(255, 255, 255, 0.9); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
@@ -546,6 +546,24 @@
 .blog-detail-content p { margin: 0; color: rgba(214,235,255,0.9); line-height: 1.8; font-size: 16px; }
 .blog-detail-footer { margin-top: 20px; display: flex; justify-content: flex-end; }
 
+/* Contact page */
+.contact-page { padding: 24px 0 64px; }
+.contact-title { font-size: 48px; font-weight: 900; color: #fff; margin: 0 0 16px; text-align: center; }
+.contact-subtitle { font-size: 18px; color: rgba(214,235,255,0.9); text-align: center; margin: 0 0 48px; line-height: 1.6; }
+.contact-form { max-width: 600px; margin: 0 auto; }
+.contact-form-group { margin-bottom: 24px; }
+.contact-label { display: block; font-size: 12px; font-weight: 700; color: rgba(214,235,255,0.9); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.contact-input, .contact-textarea { width: 100%; padding: 14px 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; color: #fff; font-size: 16px; font-family: inherit; transition: all 0.2s ease; box-sizing: border-box; }
+.contact-input:focus, .contact-textarea:focus { outline: none; border-color: #27d5ff; background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 0 3px rgba(39, 213, 255, 0.1); }
+.contact-input::placeholder, .contact-textarea::placeholder { color: rgba(214,235,255,0.5); }
+.contact-textarea { resize: vertical; min-height: 120px; font-family: inherit; }
+.contact-form-footer { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+.contact-form-note { font-size: 13px; color: rgba(214,235,255,0.7); line-height: 1.6; margin: 0; }
+.contact-submit-btn { align-self: flex-start; padding: 14px 32px; font-size: 16px; font-weight: 700; }
+.contact-form-message { padding: 16px; border-radius: 8px; margin-top: 20px; font-size: 14px; line-height: 1.6; }
+.contact-form-success { background: rgba(76, 175, 80, 0.15); border: 1px solid rgba(76, 175, 80, 0.3); color: #4caf50; }
+.contact-form-error { background: rgba(244, 67, 54, 0.15); border: 1px solid rgba(244, 67, 54, 0.3); color: #f44336; }
+
 /* Generic fade-in-up */
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(14px); }
@@ -871,6 +889,13 @@
   .blog-detail-content p { font-size: 15px; }
   .blog-detail-hero img { height: 300px; }
   .blog-detail { padding: 16px; }
+  .contact-page { padding: 20px 0 48px; }
+  .contact-title { font-size: 36px; }
+  .contact-subtitle { font-size: 16px; margin-bottom: 32px; }
+  .contact-form { max-width: 100%; }
+  .contact-form-group { margin-bottom: 20px; }
+  .contact-input, .contact-textarea { padding: 12px 14px; font-size: 15px; }
+  .contact-submit-btn { padding: 12px 24px; font-size: 15px; }
   .game-title { font-size: 20px; }
   .game-description { font-size: 12px; }
   .game-banner { height: 170px; }
@@ -952,6 +977,15 @@
   .blog-detail-content p { font-size: 14px; line-height: 1.7; }
   .blog-detail-hero img { height: 240px; }
   .blog-detail { padding: 12px; }
+  .contact-page { padding: 16px 0 40px; }
+  .contact-title { font-size: 28px; }
+  .contact-subtitle { font-size: 14px; margin-bottom: 24px; }
+  .contact-form-group { margin-bottom: 16px; }
+  .contact-label { font-size: 11px; }
+  .contact-input, .contact-textarea { padding: 10px 12px; font-size: 14px; }
+  .contact-form-footer { margin-top: 24px; gap: 16px; }
+  .contact-form-note { font-size: 12px; }
+  .contact-submit-btn { padding: 10px 20px; font-size: 14px; }
   .blog-detail-meta { font-size: 12px; gap: 6px; }
   .blog-detail-separator { margin: 12px 0; }
   .blog-detail-footer { margin-top: 16px; }
@@ -1040,6 +1074,15 @@
   .blog-detail-content p { font-size: 13px; line-height: 1.6; }
   .blog-detail-hero img { height: 200px; }
   .blog-detail { padding: 10px; }
+  .contact-page { padding: 12px 0 32px; }
+  .contact-title { font-size: 24px; }
+  .contact-subtitle { font-size: 13px; margin-bottom: 20px; }
+  .contact-form-group { margin-bottom: 14px; }
+  .contact-label { font-size: 10px; }
+  .contact-input, .contact-textarea { padding: 8px 10px; font-size: 13px; }
+  .contact-form-footer { margin-top: 20px; gap: 12px; }
+  .contact-form-note { font-size: 11px; }
+  .contact-submit-btn { padding: 8px 16px; font-size: 13px; }
   .blog-detail-meta { font-size: 11px; }
   .game-title { font-size: 16px; }
   .game-description { font-size: 10px; }
@@ -1066,10 +1109,12 @@
 .leaderboard-container { display: flex; flex-wrap: wrap; gap: 24px; max-width: 1400px; margin: 0 auto; }
 .leaderboard-main { background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 0; padding: 24px; width: 100%;}
 .leaderboard-title { font-size: 28px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 20px; }
-.leaderboard-filters { display: flex; gap: 12px; margin-bottom: 24px; }
+.leaderboard-filters { display: flex; gap: 12px; margin-bottom: 24px; align-items: center; }
 .leaderboard-filter { padding: 10px 20px; border: none; background: rgba(255, 255, 255, 0.08); color: #fff; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; border-radius: 0; transition: all 0.2s ease; }
 .leaderboard-filter:hover { background: rgba(255, 255, 255, 0.12); }
 .leaderboard-filter.active { background: #27d5ff; color: #0a1924; }
+.leaderboard-sort-wrapper { display: flex; align-items: center; gap: 8px; }
+.leaderboard-sort-label { color: #fff; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
 
 .leaderboard-select {
   padding: 10px 20px;
@@ -1112,14 +1157,16 @@
 .leaderboard-table { width: 100%; border-collapse: collapse; background: rgba(255, 255, 255, 0.05); }
 .leaderboard-table thead { border-bottom: 2px solid transparent; }
 .leaderboard-table th { padding: 14px 12px; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(214, 235, 255, 0.9); text-align: left; vertical-align: middle; border: 1px solid transparent; }
-.leaderboard-table .rank-col { width: 12%; }
-.leaderboard-table .player-col { width: 28%; }
-.leaderboard-table .game-col { width: 35%; }
-.leaderboard-table .reward-col { width: 25%; }
+.leaderboard-table .rank-col { width: 10%; }
+.leaderboard-table .player-col { width: 24%; }
+.leaderboard-table .game-col { width: 30%; }
+.leaderboard-table .reward-col { width: 18%; }
+.leaderboard-table .joined-col { width: 18%; }
 .leaderboard-table th.rank-col { text-align: left; }
 .leaderboard-table th.player-col { text-align: left; }
 .leaderboard-table th.game-col { text-align: left; }
 .leaderboard-table th.reward-col { text-align: left; }
+.leaderboard-table th.joined-col { text-align: left; }
 .leaderboard-table tbody tr { border-bottom: 1px solid transparent; transition: background 0.2s ease; background: transparent; }
 .leaderboard-table tbody tr:hover { background: transparent; }
 .leaderboard-table tbody tr.current-user { background: transparent; }
@@ -1132,6 +1179,7 @@
 .player-name { font-weight: 600; color: #fff; font-size: 14px; }
 .game-score { font-size: 13px; color: rgba(214, 235, 255, 0.8); }
 .leaderboard-table .reward-col { color: #7ce6ff; font-weight: 600; }
+.leaderboard-table .joined-col { color: rgba(214, 235, 255, 0.8); font-size: 13px; }
 .leaderboard-pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 24px; }
 .pagination-btn { padding: 8px 16px; border: 1px solid rgba(39, 213, 255, 0.5); background: transparent; color: #7ce6ff; font-weight: 600; font-size: 13px; cursor: pointer; border-radius: 0; transition: all 0.2s ease; }
 .pagination-btn:hover:not(:disabled) { background: rgba(39, 213, 255, 0.1); border-color: #27d5ff; }
@@ -1162,6 +1210,8 @@
   .leaderboard-title { font-size: 22px; }
   .leaderboard-filters { flex-direction: column; }
   .leaderboard-filter { width: 100%; }
+  .leaderboard-sort-wrapper { width: 100%; }
+  .leaderboard-sort-label { font-size: 12px; }
   .leaderboard-select { width: 100%; min-width: auto; }
   .leaderboard-table { font-size: 11px; }
   .leaderboard-table th, .leaderboard-table td { padding: 10px 6px; }

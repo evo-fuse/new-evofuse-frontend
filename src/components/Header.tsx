@@ -33,10 +33,10 @@ function Header() {
           </NavLink>
         </nav>
         <div className="user-actions">
-          <button className="btn btn-contact">
+          <Link to="/contact" className="btn btn-contact">
             <FaEnvelope className="btn-contact-icon" />
             <span className="btn-contact-text">Contact Us</span>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -60,15 +60,18 @@ function Leaderboard() {
               <option value="flappy">FLAPPY BIRD</option>
               <option value="carcassonne">CARCASSONNE</option>
             </select>
-            <select 
-              className="leaderboard-select"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as 'reward' | 'joined' | 'stars')}
-            >
-              <option value="reward">SORT BY: REWARD</option>
-              <option value="joined">SORT BY: JOINED</option>
-              <option value="stars">SORT BY: STARS</option>
-            </select>
+            <div className="leaderboard-sort-wrapper">
+              <span className="leaderboard-sort-label">Sort by:</span>
+              <select 
+                className="leaderboard-select"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as 'reward' | 'joined' | 'stars')}
+              >
+                <option value="reward">REWARD</option>
+                <option value="joined">JOINED</option>
+                <option value="stars">STARS</option>
+              </select>
+            </div>
           </div>
           <div className="leaderboard-table-wrapper">
             <table className="leaderboard-table">
@@ -78,6 +81,7 @@ function Leaderboard() {
                   <th className="player-col">ADDRESS</th>
                   <th className="game-col">GAME/SCORE</th>
                   <th className="reward-col">REWARD</th>
+                  <th className="joined-col">JOINED DATE</th>
                 </tr>
               </thead>
               <tbody>
@@ -98,6 +102,7 @@ function Leaderboard() {
                       <div className="game-score">{entry.game} ({entry.score})</div>
                     </td>
                     <td className="reward-col">{entry.reward} $CHML</td>
+                    <td className="joined-col">{entry.joined}</td>
                   </tr>
                 ))}
               </tbody>
