@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { FaMinus, FaTimes } from 'react-icons/fa'
 
 function PreSaleBanner() {
   const [timeLeft, setTimeLeft] = useState({
@@ -7,6 +8,8 @@ function PreSaleBanner() {
     minutes: 34,
     seconds: 56
   })
+  const [isMinimized, setIsMinimized] = useState(false)
+  const [isClosed, setIsClosed] = useState(false)
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -40,11 +43,34 @@ function PreSaleBanner() {
     return value.toString().padStart(2, '0')
   }
 
+  if (isClosed) {
+    return null
+  }
+
   return (
-    <div className="presale-banner">
+    <div className={`presale-banner ${isMinimized ? 'presale-banner-minimized' : ''}`}>
       <div className="presale-banner-content">
-        <h2 className="presale-banner-title">TOKEN & PRE-SALE</h2>
-        
+        <div className="presale-banner-controls">
+          <button 
+            className="presale-control-btn" 
+            onClick={() => setIsMinimized(!isMinimized)}
+            aria-label={isMinimized ? 'Expand' : 'Minimize'}
+          >
+            <FaMinus />
+          </button>
+          <button 
+            className="presale-control-btn" 
+            onClick={() => setIsClosed(true)}
+            aria-label="Close"
+          >
+            <FaTimes />
+          </button>
+        </div>
+        {!isMinimized && (
+          <>
+            <h2 className="presale-banner-title">TOKEN & GAME PRE-SALE</h2>
+          </>
+        )}
         <div className="presale-banner-timer">
           <div className="presale-timer-item">
             <div className="presale-timer-label">DAYS</div>
@@ -66,15 +92,19 @@ function PreSaleBanner() {
             <div className="presale-timer-value">{formatTime(timeLeft.seconds)}</div>
           </div>
         </div>
+        {!isMinimized && (
+          <>
+            
+            <p className="presale-banner-description">
+              Limited time opportunity!<br/> Get early access and bonus tokens.
+            </p>
 
-        <p className="presale-banner-description">
-          Limited time opportunity! <br/>Get early access and bonus tokens.
-        </p>
-
-        <div className="presale-banner-buttons">
-          <button className="btn btn-primary presale-btn-primary">Buy Tokens</button>
-          <button className="btn btn-outline presale-btn-secondary">Pre-Order Games</button>
-        </div>
+            <div className="presale-banner-buttons">
+              <button className="btn btn-primary presale-btn-primary">Buy Tokens</button>
+              {/* <button className="btn btn-outline presale-btn-secondary">Pre-Order Games</button> */}
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
