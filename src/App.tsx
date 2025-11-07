@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import thumb2048 from '@thumbnails/2048.jpg'
 import thumbFlappy from '@thumbnails/flappy_bird.jpg'
-import thumbOthello from '@thumbnails/othelo.jpg'
+import thumbOthello from '@thumbnails/Othelo.jpg'
 import thumbCarcassonne from '@thumbnails/carcassonne.png'
 import slideRunning from '@slides/running.png'
 import slideImagine from '@slides/imaginzation.png'
@@ -17,7 +17,7 @@ import blog4 from '@assets/blog/4.png'
 import blog5 from '@assets/blog/5.png'
 import blog6 from '@assets/blog/6.png'
 import siteLogo from '@assets/logo.png'
-import { FaTwitter, FaDiscord, FaLinkedin, FaMusic, FaGamepad, FaRegComments, FaHome, FaTrophy, FaCoins, FaBlog, FaChartLine, FaRocket, FaAward, FaPlay, FaServer, FaStar, FaShieldAlt, FaUser, FaYoutube, FaBookOpen, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { FaTwitter, FaDiscord, FaLinkedin, FaMusic, FaGamepad, FaRegComments, FaHome, FaTrophy, FaBlog, FaChartLine, FaRocket, FaAward, FaPlay, FaShieldAlt, FaUser, FaYoutube, FaBookOpen, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { FaTiktok } from 'react-icons/fa6'
 
 // type TabKey = 'Home' | 'Games' | 'Blog' | 'Leaderboar' | 'TOKENOMICS'
@@ -332,6 +332,7 @@ function GameBanner({ title, subtitle, imageSrc, description }: GameBannerProps)
       </div>
       <div className="game-banner-info">
         <div className="game-title">{title}</div>
+        <div className="game-subtitle">{subtitle}</div>
         <div className="game-separator"></div>
         <div className="game-description">{description}</div>
       </div>
@@ -345,104 +346,6 @@ function GameBanner({ title, subtitle, imageSrc, description }: GameBannerProps)
   )
 }
 
-function TokenPreSale() {
-  // Demo deadline: 3 days, 12 hours, 34 minutes from now
-  const [target] = useState(() => Date.now() + ((3 * 24 + 12) * 60 + 34) * 60 * 1000)
-  const [now, setNow] = useState(Date.now())
-  const [saleProgress, setSaleProgress] = useState(0)
-  const saleProgressTarget = 75
-
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000)
-    return () => clearInterval(id)
-  }, [])
-
-  // Animate sale progress to target
-  useEffect(() => {
-    if (saleProgress >= saleProgressTarget) return
-    const step = () => setSaleProgress((p) => Math.min(saleProgressTarget, p + 1))
-    const t = setTimeout(step, 20)
-    return () => clearTimeout(t)
-  }, [saleProgress, saleProgressTarget])
-
-  const remainingMs = Math.max(0, target - now)
-  const totalSeconds = Math.floor(remainingMs / 1000)
-  const days = Math.floor(totalSeconds / (24 * 3600))
-  const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600)
-  const minutes = Math.floor((totalSeconds % 3600) / 60)
-  const seconds = totalSeconds % 60
-
-  // Progress for rings
-  const pctDays = ((days % 30) / 30) * 100
-  const pctHours = (hours / 24) * 100
-  const pctMinutes = (minutes / 60) * 100
-  const pctSeconds = (seconds / 60) * 100
-
-  return (
-    <section className="section presale-timer">
-      <div className="presale-heading">
-        <div className="presale-kicker">PLAY, EARN AND OWN YOUR GAMES!</div>
-      </div>
-
-      <div className="timer-grid">
-        <TimerRing value={days} label="DAYS" pct={pctDays} />
-        <TimerRing value={hours} label="HRS" pct={pctHours} highlight />
-        <TimerRing value={minutes} label="MINS" pct={pctMinutes} />
-        <TimerRing value={seconds} label="SECS" pct={pctSeconds} small />
-      </div>
-
-      <div className="timer-cta">
-        <button className="btn btn-primary">BUY TOKENS NOW</button>
-      </div>
-
-      <div className="sale-progress">
-        <div className="sale-top">
-          <span className="sale-label">Pre‑Sale Goal</span>
-          <span className="sale-value">{saleProgress}% Sold</span>
-        </div>
-        <div className="progress-track" aria-valuemin={0} aria-valuemax={100} aria-valuenow={saleProgress} role="progressbar">
-          <div className="progress-fill" style={{ width: `${saleProgress}%` }} />
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function TimerRing({ value, label, pct, highlight, small }: { value: number; label: string; pct: number; highlight?: boolean; small?: boolean }) {
-  const display = String(Math.max(0, value)).padStart(2, '0')
-  const size = small ? 150 : 180
-  const stroke = 12 // thinner stroke
-  const radius = (size - stroke) / 2
-  const circumference = 2 * Math.PI * radius
-  const dashOffset = circumference * (1 - pct / 100)
-
-  return (
-    <div className={`ring ${highlight ? 'ring-highlight' : ''} ${small ? 'ring-small' : ''}`} style={{ ['--size' as any]: `${size}px` }}>
-      <svg className="ring-svg" width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden>
-        <circle className="ring-track" cx={size / 2} cy={size / 2} r={radius} strokeWidth={stroke} strokeLinecap="round" />
-        <circle
-          className="ring-progress"
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          strokeWidth={stroke}
-          strokeDasharray={circumference}
-          strokeDashoffset={dashOffset}
-          strokeLinecap="round"
-        />
-      </svg>
-      <div className="ring-center">
-        <div className="ring-number">{display}</div>
-        <div className="ring-label">{label}</div>
-      </div>
-      {/* Simple number display for mobile */}
-      <div className="timer-simple">
-        <div className="timer-number">{display}</div>
-        <div className="timer-label">{label}</div>
-      </div>
-    </div>
-  )
-}
 
 function Leaderboard() {
   const [activeFilter, setActiveFilter] = useState<'all' | 'othello' | '2048' | 'flappy' | 'carcassonne'>('all')
