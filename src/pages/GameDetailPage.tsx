@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react'
+import { useMemo, useEffect, useState, useLayoutEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useLoading } from '../contexts/LoadingContext'
 import GameDetailSkeleton from '../components/GameDetailSkeleton'
@@ -71,13 +71,24 @@ const games: Record<string, { title: string; imageSrc: string; gameplayImage?: s
 function GameDetailPage() {
   const { slug } = useParams()
   const game = useMemo(() => (slug ? games[slug.toLowerCase()] : undefined), [slug])
-  const { loading, setLoading } = useLoading()
+  const { setLoading } = useLoading()
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Use useLayoutEffect to set loading state synchronously before paint
+  useLayoutEffect(() => {
+    setIsLoading(true)
+    setLoading(true)
+  }, [slug, setLoading])
 
   useEffect(() => {
-    setLoading(true)
-    const t = setTimeout(() => setLoading(false), 1000)
+    const t = setTimeout(() => {
+      setIsLoading(false)
+      setLoading(false)
+    }, 1000)
+    
     return () => {
       clearTimeout(t)
+      setIsLoading(false)
       setLoading(false)
     }
   }, [slug, setLoading])
@@ -96,7 +107,7 @@ function GameDetailPage() {
     )
   }
 
-  if (loading) {
+  if (isLoading) {
     return <GameDetailSkeleton />
   }
 
