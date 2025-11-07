@@ -564,6 +564,7 @@
 .presale-banner-buttons { transition: opacity 0.3s ease, transform 0.3s ease, height 0.3s ease; opacity: 1; transform: translateY(0); }
 .presale-banner-minimized .presale-banner-content { padding: 16px 20px; }
 .presale-banner-minimized .presale-banner-title { opacity: 0; transform: translateY(-10px); margin: 0; height: 0; overflow: hidden; }
+.presale-banner-minimized .presale-progress-ring { opacity: 0; transform: translateY(-10px); margin: 0; height: 0; overflow: hidden; }
 .presale-banner-minimized .presale-banner-description { opacity: 0; transform: translateY(-10px); margin: 0; height: 0; overflow: hidden; }
 .presale-banner-minimized .presale-banner-buttons { opacity: 0; transform: translateY(-10px); height: 0; overflow: hidden; }
 .presale-banner-minimized .presale-banner-timer { margin-bottom: 0; }
@@ -575,9 +576,25 @@
 .presale-timer-separator { font-size: 32px; font-weight: 900; color: rgba(39, 213, 255, 0.6); margin: 0 4px; line-height: 1; display: flex; align-items: center; justify-content: center; height: 100%; }
 .presale-banner-description { font-size: 14px; color: rgba(214, 235, 255, 0.9); margin: 0 0 24px; line-height: 1.6; }
 .presale-banner-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.presale-btn-primary { padding: 12px 24px; font-size: 14px; font-weight: 700; min-width: 140px; }
+.presale-btn-primary { padding: 12px 24px; font-size: 14px; font-weight: 700; min-width: 140px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.presale-btn-icon { font-size: 16px; }
 .presale-btn-secondary { padding: 12px 24px; font-size: 14px; font-weight: 700; min-width: 140px; background: rgba(39, 213, 255, 0.1); border-color: rgba(39, 213, 255, 0.4); color: #7ce6ff; }
 .presale-btn-secondary:hover { background: rgba(39, 213, 255, 0.2); border-color: #27d5ff; color: #bff3ff; }
+/* Presale Token Info */
+.presale-token-info { display: flex; flex-direction: column; gap: 8px; margin: 0 auto 16px; text-align: center; transition: opacity 0.3s ease, transform 0.3s ease, margin 0.3s ease, height 0.3s ease; opacity: 1; transform: translateY(0); animation: fade-in-up 0.6s ease-out; }
+.presale-token-supply, .presale-token-sold { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.presale-token-label { font-size: 12px; font-weight: 700; color: rgba(214, 235, 255, 0.8); text-transform: uppercase; letter-spacing: 0.5px; animation: fade-in 0.8s ease-out; }
+.presale-token-value { font-size: 16px; font-weight: 900; color: #bff3ff; text-shadow: 0 0 8px rgba(39, 213, 255, 0.4); }
+.animate-number { animation: number-pop 0.2s ease-out, glow-pulse 2s ease-in-out infinite 0.5s; }
+.presale-banner-minimized .presale-token-info { opacity: 0; transform: translateY(-10px); margin: 0; height: 0; overflow: hidden; }
+/* Presale Progress Ring */
+.presale-progress-ring { position: relative; width: 120px; height: 120px; margin: 20px auto; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s ease, transform 0.3s ease, margin 0.3s ease, height 0.3s ease; opacity: 1; transform: translateY(0); background: transparent; border: none; animation: ring-fade-in 0.8s ease-out, ring-scale-in 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both; }
+.presale-ring-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; background: transparent; border: none; outline: none; }
+.presale-ring-track { stroke: rgba(124, 230, 255, 0.18); animation: track-fade-in 1s ease-out; }
+.presale-ring-progress { stroke: #27d5ff; stroke-linecap: round; transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1); filter: drop-shadow(0 0 8px rgba(39, 213, 255, 0.6)); animation: progress-glow 2.5s ease-in-out infinite; }
+.presale-ring-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1; animation: center-fade-in 1.2s ease-out; }
+.presale-ring-percentage { font-size: 32px; font-weight: 900; color: #bff3ff; text-shadow: 0 0 10px rgba(39, 213, 255, 0.5); line-height: 1; }
+.presale-ring-label { font-size: 11px; font-weight: 700; color: rgba(214, 235, 255, 0.8); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; animation: label-fade-in 1.4s ease-out; }
 
 /* Contact page */
 .contact-page { padding: 24px 0 64px; }
@@ -606,6 +623,49 @@
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* Presale Animation Keyframes */
+@keyframes number-pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 8px rgba(39, 213, 255, 0.4), 0 0 12px rgba(39, 213, 255, 0.2); }
+  50% { text-shadow: 0 0 12px rgba(39, 213, 255, 0.8), 0 0 18px rgba(39, 213, 255, 0.4), 0 0 24px rgba(39, 213, 255, 0.2); }
+}
+
+@keyframes ring-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ring-scale-in {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes track-fade-in {
+  from { stroke-opacity: 0; }
+  to { stroke-opacity: 1; }
+}
+
+@keyframes progress-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(39, 213, 255, 0.6)); }
+  50% { filter: drop-shadow(0 0 12px rgba(39, 213, 255, 0.9)) drop-shadow(0 0 16px rgba(39, 213, 255, 0.4)); }
+}
+
+@keyframes center-fade-in {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes label-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Footer */
@@ -972,6 +1032,26 @@
   }
 }
 
+/* Presale Banner Responsive */
+@media (max-width: 900px) {
+  .presale-banner { top: 80px; max-width: 360px; width: calc(100% - 24px); }
+  .presale-banner-content { padding: 24px 20px; border-radius: 14px; }
+  .presale-banner-title { font-size: 20px; margin: 5px 0 20px; }
+  .presale-banner-timer { gap: 6px; margin-top: 8px; margin-bottom: 16px; }
+  .presale-timer-item { gap: 6px; }
+  .presale-timer-label { font-size: 10px; }
+  .presale-timer-value { font-size: 28px; }
+  .presale-timer-separator { font-size: 24px; margin: 0 2px; }
+  .presale-progress-ring { width: 100px; height: 100px; margin: 16px auto; }
+  .presale-ring-percentage { font-size: 26px; }
+  .presale-ring-label { font-size: 10px; }
+  .presale-token-value { font-size: 14px; }
+  .presale-token-label { font-size: 11px; }
+  .presale-banner-description { font-size: 13px; margin: 0 0 20px; }
+  .presale-btn-primary, .presale-btn-secondary { padding: 10px 20px; font-size: 13px; min-width: 120px; }
+  .presale-banner-minimized .presale-banner-content { padding: 12px 16px; }
+}
+
 @media (max-width: 600px) {
   .slideshow-container { height: auto; min-height: 250px; }
   .slide-inner img { min-height: 180px; max-height: 250px; width: 100%; }
@@ -1018,15 +1098,29 @@
   .blog-detail-content p { font-size: 14px; line-height: 1.7; }
   .blog-detail-hero img { height: 240px; }
   .blog-detail { padding: 12px; }
-  .presale-banner { bottom: 12px; max-width: 95%; padding: 0 12px; }
-  .presale-banner-content { padding: 20px 16px; }
-  .presale-banner-title { font-size: 18px; margin-bottom: 16px; }
-  .presale-timer-value { font-size: 24px; }
-  .presale-timer-separator { font-size: 20px; }
-  .presale-timer-label { font-size: 10px; }
-  .presale-banner-description { font-size: 12px; margin-bottom: 16px; }
-  .presale-banner-buttons { flex-direction: column; width: 100%; }
+  .presale-banner { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); top: auto; right: auto; max-width: calc(100% - 16px); width: 100%; }
+  .presale-banner-content { padding: 16px 14px; border-radius: 12px; }
+  .presale-banner-controls { top: 8px; right: 8px; gap: 6px; }
+  .presale-control-btn { width: 24px; height: 24px; font-size: 10px; }
+  .presale-banner-title { font-size: 16px; margin: 0 0 12px; letter-spacing: 0.5px; }
+  .presale-banner-timer { gap: 4px; margin-top: 6px; margin-bottom: 12px; }
+  .presale-timer-item { gap: 4px; }
+  .presale-timer-label { font-size: 9px; letter-spacing: 0.3px; }
+  .presale-timer-value { font-size: 20px; }
+  .presale-timer-separator { font-size: 16px; margin: 0 2px; }
+  .presale-progress-ring { width: 80px; height: 80px; margin: 12px auto; }
+  .presale-ring-percentage { font-size: 20px; }
+  .presale-ring-label { font-size: 9px; margin-top: 2px; }
+  .presale-token-info { gap: 6px; margin: 0 auto 12px; }
+  .presale-token-supply, .presale-token-sold { gap: 6px; }
+  .presale-token-label { font-size: 10px; letter-spacing: 0.3px; }
+  .presale-token-value { font-size: 13px; }
+  .presale-banner-description { font-size: 11px; margin: 0 0 12px; line-height: 1.5; }
+  .presale-banner-buttons { flex-direction: column; width: 100%; gap: 8px; }
   .presale-btn-primary, .presale-btn-secondary { width: 100%; min-width: auto; padding: 10px 16px; font-size: 12px; }
+  .presale-btn-icon { font-size: 14px; }
+  .presale-banner-minimized .presale-banner-content { padding: 10px 12px; }
+  .presale-banner-minimized .presale-timer-label { margin-top: 6px; }
   .contact-page { padding: 16px 0 40px; }
   .contact-title { font-size: 28px; }
   .contact-subtitle { font-size: 14px; margin-bottom: 24px; }
@@ -1096,6 +1190,31 @@
   .presale-timer .ring-svg .ring-progress { stroke-width: 3 !important; }
   .pagination-page { width: 36px; height: 36px; font-size: 12px; }
   .pagination-btn { padding: 6px 10px; min-width: 36px; height: 36px; font-size: 11px; }
+  
+  /* Presale Banner - Extra Small Devices */
+  .presale-banner { bottom: 8px; max-width: calc(100% - 12px); }
+  .presale-banner-content { padding: 12px 10px; border-radius: 10px; }
+  .presale-banner-controls { top: 6px; right: 6px; gap: 4px; }
+  .presale-control-btn { width: 20px; height: 20px; font-size: 9px; }
+  .presale-banner-title { font-size: 14px; margin: 0 0 10px; letter-spacing: 0.3px; }
+  .presale-banner-timer { gap: 3px; margin-top: 4px; margin-bottom: 10px; }
+  .presale-timer-item { gap: 3px; }
+  .presale-timer-label { font-size: 8px; letter-spacing: 0.2px; }
+  .presale-timer-value { font-size: 18px; }
+  .presale-timer-separator { font-size: 14px; margin: 0 1px; }
+  .presale-progress-ring { width: 70px; height: 70px; margin: 10px auto; }
+  .presale-ring-percentage { font-size: 18px; }
+  .presale-ring-label { font-size: 8px; margin-top: 2px; }
+  .presale-token-info { gap: 5px; margin: 0 auto 10px; }
+  .presale-token-supply, .presale-token-sold { gap: 5px; }
+  .presale-token-label { font-size: 9px; letter-spacing: 0.2px; }
+  .presale-token-value { font-size: 12px; }
+  .presale-banner-description { font-size: 10px; margin: 0 0 10px; line-height: 1.4; }
+  .presale-banner-buttons { gap: 6px; }
+  .presale-btn-primary, .presale-btn-secondary { padding: 8px 14px; font-size: 11px; }
+  .presale-btn-icon { font-size: 12px; }
+  .presale-banner-minimized .presale-banner-content { padding: 8px 10px; }
+  .presale-banner-minimized .presale-timer-label { margin-top: 4px; }
   .presale-timer .ring::after { inset: 1px; }
   .timer-number { font-size: 12px; }
   .timer-label { font-size: 6px; }

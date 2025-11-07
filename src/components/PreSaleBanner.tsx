@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FaMinus, FaPlus, FaTimes } from 'react-icons/fa'
+import { FaMinus, FaPlus, FaTimes, FaShoppingCart } from 'react-icons/fa'
 
 function PreSaleBanner() {
   const [timeLeft, setTimeLeft] = useState({
@@ -10,6 +10,9 @@ function PreSaleBanner() {
   })
   const [isMinimized, setIsMinimized] = useState(false)
   const [isClosed, setIsClosed] = useState(false)
+  const [animatedTotalSupply, setAnimatedTotalSupply] = useState(0)
+  const [animatedSoldTokens, setAnimatedSoldTokens] = useState(0)
+  const [animatedProgress, setAnimatedProgress] = useState(0)
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -43,6 +46,41 @@ function PreSaleBanner() {
     return value.toString().padStart(2, '0')
   }
 
+  // Presale progress (example: 65% sold)
+  const totalTokenSupply = 1000000
+  const soldTokens = 650000
+  const presaleProgress = Math.round((soldTokens / totalTokenSupply) * 100)
+  const radius = 50
+  const circumference = 2 * Math.PI * radius
+
+  // Animation for numbers and progress ring
+  useEffect(() => {
+    if (isMinimized) return
+
+    const duration = 2000 // 2 seconds
+    const steps = 60
+    const stepDuration = duration / steps
+    const totalSupplyStep = totalTokenSupply / steps
+    const soldTokensStep = soldTokens / steps
+    const progressStep = presaleProgress / steps
+
+    let currentStep = 0
+    const animationTimer = setInterval(() => {
+      currentStep++
+      if (currentStep <= steps) {
+        setAnimatedTotalSupply(Math.min(Math.round(currentStep * totalSupplyStep), totalTokenSupply))
+        setAnimatedSoldTokens(Math.min(Math.round(currentStep * soldTokensStep), soldTokens))
+        setAnimatedProgress(Math.min(Math.round(currentStep * progressStep), presaleProgress))
+      } else {
+        clearInterval(animationTimer)
+      }
+    }, stepDuration)
+
+    return () => clearInterval(animationTimer)
+  }, [isMinimized, totalTokenSupply, soldTokens, presaleProgress])
+
+  const offset = circumference - (animatedProgress / 100) * circumference
+
   if (isClosed) {
     return null
   }
@@ -68,7 +106,44 @@ function PreSaleBanner() {
         </div>
         {!isMinimized && (
           <>
-            <h2 className="presale-banner-title">TOKEN & GAME PRE-SALE</h2>
+            <h2 className="presale-banner-title">TOKEN PRE-SALE</h2>
+            <div className="presale-token-info">
+              <div className="presale-token-supply">
+                <span className="presale-token-label">Total Supply:</span>
+                <span className="presale-token-value animate-number">{animatedTotalSupply.toLocaleString()}</span>
+              </div>
+              <div className="presale-token-sold">
+                <span className="presale-token-label">Sold:</span>
+                <span className="presale-token-value animate-number">{animatedSoldTokens.toLocaleString()}</span>
+              </div>
+            </div>
+            <div className="presale-progress-ring">
+              <svg className="presale-ring-svg" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet">
+                <circle
+                  className="presale-ring-track"
+                  cx="60"
+                  cy="60"
+                  r={radius}
+                  fill="none"
+                  strokeWidth="8"
+                />
+                <circle
+                  className="presale-ring-progress"
+                  cx="60"
+                  cy="60"
+                  r={radius}
+                  fill="none"
+                  strokeWidth="8"
+                  strokeDasharray={circumference}
+                  strokeDashoffset={offset}
+                  transform="rotate(-90 60 60)"
+                />
+              </svg>
+              <div className="presale-ring-center">
+                <div className="presale-ring-percentage animate-number">{animatedProgress}%</div>
+                <div className="presale-ring-label">SOLD</div>
+              </div>
+            </div>
           </>
         )}
         <div className="presale-banner-timer">
@@ -100,7 +175,10 @@ function PreSaleBanner() {
             </p>
 
             <div className="presale-banner-buttons">
-              <button className="btn btn-primary presale-btn-primary">Buy Tokens</button>
+              <button className="btn btn-primary presale-btn-primary">
+                <FaShoppingCart className="presale-btn-icon" />
+                <span>Buy Tokens</span>
+              </button>
               {/* <button className="btn btn-outline presale-btn-secondary">Pre-Order Games</button> */}
             </div>
           </>
