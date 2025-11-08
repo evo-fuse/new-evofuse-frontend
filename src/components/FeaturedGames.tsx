@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FaChevronLeft, FaChevronRight, FaPlay } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { useComingSoonModal } from '../contexts/ComingSoonModalContext'
 import thumb2048 from '@thumbnails/2048.jpg'
 import thumbFlappy from '@thumbnails/flappy_bird.jpg'
@@ -10,12 +10,6 @@ import thumbCarcassonne from '@thumbnails/carcassonne.png'
 function GameBanner({ title, imageSrc, description, slug, category }: { title: string; imageSrc: string; description: string; slug: string; category: 'top' | 'coming-soon' }) {
   const isComingSoon = category === 'coming-soon'
   const { openModal } = useComingSoonModal()
-  
-  const handleComingSoonClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    openModal(title)
-  }
   
   const handleBannerClick = (e: React.MouseEvent) => {
     if (isComingSoon) {
