@@ -183,10 +183,10 @@ function PrivacyPolicyPage() {
                   If you have any questions or concerns about this policy or your data, please contact us at:
                 </p>
                 <p>
-                  <a href="mailto:privacy@evofuse.games"><strong>privacy@evofuse.games</strong></a>
+                  <a href="mailto:privacy@evofuse.xyz"><strong>privacy@evofuse.xyz</strong></a>
                 </p>
                 <p>
-                  <a href="https://evofuse.games/privacy-policy"><strong>https://evofuse.games/privacy-policy</strong></a>
+                  <a href="https://evofuse.xyz/privacy-policy"><strong>https://evofuse.xyz/privacy-policy</strong></a>
                 </p>
               </div>
             </div>

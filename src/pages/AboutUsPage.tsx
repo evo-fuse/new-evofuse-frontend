@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useLoading } from '../contexts/LoadingContext'
+import { useApplyingModal, type PositionData } from '../contexts/ApplyingModalContext'
 import AboutUsSkeleton from '../components/AboutUsSkeleton'
 import { FaLinkedin, FaFacebook, FaCode, FaPalette, FaMapMarkerAlt, FaUser } from 'react-icons/fa'
 import { FaDiscord } from 'react-icons/fa6'
@@ -7,8 +8,58 @@ import johnAvatar from '../assets/teams/John Guerrero.png'
 import felixAvatar from '../assets/teams/Felix Hansen.png'
 import leonAvatar from '../assets/teams/Leon Weber.png'
 
+const positionData: Record<string, PositionData> = {
+  'UX/UI Engineer': {
+    title: 'UX/UI Engineer',
+    description: 'We are seeking a talented UX/UI Engineer to design and implement beautiful, intuitive user interfaces for our gaming platform. You will create seamless user experiences that bridge traditional gaming with Web3 technology, ensuring our games are both visually stunning and highly functional.',
+    responsibilities: [
+      'Design and implement user interfaces for web and mobile gaming applications',
+      'Create wireframes, prototypes, and high-fidelity designs using modern design tools',
+      'Collaborate with developers to ensure pixel-perfect implementation of designs',
+      'Conduct user research and usability testing to improve user experience',
+      'Develop and maintain design systems and component libraries',
+      'Work closely with product managers and stakeholders to define user requirements',
+      'Optimize interfaces for performance and accessibility across all devices'
+    ],
+    technicalSkills: [
+      'Proficiency in Figma, Adobe XD, or similar design tools',
+      'Strong knowledge of React, TypeScript, and modern frontend frameworks',
+      'Experience with responsive design and mobile-first development',
+      'Understanding of Web3 and blockchain user experience patterns',
+      'Knowledge of CSS, SCSS, and modern styling techniques',
+      'Familiarity with design systems and component-based architecture',
+      'Experience with user testing and prototyping tools'
+    ],
+    compensation: 'Competitive salary based on experience, plus equity options, health benefits, and flexible work arrangements. Salary range: $70,000 - $120,000 USD annually.'
+  },
+  '3D Game Developer': {
+    title: '3D Game Developer',
+    description: 'Join our team as a 3D Game Developer to build immersive gaming experiences using cutting-edge 3D technologies. You will work on creating engaging game mechanics, optimizing performance, and bringing our game concepts to life with stunning 3D graphics and animations.',
+    responsibilities: [
+      'Develop 3D game features and mechanics using modern game engines',
+      'Create and optimize 3D models, textures, and animations',
+      'Implement game physics, collision detection, and rendering systems',
+      'Optimize game performance for web and mobile platforms',
+      'Collaborate with designers and artists to bring game concepts to life',
+      'Debug and fix technical issues across different platforms',
+      'Stay updated with latest 3D gaming technologies and best practices'
+    ],
+    technicalSkills: [
+      'Proficiency in Unity, Unreal Engine, or Three.js',
+      'Strong programming skills in C#, C++, or JavaScript/TypeScript',
+      'Experience with 3D modeling tools (Blender, Maya, or 3ds Max)',
+      'Knowledge of shader programming and graphics rendering',
+      'Understanding of game physics and animation systems',
+      'Experience with WebGL and WebGPU technologies',
+      'Familiarity with blockchain integration in games'
+    ],
+    compensation: 'Competitive salary based on experience, plus equity options, health benefits, and flexible work arrangements. Salary range: $60,000 - $80,000 USD annually.'
+  }
+}
+
 function AboutUsPage() {
   const { loading, setLoading } = useLoading()
+  const { openModal } = useApplyingModal()
 
   useEffect(() => {
     setLoading(true)
@@ -116,9 +167,15 @@ function AboutUsPage() {
                     <span className="about-position-seniority">
                       <FaUser /> Junior / Senior
                     </span>
-                    <a href="mailto:careers@evofuse.games?subject=UX/UI Engineer Application" className="about-position-apply-btn">
+                    <button 
+                      className="about-position-apply-btn"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        openModal(positionData['UX/UI Engineer'])
+                      }}
+                    >
                       Apply Now
-                    </a>
+                    </button>
                   </div>
                 </div>
                 <div className="about-position-card">
@@ -126,7 +183,7 @@ function AboutUsPage() {
                     <div className="about-position-icon">
                       <FaCode />
                     </div>
-                    <h3 className="about-position-title">Frontend Developer</h3>
+                    <h3 className="about-position-title">3D Game Developer</h3>
                   </div>
                   <div className="about-position-info">
                     <span className="about-position-location">
@@ -135,9 +192,15 @@ function AboutUsPage() {
                     <span className="about-position-seniority">
                       <FaUser /> Junior / Senior
                     </span>
-                    <a href="mailto:careers@evofuse.games?subject=Frontend Developer Application" className="about-position-apply-btn">
+                    <button 
+                      className="about-position-apply-btn"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        openModal(positionData['3D Game Developer'])
+                      }}
+                    >
                       Apply Now
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
