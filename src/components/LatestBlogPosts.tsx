@@ -42,8 +42,8 @@ function BlogCard({ slug, title, imageSrc, variant, category, author, postedDate
       </div>
       {/* {variant === 'light' && (
         <>
-          <div className="blog-coins">🪙🪙🪙</div>
-          <div className="blog-sprite">👾</div>
+          <div className="blog-coins"></div>
+          <div className="blog-sprite"></div>
         </>
       )} */}
       {variant === 'dark' && (
