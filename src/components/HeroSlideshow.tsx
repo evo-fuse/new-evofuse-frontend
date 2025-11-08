@@ -26,7 +26,6 @@ function HeroSlideshow() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [dragStart, setDragStart] = useState<number | null>(null)
   const [isDragging, setIsDragging] = useState(false)
-  const [dragCurrent, setDragCurrent] = useState<number | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -48,8 +47,6 @@ function HeroSlideshow() {
 
   const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
     if (dragStart === null || !isDragging) return
-    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
-    setDragCurrent(clientX)
     if ('touches' in e) {
       e.preventDefault()
     }
@@ -74,7 +71,6 @@ function HeroSlideshow() {
 
     setDragStart(null)
     setIsDragging(false)
-    setDragCurrent(null)
   }
 
   const getDragTransform = () => {
