@@ -28,7 +28,7 @@ const games: Record<string, { title: string; imageSrc: string; gameplayImage?: s
     title: 'Othello',
     imageSrc: thumbOthello,
     description: 'No quiet board game here — this is mind warfare on-chain. Outsmart, outflip, and outshine as your every move earns power, pride, and maybe a few DWAT brags.',
-    category: 'top',
+    category: 'coming-soon',
     features: [
       'Strategic gameplay with crypto rewards',
       'Real-time multiplayer matches',
@@ -42,7 +42,7 @@ const games: Record<string, { title: string; imageSrc: string; gameplayImage?: s
     title: 'Flappy Bird',
     imageSrc: thumbFlappy,
     description: "He's back — and he's learned to fly for tokens. Dodge chaos, chase destiny, and flap your way through the most ridiculous, rewarding sky in blockchain history.",
-    category: 'top',
+    category: 'coming-soon',
     features: [
       'Classic gameplay with crypto rewards',
       'Progressive difficulty levels',

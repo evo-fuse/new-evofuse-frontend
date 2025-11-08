@@ -54,12 +54,12 @@ function HeroSlideshow() {
             </div>
           </div>
         ))}
-        <button className="slide-nav slide-prev" onClick={goToPrevious} aria-label="Previous slide">
+        {/* <button className="slide-nav slide-prev" onClick={goToPrevious} aria-label="Previous slide">
           ‹
         </button>
         <button className="slide-nav slide-next" onClick={goToNext} aria-label="Next slide">
           ›
-        </button>
+        </button> */}
       </div>
       <div className="slide-dots">
         {slides.map((_, index) => (
