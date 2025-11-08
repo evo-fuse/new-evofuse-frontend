@@ -1025,13 +1025,13 @@
   padding: 16px 20px; 
   font-size: 16px; 
   font-weight: 600; 
-  background: #4ade80; 
+  background: #27d5ff; 
   color: #0a1924; 
   border: none; 
   border-radius: 12px; 
   cursor: pointer; 
   transition: all 0.3s ease; 
-  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
+  box-shadow: 0 4px 12px rgba(39, 213, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1040,11 +1040,11 @@
 .game-detail-play-btn-icon {
   font-size: 18px;
 }
-.game-detail-play-btn:hover { background: #5ee88a; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(74, 222, 128, 0.4); }
+.game-detail-play-btn:hover { background: #7ce6ff; color: #0a1924; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(39, 213, 255, 0.4); }
 
 /* Download App Buttons Section */
 .game-detail-download-section { margin-top: auto; padding-top: 24px; animation: fade-in-up 1s ease-out 0.3s both; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
-.game-detail-download-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 16px; letter-spacing: -0.01em; font-family: 'Poppins', sans-serif; }
+.game-detail-download-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 16px; letter-spacing: -0.01em; font-family: 'Poppins', sans-serif; text-align: center; }
 .game-detail-download-buttons { display: flex; flex-direction: row; gap: 12px; flex-wrap: wrap; justify-content: center; }
 .game-detail-download-btn { display: flex; align-items: center; gap: 14px; padding: 16px 18px; background: rgba(18, 34, 50, 0.6); border: 1px solid rgba(39, 213, 255, 0.2); border-radius: 12px; color: rgba(214, 235, 255, 0.9); text-decoration: none; cursor: pointer; transition: all 0.3s ease; position: relative; animation: slide-in-right 0.6s ease-out both; flex: 1; min-width: 0; overflow: hidden; }
 .game-detail-download-btn:nth-child(1) { animation-delay: 0.4s; }
@@ -1305,7 +1305,7 @@
   visibility: visible;
   pointer-events: auto;
 }
-.game-detail-watch-video-btn:hover { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.5); transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 40px rgba(39, 213, 255, 0.3); }
+.game-detail-watch-video-btn:hover { background: rgba(39, 213, 255, 0.35); border-color: #7ce6ff; color: #fff; transform: translate(-50%, -50%) scale(1.08); box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(124, 230, 255, 0.3), 0 0 50px rgba(39, 213, 255, 0.5), 0 0 80px rgba(124, 230, 255, 0.3); }
 .game-detail-watch-video-btn:active { transform: translate(-50%, -50%) scale(0.98); }
 .game-detail-watch-video-icon { font-size: 20px; }
 .game-detail-watch-video-text { white-space: nowrap; }
@@ -1651,6 +1651,8 @@
   .game-detail-intro { padding: 28px 22px; }
   .game-detail-title { font-size: 30px; }
   .game-detail-interface { padding: 22px; }
+  .game-detail-download-buttons { gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .game-detail-download-btn { flex: 1 1 calc(50% - 6px); min-width: 180px; max-width: 240px; }
 }
 
 @media (max-width: 900px) {
@@ -1962,9 +1964,9 @@
   .game-detail-interface { padding: 20px; }
   .game-detail-gameplay { margin-bottom: 20px; }
   .game-detail-download-section { padding-top: 20px; }
-  .game-detail-download-title { font-size: 16px; margin-bottom: 12px; }
-  .game-detail-download-buttons { gap: 10px; flex-wrap: wrap; }
-  .game-detail-download-btn { padding: 14px 16px; gap: 12px; flex: 1; min-width: 200px; overflow: hidden; }
+  .game-detail-download-title { font-size: 16px; margin-bottom: 12px; text-align: center; }
+  .game-detail-download-buttons { gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .game-detail-download-btn { padding: 14px 16px; gap: 12px; flex: 1 1 calc(50% - 5px); min-width: 150px; max-width: 200px; overflow: hidden; }
   .game-detail-download-btn-icon { font-size: 22px; }
   .game-detail-download-btn-label { font-size: 14px; }
   .game-detail-download-btn-subtitle { font-size: 11px; }
@@ -2157,7 +2159,7 @@
   .about-team-social-link { width: 28px; height: 28px; font-size: 12px; }
   .about-contact-section { margin: 32px 0; padding-top: 20px; }
   .game-detail-page { padding: 12px 0 32px; }
-  .game-detail-container { padding: 0 12px; }
+  .game-detail-container { padding: 0 8px; }
   .game-detail-layout { gap: 16px; margin-bottom: 24px; padding: 2px; padding-bottom: 56px; }
   .game-detail-layout::before { filter: blur(6px); opacity: 0.5; }
   .game-detail-layout::after { inset: 2px; border-radius: 16px; }
@@ -2166,17 +2168,17 @@
   .game-detail-play-btn { padding: 12px 16px; font-size: 14px; }
   .game-detail-watch-video-btn { padding: 12px 24px; font-size: 14px; gap: 10px; }
   .game-detail-watch-video-icon { font-size: 18px; }
-  .game-detail-intro { padding: 20px 16px; }
+  .game-detail-intro { padding: 16px 12px; }
   .game-detail-title { font-size: 24px; }
   .game-detail-tagline { font-size: 13px; }
   .game-detail-feature-item { font-size: 12px; gap: 8px; margin-bottom: 10px; }
   .game-detail-feature-check { font-size: 14px; }
   .game-detail-play-btn-wrapper { padding-top: 16px; }
   .game-detail-play-btn { padding: 12px 16px; font-size: 14px; }
-  .game-detail-download-section { padding-top: 16px; }
-  .game-detail-download-title { font-size: 14px; margin-bottom: 10px; }
-  .game-detail-download-buttons { gap: 8px; flex-direction: column; }
-  .game-detail-download-btn { padding: 12px 14px; gap: 10px; flex: 1; min-width: 0; overflow: hidden; }
+  .game-detail-download-section { padding-top: 16px; padding-left: 0; padding-right: 0; }
+  .game-detail-download-title { font-size: 14px; margin-bottom: 12px; text-align: center; }
+  .game-detail-download-buttons { gap: 10px; flex-direction: column; justify-content: center; align-items: stretch; width: 100%; }
+  .game-detail-download-btn { padding: 14px 16px; gap: 10px; flex: 1; min-width: 100%; max-width: 100%; width: 100%; overflow: hidden; box-sizing: border-box; }
   .game-detail-download-btn-icon { font-size: 18px; }
   .game-detail-download-btn-label { font-size: 13px; }
   .game-detail-download-btn-subtitle { font-size: 10px; }
@@ -2187,9 +2189,12 @@
   .game-detail-download-btn-content { gap: 2px; }
   .game-detail-watch-video-btn { padding: 10px 20px; font-size: 12px; gap: 8px; }
   .game-detail-watch-video-icon { font-size: 16px; }
-  .game-detail-interface { padding: 16px; }
+  .game-detail-interface { padding: 12px; }
   .game-detail-interface-title { font-size: 20px; }
   .game-detail-currency-item { font-size: 12px; padding: 5px 10px; }
+  .game-detail-download-section { padding: 0; margin-top: auto; }
+  .game-detail-download-buttons { gap: 10px; width: 100%; }
+  .game-detail-download-btn { padding: 14px 16px; width: 100%; max-width: 100%; min-width: 100%; }
   .game-detail-footer { margin-top: 24px; padding-top: 20px; }
   .terms-page { padding: 12px 0 32px; }
   .terms-content { padding: 0 8px; }

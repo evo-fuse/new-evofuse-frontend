@@ -168,10 +168,27 @@ function GameDetailPage() {
                 alt={`${game.title} gameplay`} 
                 className="game-detail-gameplay-image"
               />
-              <button className="game-detail-watch-video-btn" aria-label="Play Game">
-                <FaPlay className="game-detail-watch-video-icon" />
-                <span className="game-detail-watch-video-text">Play Game</span>
-              </button>
+              {game.gameUrl ? (
+                <a 
+                  href={game.gameUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="game-detail-watch-video-btn" 
+                  aria-label="Play Game"
+                >
+                  <FaPlay className="game-detail-watch-video-icon" />
+                  <span className="game-detail-watch-video-text">Play Game</span>
+                </a>
+              ) : (
+                <button 
+                  className="game-detail-watch-video-btn" 
+                  aria-label="Play Game"
+                  onClick={() => openModal(game.title)}
+                >
+                  <FaPlay className="game-detail-watch-video-icon" />
+                  <span className="game-detail-watch-video-text">Play Game</span>
+                </button>
+              )}
             </div>
             
             {/* Download App Buttons */}
