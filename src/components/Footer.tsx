@@ -44,7 +44,7 @@ function Footer() {
             <button type="submit" className="footer-subscribe-btn">Subscribe</button>
           </form>
           <div className="footer-privacy-text">
-            By subscribing, you agree to our <a href="#" className="footer-privacy-link">Privacy Policy</a> and consent to updates.
+            By subscribing, you agree to our <Link to="/privacy" className="footer-privacy-link">Privacy Policy</Link> and consent to updates.
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@ function Footer() {
           <div className="footer-copyright">© 2025 EvoFuse LLC. All rights reserved.</div>
           <div className="footer-legal-links">
             <Link to="/terms" className="footer-legal-link">Terms & Conditions</Link>
-            <a href="#" className="footer-legal-link">Privacy Policy</a>
+            <Link to="/privacy" className="footer-legal-link">Privacy Policy</Link>
           </div>
         </div>
       </div>

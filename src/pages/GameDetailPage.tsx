@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useLoading } from '../contexts/LoadingContext'
 import GameDetailSkeleton from '../components/GameDetailSkeleton'
 import { useComingSoonModal } from '../contexts/ComingSoonModalContext'
-import { FaCheck, FaWindows, FaApple, FaAndroid, FaMobileAlt, FaDownload, FaPlay } from 'react-icons/fa'
+import { FaCheck, FaWindows, FaApple, FaAndroid, FaMobileAlt, FaDownload, FaPlay, FaRocket, FaGlobe, FaDesktop, FaGamepad, FaPalette, FaTools, FaCoins, FaWallet, FaDice, FaVideo, FaRobot, FaTimes } from 'react-icons/fa'
 import thumb2048 from '@thumbnails/2048.jpg'
 import thumbFlappy from '@thumbnails/flappy_bird.jpg'
 import thumbOthello from '@thumbnails/Othello.jpg'
@@ -260,6 +260,120 @@ function GameDetailPage() {
             </div>
           </div>
         </div>
+        
+        {/* Feature Comparison Table */}
+        <div className="game-detail-feature-comparison">
+          <h2 className="game-detail-comparison-title">Feature Comparison</h2>
+          <div className="game-detail-comparison-table-wrapper">
+            <table className="game-detail-comparison-table">
+              <thead>
+                <tr>
+                  <th className="game-detail-comparison-feature-col">
+                    <FaRocket className="game-detail-comparison-header-icon" />
+                    <span>Feature</span>
+                  </th>
+                  <th className="game-detail-comparison-version-col">
+                    <FaGlobe className="game-detail-comparison-header-icon" />
+                    <span>Web Version</span>
+                  </th>
+                  <th className="game-detail-comparison-version-col">
+                    <FaDesktop className="game-detail-comparison-header-icon" />
+                    <span>PC App Version</span>
+                  </th>
+                  <th className="game-detail-comparison-version-col">
+                    <FaMobileAlt className="game-detail-comparison-header-icon" />
+                    <span>Mobile App Version</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
+                    <FaGamepad className="game-detail-comparison-feature-icon" />
+                    <span>Core Fusion</span>
+                    <div className="game-detail-comparison-tooltip">Classic 2048 gameplay with our signature evolving history theme</div>
+                  </td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                </tr>
+                <tr>
+                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
+                    <FaPalette className="game-detail-comparison-feature-icon" />
+                    <span>Theme Playground</span>
+                    <div className="game-detail-comparison-tooltip">Buy, play, or even create your own themed tile sets</div>
+                  </td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                </tr>
+                <tr>
+                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
+                    <FaTools className="game-detail-comparison-feature-icon" />
+                    <span>Power Tools</span>
+                    <div className="game-detail-comparison-tooltip">Smash or upgrade tiles with cool in-game items</div>
+                  </td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                </tr>
+                <tr>
+                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
+                    <FaCoins className="game-detail-comparison-feature-icon" />
+                    <span>DWAT Rush</span>
+                    <div className="game-detail-comparison-tooltip">Earn real DWAT tokens with your high scores</div>
+                  </td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                </tr>
+                <tr>
+                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
+                    <FaWallet className="game-detail-comparison-feature-icon" />
+                    <span>My Vault</span>
+                    <div className="game-detail-comparison-tooltip">Create & manage a crypto wallet directly in-game</div>
+                  </td>
+                  <td className="game-detail-comparison-cross"><FaTimes /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                </tr>
+                <tr>
+                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
+                    <FaDice className="game-detail-comparison-feature-icon" />
+                    <span>Crypto Carnival</span>
+                    <div className="game-detail-comparison-tooltip">Play betting games like SportBingo with DWAT</div>
+                  </td>
+                  <td className="game-detail-comparison-cross"><FaTimes /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                </tr>
+                <tr>
+                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
+                    <FaVideo className="game-detail-comparison-feature-icon" />
+                    <span>Replay Magic</span>
+                    <div className="game-detail-comparison-tooltip">Save your genius moves or learn from top players' replays</div>
+                  </td>
+                  <td className="game-detail-comparison-cross"><FaTimes /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                </tr>
+                <tr>
+                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
+                    <FaRobot className="game-detail-comparison-feature-icon" />
+                    <span>AI Theme Wizard</span>
+                    <div className="game-detail-comparison-tooltip">AI builds a whole new 2048 theme based on <em>your</em> idea!</div>
+                  </td>
+                  <td className="game-detail-comparison-cross"><FaTimes /></td>
+                  <td className="game-detail-comparison-cross"><FaTimes /></td>
+                  <td className="game-detail-comparison-coming-soon">
+                    <FaCheck /> <span>(Coming Soon!)</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
         <div className="game-detail-footer">
           <Link to="/games" className="btn btn-outline">Back to Game</Link>
         </div>

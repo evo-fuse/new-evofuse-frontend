@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import { useLoading } from '../contexts/LoadingContext'
 import AboutUsSkeleton from '../components/AboutUsSkeleton'
-import { FaLinkedin, FaFacebook } from 'react-icons/fa'
+import { FaLinkedin, FaFacebook, FaCode, FaPalette, FaMapMarkerAlt, FaUser } from 'react-icons/fa'
 import { FaDiscord } from 'react-icons/fa6'
-import chikoAvatar from '../assets/teams/chiko.png'
+import johnAvatar from '../assets/teams/John Guerrero.png'
+import felixAvatar from '../assets/teams/Felix Hansen.png'
+import leonAvatar from '../assets/teams/Leon Weber.png'
 
 function AboutUsPage() {
   const { loading, setLoading } = useLoading()
@@ -38,9 +40,10 @@ function AboutUsPage() {
               <div className="about-team-grid">
                 <div className="about-team-member">
                   <div className="about-team-avatar">
-                    <img src={chikoAvatar} alt="Chiko" />
+                    <img src={johnAvatar} alt="John Guerrero" />
                   </div>
-                  <h3 className="about-team-name">Chiko</h3>
+                  <h3 className="about-team-name">John Guerrero</h3>
+                  <p className="about-team-role">Co-Founder</p>
                   <div className="about-team-social">
                     <a href="#" className="about-team-social-link" aria-label="LinkedIn">
                       <FaLinkedin />
@@ -50,6 +53,90 @@ function AboutUsPage() {
                     </a>
                     <a href="#" className="about-team-social-link" aria-label="Facebook">
                       <FaFacebook />
+                    </a>
+                  </div>
+                </div>
+                <div className="about-team-member">
+                  <div className="about-team-avatar">
+                    <img src={felixAvatar} alt="Felix Hansen" />
+                  </div>
+                  <h3 className="about-team-name">Felix Hansen</h3>
+                  <p className="about-team-role">CEO</p>
+                  <div className="about-team-social">
+                    <a href="#" className="about-team-social-link" aria-label="LinkedIn">
+                      <FaLinkedin />
+                    </a>
+                    <a href="#" className="about-team-social-link" aria-label="Discord">
+                      <FaDiscord />
+                    </a>
+                    <a href="#" className="about-team-social-link" aria-label="Facebook">
+                      <FaFacebook />
+                    </a>
+                  </div>
+                </div>
+                <div className="about-team-member">
+                  <div className="about-team-avatar">
+                    <img src={leonAvatar} alt="Leon Weber" />
+                  </div>
+                  <h3 className="about-team-name">Leon Weber</h3>
+                  <p className="about-team-role">CTO</p>
+                  <div className="about-team-social">
+                    <a href="#" className="about-team-social-link" aria-label="LinkedIn">
+                      <FaLinkedin />
+                    </a>
+                    <a href="#" className="about-team-social-link" aria-label="Discord">
+                      <FaDiscord />
+                    </a>
+                    <a href="#" className="about-team-social-link" aria-label="Facebook">
+                      <FaFacebook />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Open Positions Section */}
+            <div className="about-positions-section">
+              <h2 className="about-section-title">Join Our Team</h2>
+              <p className="about-section-text" style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 48px' }}>
+                We're looking for talented individuals to help us build the future of blockchain gaming. Join us and be part of an innovative team creating immersive Web3 experiences.
+              </p>
+              <div className="about-positions-grid">
+                <div className="about-position-card">
+                  <div className="about-position-header">
+                    <div className="about-position-icon">
+                      <FaPalette />
+                    </div>
+                    <h3 className="about-position-title">UX/UI Engineer</h3>
+                  </div>
+                  <div className="about-position-info">
+                    <span className="about-position-location">
+                      <FaMapMarkerAlt /> Remote / Hybrid
+                    </span>
+                    <span className="about-position-seniority">
+                      <FaUser /> Junior / Senior
+                    </span>
+                    <a href="mailto:careers@evofuse.games?subject=UX/UI Engineer Application" className="about-position-apply-btn">
+                      Apply Now
+                    </a>
+                  </div>
+                </div>
+                <div className="about-position-card">
+                  <div className="about-position-header">
+                    <div className="about-position-icon">
+                      <FaCode />
+                    </div>
+                    <h3 className="about-position-title">Frontend Developer</h3>
+                  </div>
+                  <div className="about-position-info">
+                    <span className="about-position-location">
+                      <FaMapMarkerAlt /> Remote / Hybrid
+                    </span>
+                    <span className="about-position-seniority">
+                      <FaUser /> Junior / Senior
+                    </span>
+                    <a href="mailto:careers@evofuse.games?subject=Frontend Developer Application" className="about-position-apply-btn">
+                      Apply Now
                     </a>
                   </div>
                 </div>
