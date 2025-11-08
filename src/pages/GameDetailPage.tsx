@@ -335,17 +335,17 @@ function GameDetailPage() {
                   </td>
                   <td className="game-detail-comparison-cross"><FaTimes /></td>
                   <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-cross"><FaTimes /></td>
                 </tr>
                 <tr>
                   <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
                     <FaDice className="game-detail-comparison-feature-icon" />
                     <span>Crypto Carnival</span>
-                    <div className="game-detail-comparison-tooltip">Play betting games like SportBingo with DWAT</div>
+                    <div className="game-detail-comparison-tooltip">Play betting games like SportBingo</div>
                   </td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-check"><FaCheck /></td>
                   <td className="game-detail-comparison-cross"><FaTimes /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
                 </tr>
                 <tr>
                   <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
@@ -355,7 +355,7 @@ function GameDetailPage() {
                   </td>
                   <td className="game-detail-comparison-cross"><FaTimes /></td>
                   <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
+                  <td className="game-detail-comparison-cross"><FaTimes /></td>
                 </tr>
                 <tr>
                   <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
@@ -364,10 +364,10 @@ function GameDetailPage() {
                     <div className="game-detail-comparison-tooltip">AI builds a whole new 2048 theme based on <em>your</em> idea!</div>
                   </td>
                   <td className="game-detail-comparison-cross"><FaTimes /></td>
-                  <td className="game-detail-comparison-cross"><FaTimes /></td>
                   <td className="game-detail-comparison-coming-soon">
-                    <FaCheck /> <span>(Coming Soon!)</span>
+                    <FaCheck /> <span>(Coming Soon)</span>
                   </td>
+                  <td className="game-detail-comparison-cross"><FaTimes /></td>
                 </tr>
               </tbody>
             </table>

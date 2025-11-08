@@ -8,12 +8,12 @@ import slideMac from '@slides/mac.png'
 
 function HeroSlideshow() {
   const slides = [
-    { src: slideRunning, title: 'EvoFuse: Classic Games Reborn on the Blockchain', desc: 'Rediscover your favorite games through a modern Web3 lens—EvoFuse merges nostalgic gameplay with real token rewards on the Fuse Network.', badge: 'Web3 Gaming', cta: 'Explore Games' },
-    { src: slideImagine, title: 'One Ecosystem, Endless Games', desc: 'From 2048 to future classics like Othello and Flappybird, EvoFuse brings them all together in a unified, reward-powered arcade experience.', badge: 'Arcade', cta: 'Play Now' },
-    { src: slideSell, title: 'Earn While You Play with DWAT', desc: 'Your skills are your currency—achieve high scores, unlock milestones, and get rewarded with DWAT tokens you can use across the platform.', badge: 'Earn Rewards', cta: 'Start Earning' },
-    { src: slideTree, title: 'Fully Customizable, Truly Yours', desc: 'Everything in EvoFuse can be tailored—create your own themes, tweak gameplay mechanics, and even design new experiences to share or sell.', badge: 'Customize', cta: 'Create Now' },
-    { src: slideGround, title: 'Share, Compete, and Learn Together', desc: 'Record and replay every move, study top players, and join a growing social hub where games become stories and strategies are shared.', badge: 'Community', cta: 'Join Now' },
-    { src: slideMac, title: 'The Future is Player-Owned', desc: 'With betting games, NFTs, and a creator-driven economy on the horizon, EvoFuse is building the next-generation Web3 arcade—powered by you.', badge: 'Future', cta: 'Learn More' },
+    { src: slideRunning, title: 'EvoFuse: Classic Games Reborn on Web3', desc: 'Rediscover the games you love—EvoFuse fuses timeless gameplay with real blockchain rewards on the Fuse Network.', badge: 'Web3 Gaming', cta: 'Explore Games' },
+    { src: slideImagine, title: 'One Ecosystem, Infinite Play', desc: 'From 2048 to Othello and Flappybird, EvoFuse unites classic titles into one connected, reward-powered arcade universe.', badge: 'Arcade', cta: 'Play Now' },
+    { src: slideSell, title: 'Earn DWAT by Playing Smart', desc: 'Your skills generate value—hit milestones, climb leaderboards, and collect DWAT tokens to use throughout the platform.', badge: 'Earn Rewards', cta: 'Start Earning' },
+    { src: slideTree, title: 'Customize, Create, and Share', desc: 'Shape EvoFuse your way—build new themes, adjust mechanics, and release original creations to showcase or monetize.', badge: 'Customize', cta: 'Create Now' },
+    { src: slideGround, title: 'Powered by Players, Built for the Future', desc: 'With NFTs, betting modes, and a creator economy ahead, EvoFuse is crafting the next-generation Web3 arcade.', badge: 'Future', cta: 'Learn More' },
+    { src: slideMac, title: 'EvoFuse PC App: Evolve Your Mastery', desc: 'Unlock advanced tools like AI Theme Agent for instant theme creation and Play Record Replay for strategic learning—exclusive to the PC app.', badge: 'PC App', cta: 'Download Now' },
   ]
 
   // Random vertical positions for each slide: 'top', 'middle', 'bottom'
