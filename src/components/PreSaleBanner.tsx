@@ -178,7 +178,8 @@ function PreSaleBanner() {
         <div className="presale-blur-mask">
           <div className="presale-upcoming-alert">
             <FaRocket className="presale-alert-icon" />
-            <span className="presale-alert-text">Upcoming Token Presale</span>
+            <span className="presale-alert-text presale-alert-text-full">Upcoming Token Presale</span>
+            <span className="presale-alert-text presale-alert-text-short">Presale</span>
           </div>
         </div>
         <div className="presale-banner-controls">
