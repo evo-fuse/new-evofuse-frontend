@@ -22,7 +22,7 @@ function AppContent() {
   const location = useLocation()
   
   // Routes that should only show skeleton, not the circle ring loader
-  const skeletonOnlyRoutes = ['/games', '/blog', '/leaderboard', '/terms', '/privacy', '/about']
+  const skeletonOnlyRoutes = ['/games', '/blog', '/leaderboard', '/terms', '/privacy', '/about', '/contact']
   const isSkeletonOnlyRoute = skeletonOnlyRoutes.some(route => 
     location.pathname === route || location.pathname.startsWith('/blog/') || location.pathname.startsWith('/game/')
   )
