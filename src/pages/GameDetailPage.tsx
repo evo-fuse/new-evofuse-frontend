@@ -128,12 +128,14 @@ function GameDetailPage() {
                 </div>
               ))}
             </div>
+            {/* Play Button aligned with download buttons */}
+            <div className="game-detail-play-btn-wrapper">
+              <button className="btn btn-primary game-detail-play-btn" aria-label="Play">
+                <FaPlay className="game-detail-play-btn-icon" />
+                <span>Play {game.title}</span>
+              </button>
+            </div>
           </div>
-          
-          {/* Play Button at Bottom Border */}
-          <button className="btn btn-primary game-detail-play-btn" aria-label="Play">
-            Play {game.title}
-          </button>
 
           {/* Right Panel - Game Interface */}
           <div className="game-detail-interface">
@@ -146,10 +148,10 @@ function GameDetailPage() {
                 alt={`${game.title} gameplay`} 
                 className="game-detail-gameplay-image"
               />
-              <button className="game-detail-watch-video-btn" aria-label="Play Game">
+              {/* <button className="game-detail-watch-video-btn" aria-label="Play Game">
                 <FaPlay className="game-detail-watch-video-icon" />
                 <span className="game-detail-watch-video-text">Play Game</span>
-              </button>
+              </button> */}
             </div>
             
             {/* Download App Buttons */}

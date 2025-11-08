@@ -26,7 +26,7 @@ export const blogPosts: BlogPost[] = [
     variant: 'light',
     category: 'game',
     author: 'John Doe',
-    postedDate: 'Jan 15, 2026',
+    postedDate: 'Oct 15, 2025',
     readingTime: '5 min read',
     dateValue: new Date('2026-01-15'),
     content: [
@@ -66,7 +66,7 @@ export const blogPosts: BlogPost[] = [
     variant: 'dark',
     category: 'crypto',
     author: 'Jane Smith',
-    postedDate: 'Jan 12, 2026',
+    postedDate: 'Oct 12, 2025',
     readingTime: '7 min read',
     dateValue: new Date('2026-01-12'),
     content: [
@@ -115,7 +115,7 @@ export const blogPosts: BlogPost[] = [
     variant: 'dark',
     category: 'crypto',
     author: 'Mike Johnson',
-    postedDate: 'Jan 10, 2026',
+    postedDate: 'Oct 10, 2025',
     readingTime: '6 min read',
     dateValue: new Date('2026-01-10'),
     content: [
@@ -154,7 +154,7 @@ export const blogPosts: BlogPost[] = [
     variant: 'dark',
     category: 'new',
     author: 'Sarah Williams',
-    postedDate: 'Jan 8, 2026',
+    postedDate: 'Oct 8, 2025',
     readingTime: '4 min read',
     dateValue: new Date('2026-01-08'),
     content: [
@@ -183,7 +183,7 @@ export const blogPosts: BlogPost[] = [
     variant: 'light',
     category: 'server',
     author: 'David Brown',
-    postedDate: 'Jan 5, 2026',
+    postedDate: 'Oct 5, 2025',
     readingTime: '6 min read',
     dateValue: new Date('2026-01-05'),
     content: [
@@ -217,7 +217,7 @@ export const blogPosts: BlogPost[] = [
     variant: 'dark',
     category: 'game',
     author: 'Emily Davis',
-    postedDate: 'Jan 3, 2026',
+    postedDate: 'Oct 3, 2025',
     readingTime: '5 min read',
     dateValue: new Date('2026-01-03'),
     content: [

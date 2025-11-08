@@ -58,15 +58,20 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 24px;
+  overflow: visible;
+  padding: 20px 0;
 }
 
 .slideshow-container {
   position: relative;
   width: 100%;
   height: 400px;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 0;
   background: transparent;
+  perspective: 1500px;
+  perspective-origin: center center;
+  transform-style: preserve-3d;
 }
 
 .slide {
@@ -93,8 +98,49 @@
   display: block;
 }
 /* slide content beside image */
-.slide-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; height: 100%; gap: 12px; position: relative; overflow: hidden; padding: 0 8px; box-sizing: border-box; }
-.slide-inner img { order: 1; width: 100%; height: 100%; object-fit: cover; }
+.slide-inner { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  align-items: stretch; 
+  height: 100%; 
+  gap: 12px; 
+  position: relative; 
+  overflow: visible; 
+  padding: 0 8px; 
+  box-sizing: border-box; 
+  user-select: none;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+.slide.dragging .slide-inner { 
+  cursor: grabbing; 
+  transition: none;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.4),
+    0 15px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  filter: drop-shadow(0 0 20px rgba(39, 213, 255, 0.2));
+}
+.slide.dragging .slide-inner img { 
+  opacity: 0.98; 
+  filter: brightness(0.92) contrast(1.05);
+  transform-style: preserve-3d;
+}
+.slide.dragging .slide-caption {
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+}
+.slide-inner img { 
+  order: 1; 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 .slide-caption { 
   order: 2; 
   position: relative; 
@@ -106,7 +152,10 @@
   width: 100%; 
   max-width: 100%; 
   box-sizing: border-box; 
-  color: #d6ebff; 
+  color: #d6ebff;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .slide.reverse .slide-inner { grid-template-columns: 1fr 1fr; }
 .slide.reverse .slide-inner img { order: 2; }
@@ -345,7 +394,7 @@
 .btn-outline:hover { border-color: #7ce6ff; color: #7ce6ff; }
 
 /* Sections */
-.section { background: transparent; border: 0; border-radius: 16px; padding: 28px 24px; }
+.section { background: transparent; border: 0; border-radius: 16px; padding: 0 24px 28px 24px; }
 .section-title { margin: 0 0 28px; font-size: 30px; font-weight: 700; letter-spacing: -0.01em; text-transform: none; color: #fff; text-shadow: 0 2px 8px rgba(39, 213, 255, 0.2); line-height: 1.4; font-family: 'Poppins', sans-serif; }
 
 /* Shell wrapping tabs + sections */
@@ -848,35 +897,49 @@
 .game-detail-footer { margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; }
 
 /* Left Panel - Game Introduction */
-.game-detail-intro { background: rgba(18, 34, 50, 0.6); border: 1px solid rgba(39, 213, 255, 0.2); border-radius: 16px; padding: 32px 24px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(39, 213, 255, 0.1); }
+.game-detail-intro { 
+  background: rgba(18, 34, 50, 0.6); 
+  border: 1px solid rgba(39, 213, 255, 0.2); 
+  border-radius: 16px; 
+  padding: 32px 24px; 
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(39, 213, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+}
 .game-detail-title { font-size: 32px; font-weight: 700; color: #fff; margin: 0 0 16px; letter-spacing: -0.02em; text-shadow: 0 2px 8px rgba(39, 213, 255, 0.3); line-height: 1.3; font-family: 'Poppins', sans-serif; }
 .game-detail-tagline { font-size: 15px; line-height: 1.6; color: rgba(214, 235, 255, 0.9); margin: 0 0 24px; font-weight: 400; text-align: justify; }
 .game-detail-separator { width: 100%; height: 1px; background: rgba(255, 255, 255, 0.15); margin: 24px 0; }
 .game-detail-features { margin-bottom: 32px; }
 .game-detail-feature-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; font-size: 14px; line-height: 1.5; color: rgba(214, 235, 255, 0.85); }
 .game-detail-feature-check { color: #4ade80; font-size: 16px; margin-top: 2px; flex-shrink: 0; }
+.game-detail-play-btn-wrapper {
+  margin-top: auto;
+  padding-top: 24px;
+}
 .game-detail-play-btn { 
-  position: absolute; 
-  bottom: 3px; 
-  left: 3px; 
-  right: 3px; 
-  width: calc(100% - 6px); 
-  padding: 14px 20px; 
+  width: 100%; 
+  padding: 16px 20px; 
   font-size: 16px; 
   font-weight: 600; 
   background: #4ade80; 
   color: #0a1924; 
   border: none; 
-  border-radius: 0 0 17px 17px; 
+  border-radius: 12px; 
   cursor: pointer; 
   transition: all 0.3s ease; 
   box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
-  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.game-detail-play-btn-icon {
+  font-size: 18px;
 }
 .game-detail-play-btn:hover { background: #5ee88a; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(74, 222, 128, 0.4); }
 
 /* Download App Buttons Section */
-.game-detail-download-section { margin-top: 24px; animation: fade-in-up 1s ease-out 0.3s both; position: relative; z-index: 1; }
+.game-detail-download-section { margin-top: auto; padding-top: 24px; animation: fade-in-up 1s ease-out 0.3s both; position: relative; z-index: 1; }
 .game-detail-download-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 16px; letter-spacing: -0.01em; font-family: 'Poppins', sans-serif; }
 .game-detail-download-buttons { display: flex; flex-direction: row; gap: 12px; flex-wrap: wrap; }
 .game-detail-download-btn { display: flex; align-items: center; gap: 14px; padding: 16px 18px; background: rgba(18, 34, 50, 0.6); border: 1px solid rgba(39, 213, 255, 0.2); border-radius: 12px; color: rgba(214, 235, 255, 0.9); text-decoration: none; cursor: pointer; transition: all 0.3s ease; position: relative; animation: slide-in-right 0.6s ease-out both; flex: 1; min-width: 0; }
@@ -1049,7 +1112,17 @@
 }
 
 /* Right Panel - Game Interface */
-.game-detail-interface { background: rgba(18, 34, 50, 0.6); border: 1px solid rgba(39, 213, 255, 0.2); border-radius: 16px; padding: 24px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(39, 213, 255, 0.1); position: relative; overflow: hidden; }
+.game-detail-interface { 
+  background: rgba(18, 34, 50, 0.6); 
+  border: 1px solid rgba(39, 213, 255, 0.2); 
+  border-radius: 16px; 
+  padding: 24px; 
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(39, 213, 255, 0.1); 
+  position: relative; 
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
 .game-detail-interface-border-progress { position: absolute; inset: 0; border-radius: 16px; z-index: 0; pointer-events: none; }
 .game-detail-interface-progress-fill { position: absolute; width: 25%; height: 3px; background: linear-gradient(90deg, transparent, #27d5ff, #7ce6ff, #27d5ff, transparent); background-size: 200% 100%; animation: progress-shimmer 2s linear infinite, border-travel 6s linear infinite; box-shadow: 0 0 10px rgba(39, 213, 255, 0.8), 0 0 20px rgba(124, 230, 255, 0.4), 0 0 30px rgba(39, 213, 255, 0.3); }
 .game-detail-interface-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
@@ -1705,10 +1778,11 @@
   .game-detail-features { margin-bottom: 24px; }
   .game-detail-feature-item { font-size: 13px; gap: 10px; margin-bottom: 10px; }
   .game-detail-feature-check { font-size: 15px; }
-  .game-detail-play-btn { bottom: 2px; left: 2px; right: 2px; width: calc(100% - 4px); padding: 12px 18px; font-size: 15px; border-radius: 0 0 16px 16px; }
+  .game-detail-play-btn-wrapper { padding-top: 20px; }
+  .game-detail-play-btn { padding: 14px 18px; font-size: 15px; }
   .game-detail-interface { padding: 20px; }
   .game-detail-gameplay { margin-bottom: 20px; }
-  .game-detail-download-section { margin-top: 20px; }
+  .game-detail-download-section { padding-top: 20px; }
   .game-detail-download-title { font-size: 16px; margin-bottom: 12px; }
   .game-detail-download-buttons { gap: 10px; }
   .game-detail-download-btn { padding: 14px 16px; gap: 12px; }
@@ -1900,7 +1974,8 @@
   .game-detail-layout::before { filter: blur(6px); opacity: 0.5; }
   .game-detail-layout::after { inset: 2px; border-radius: 16px; }
   .game-detail-interface-progress-fill { width: 20%; }
-  .game-detail-play-btn { bottom: 2px; left: 2px; right: 2px; width: calc(100% - 4px); border-radius: 0 0 14px 14px; }
+  .game-detail-play-btn-wrapper { padding-top: 16px; }
+  .game-detail-play-btn { padding: 12px 16px; font-size: 14px; }
   .game-detail-watch-video-btn { padding: 12px 24px; font-size: 14px; gap: 10px; }
   .game-detail-watch-video-icon { font-size: 18px; }
   .game-detail-intro { padding: 20px 16px; }
@@ -1908,8 +1983,9 @@
   .game-detail-tagline { font-size: 13px; }
   .game-detail-feature-item { font-size: 12px; gap: 8px; margin-bottom: 10px; }
   .game-detail-feature-check { font-size: 14px; }
+  .game-detail-play-btn-wrapper { padding-top: 16px; }
   .game-detail-play-btn { padding: 12px 16px; font-size: 14px; }
-  .game-detail-download-section { margin-top: 16px; }
+  .game-detail-download-section { padding-top: 16px; }
   .game-detail-download-title { font-size: 14px; margin-bottom: 10px; }
   .game-detail-download-buttons { gap: 8px; flex-direction: column; }
   .game-detail-download-btn { padding: 12px 14px; gap: 10px; flex: 1; min-width: 0; }
