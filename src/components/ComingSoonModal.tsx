@@ -16,7 +16,10 @@ function ComingSoonModal() {
           <h2 className="coming-soon-modal-title">Coming Soon</h2>
           <p className="coming-soon-modal-game">{selectedGame}</p>
           <p className="coming-soon-modal-message">
-            We're working hard to bring you an amazing gaming experience. Stay tuned for updates!
+            {selectedGame?.includes('version') 
+              ? "This version is currently in development and coming soon. We're working hard to bring you an amazing experience. Stay tuned for updates!"
+              : "We're working hard to bring you an amazing gaming experience. Stay tuned for updates!"
+            }
           </p>
           <button className="btn btn-primary coming-soon-modal-btn" onClick={closeModal}>
             Got it

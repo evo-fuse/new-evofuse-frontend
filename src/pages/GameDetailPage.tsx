@@ -2,7 +2,8 @@ import { useMemo, useEffect, useState, useLayoutEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useLoading } from '../contexts/LoadingContext'
 import GameDetailSkeleton from '../components/GameDetailSkeleton'
-import { FaCheck, FaWindows, FaApple, FaAndroid, FaDownload, FaPlay } from 'react-icons/fa'
+import { useComingSoonModal } from '../contexts/ComingSoonModalContext'
+import { FaCheck, FaWindows, FaApple, FaAndroid, FaMobileAlt, FaDownload, FaPlay } from 'react-icons/fa'
 import thumb2048 from '@thumbnails/2048.jpg'
 import thumbFlappy from '@thumbnails/flappy_bird.jpg'
 import thumbOthello from '@thumbnails/Othello.jpg'
@@ -10,13 +11,14 @@ import thumbCarcassonne from '@thumbnails/carcassonne.png'
 
 const gameplayImage2048 = 'https://i.ibb.co/mkLhSvj/2048play.png'
 
-const games: Record<string, { title: string; imageSrc: string; gameplayImage?: string; description: string; category: string; features: string[] }> = {
+const games: Record<string, { title: string; imageSrc: string; gameplayImage?: string; description: string; category: string; features: string[]; gameUrl?: string }> = {
   '2048': {
     title: 'EvoFuse 2048',
     imageSrc: thumb2048,
     gameplayImage: gameplayImage2048,
     description: "Experience the ultimate fusion of classic puzzle gameplay and cutting-edge blockchain with EvoFuse 2048. This revolutionary take on the beloved tile-merging game combines addictive strategic gameplay with real crypto rewards, creating an immersive PZE (Play-to-Earn) gaming experience.",
     category: 'top',
+    gameUrl: 'https://2048.evofuse.xyz/game/',
     features: [
       'Play puzzle game 2048 with crypto rewards',
       'PZE crypto games with real earnings',
@@ -72,6 +74,7 @@ function GameDetailPage() {
   const { slug } = useParams()
   const game = useMemo(() => (slug ? games[slug.toLowerCase()] : undefined), [slug])
   const { setLoading } = useLoading()
+  const { openModal } = useComingSoonModal()
   const [isLoading, setIsLoading] = useState(true)
 
   // Use useLayoutEffect to set loading state synchronously before paint
@@ -130,10 +133,27 @@ function GameDetailPage() {
             </div>
             {/* Play Button aligned with download buttons */}
             <div className="game-detail-play-btn-wrapper">
-              <button className="btn btn-primary game-detail-play-btn" aria-label="Play">
-                <FaPlay className="game-detail-play-btn-icon" />
-                <span>Play {game.title}</span>
-              </button>
+              {game.gameUrl ? (
+                <a 
+                  href={game.gameUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="btn btn-primary game-detail-play-btn" 
+                  aria-label="Play"
+                >
+                  <FaPlay className="game-detail-play-btn-icon" />
+                  <span>Play {game.title}</span>
+                </a>
+              ) : (
+                <button 
+                  className="btn btn-primary game-detail-play-btn" 
+                  aria-label="Play"
+                  onClick={() => openModal(game.title)}
+                >
+                  <FaPlay className="game-detail-play-btn-icon" />
+                  <span>Play {game.title}</span>
+                </button>
+              )}
             </div>
           </div>
 
@@ -159,37 +179,63 @@ function GameDetailPage() {
               <div className="game-detail-download-title">Download App</div>
               <div className="game-detail-download-buttons">
                 <a href="#" className="game-detail-download-btn" onClick={(e) => e.preventDefault()}>
+                  <div className="game-detail-download-btn-new-banner">
+                    <span className="game-detail-download-btn-new-text">New</span>
+                  </div>
                   <FaWindows className="game-detail-download-btn-icon" />
                   <div className="game-detail-download-btn-content">
                     <div className="game-detail-download-btn-header">
                       <span className="game-detail-download-btn-label">Windows</span>
-                      <span className="game-detail-download-btn-new">New</span>
                     </div>
                     <span className="game-detail-download-btn-subtitle">Version 1.0.0</span>
-                    <span className="game-detail-download-btn-version">Latest Release</span>
                   </div>
                   <FaDownload className="game-detail-download-icon" />
                 </a>
-                <a href="#" className="game-detail-download-btn" onClick={(e) => e.preventDefault()}>
+                <a href="#" className="game-detail-download-btn" onClick={(e) => {
+                  e.preventDefault()
+                  openModal('Mac version')
+                }}>
+                  <div className="game-detail-download-btn-new-banner">
+                    <span className="game-detail-download-btn-new-text">New</span>
+                  </div>
                   <FaApple className="game-detail-download-btn-icon" />
                   <div className="game-detail-download-btn-content">
                     <div className="game-detail-download-btn-header">
                       <span className="game-detail-download-btn-label">Mac</span>
                     </div>
                     <span className="game-detail-download-btn-subtitle">Version 1.0.0</span>
-                    <span className="game-detail-download-btn-version">macOS 10.15+</span>
                   </div>
                   <FaDownload className="game-detail-download-icon" />
                 </a>
-                <a href="#" className="game-detail-download-btn" onClick={(e) => e.preventDefault()}>
+                <a href="#" className="game-detail-download-btn" onClick={(e) => {
+                  e.preventDefault()
+                  openModal('Android version')
+                }}>
+                  <div className="game-detail-download-btn-new-banner">
+                    <span className="game-detail-download-btn-new-text">New</span>
+                  </div>
                   <FaAndroid className="game-detail-download-btn-icon" />
                   <div className="game-detail-download-btn-content">
                     <div className="game-detail-download-btn-header">
                       <span className="game-detail-download-btn-label">Android</span>
-                      <span className="game-detail-download-btn-new">New</span>
                     </div>
                     <span className="game-detail-download-btn-subtitle">Version 1.0.0</span>
-                    <span className="game-detail-download-btn-version">Android 8.0+</span>
+                  </div>
+                  <FaDownload className="game-detail-download-icon" />
+                </a>
+                <a href="#" className="game-detail-download-btn" onClick={(e) => {
+                  e.preventDefault()
+                  openModal('iOS version')
+                }}>
+                  <div className="game-detail-download-btn-new-banner">
+                    <span className="game-detail-download-btn-new-text">New</span>
+                  </div>
+                  <FaMobileAlt className="game-detail-download-btn-icon" />
+                  <div className="game-detail-download-btn-content">
+                    <div className="game-detail-download-btn-header">
+                      <span className="game-detail-download-btn-label">iOS</span>
+                    </div>
+                    <span className="game-detail-download-btn-subtitle">Version 1.0.0</span>
                   </div>
                   <FaDownload className="game-detail-download-icon" />
                 </a>
