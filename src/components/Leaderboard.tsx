@@ -71,11 +71,8 @@ function Leaderboard() {
               value={activeFilter}
               onChange={(e) => setActiveFilter(e.target.value as 'all' | 'othello' | '2048' | 'flappy' | 'carcassonne')}
             >
-              <option value="2048">2048</option>
               <option value="all">ALL GAMES</option>
-              <option value="othello">OTHELLO CHPTO KINGS</option>
-              <option value="flappy">FLAPPY BIRD</option>
-              <option value="carcassonne">CARCASSONNE</option>
+              <option value="2048">2048</option>
             </select>
             <div className="leaderboard-sort-wrapper">
               <span className="leaderboard-sort-label">Sort by:</span>
