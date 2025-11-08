@@ -250,7 +250,7 @@ function PreSaleBanner() {
           </div>
           <div className="presale-timer-separator">:</div>
           <div className="presale-timer-item">
-            <div className="presale-timer-label">SECS.</div>
+            <div className="presale-timer-label">SECS</div>
             <div className="presale-timer-value">{formatTime(timeLeft.seconds)}</div>
           </div>
         </div>

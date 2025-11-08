@@ -1,6 +1,6 @@
 import siteLogo from '@assets/logo.png'
 import { Link, NavLink } from 'react-router-dom'
-import { FaHome, FaGamepad, FaBookOpen, FaTrophy, FaEnvelope, FaFileContract, FaInfoCircle } from 'react-icons/fa'
+import { FaHome, FaGamepad, FaBookOpen, FaTrophy, FaEnvelope, FaInfoCircle } from 'react-icons/fa'
 
 function Header() {
   return (
@@ -34,10 +34,6 @@ function Header() {
           <NavLink to="/about" className="nav-item">
             <FaInfoCircle className="nav-icon" />
             <span className="nav-text">About Us</span>
-          </NavLink>
-          <NavLink to="/terms" className="nav-item">
-            <FaFileContract className="nav-icon" />
-            <span className="nav-text">Terms & Conditions</span>
           </NavLink>
         </nav>
         <div className="user-actions">

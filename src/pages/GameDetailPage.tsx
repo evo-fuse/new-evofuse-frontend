@@ -8,7 +8,7 @@ import thumbFlappy from '@thumbnails/flappy_bird.jpg'
 import thumbOthello from '@thumbnails/Othello.jpg'
 import thumbCarcassonne from '@thumbnails/carcassonne.png'
 
-const gameplayImage2048 = 'https://i.ibb.co/m5TWdRCd/2048preview.png'
+const gameplayImage2048 = 'https://i.ibb.co/mkLhSvj/2048play.png'
 
 const games: Record<string, { title: string; imageSrc: string; gameplayImage?: string; description: string; category: string; features: string[] }> = {
   '2048': {
@@ -115,9 +115,6 @@ function GameDetailPage() {
     <div className="game-detail-page">
       <div className="game-detail-container">
         <div className="game-detail-layout">
-          <div className="game-detail-layout-border-progress">
-            <div className="game-detail-layout-progress-fill"></div>
-          </div>
           {/* Left Panel - Game Introduction */}
           <div className="game-detail-intro">
             <h1 className="game-detail-title">{game.title}</h1>
@@ -131,22 +128,27 @@ function GameDetailPage() {
                 </div>
               ))}
             </div>
-            <button className="btn btn-primary game-detail-play-btn" aria-label="Play">
-              Play Game {game.title} Online →
-            </button>
           </div>
+          
+          {/* Play Button at Bottom Border */}
+          <button className="btn btn-primary game-detail-play-btn" aria-label="Play">
+            Play {game.title}
+          </button>
 
           {/* Right Panel - Game Interface */}
           <div className="game-detail-interface">
+            <div className="game-detail-interface-border-progress">
+              <div className="game-detail-interface-progress-fill"></div>
+            </div>
             <div className="game-detail-gameplay">
               <img 
                 src={game.gameplayImage || game.imageSrc} 
                 alt={`${game.title} gameplay`} 
                 className="game-detail-gameplay-image"
               />
-              <button className="game-detail-watch-video-btn" aria-label="Watch Video">
+              <button className="game-detail-watch-video-btn" aria-label="Play Game">
                 <FaPlay className="game-detail-watch-video-icon" />
-                <span className="game-detail-watch-video-text">Watch Video</span>
+                <span className="game-detail-watch-video-text">Play Game</span>
               </button>
             </div>
             
