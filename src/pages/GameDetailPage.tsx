@@ -159,24 +159,35 @@ function GameDetailPage() {
                 <a href="#" className="game-detail-download-btn" onClick={(e) => e.preventDefault()}>
                   <FaWindows className="game-detail-download-btn-icon" />
                   <div className="game-detail-download-btn-content">
-                    <span className="game-detail-download-btn-label">Windows</span>
-                    <span className="game-detail-download-btn-subtitle">Download for PC</span>
+                    <div className="game-detail-download-btn-header">
+                      <span className="game-detail-download-btn-label">Windows</span>
+                      <span className="game-detail-download-btn-new">New</span>
+                    </div>
+                    <span className="game-detail-download-btn-subtitle">Version 2.1.4</span>
+                    <span className="game-detail-download-btn-version">Latest Release</span>
                   </div>
                   <FaDownload className="game-detail-download-icon" />
                 </a>
                 <a href="#" className="game-detail-download-btn" onClick={(e) => e.preventDefault()}>
                   <FaApple className="game-detail-download-btn-icon" />
                   <div className="game-detail-download-btn-content">
-                    <span className="game-detail-download-btn-label">Mac</span>
-                    <span className="game-detail-download-btn-subtitle">Download for macOS</span>
+                    <div className="game-detail-download-btn-header">
+                      <span className="game-detail-download-btn-label">Mac</span>
+                    </div>
+                    <span className="game-detail-download-btn-subtitle">Version 2.1.3</span>
+                    <span className="game-detail-download-btn-version">macOS 10.15+</span>
                   </div>
                   <FaDownload className="game-detail-download-icon" />
                 </a>
                 <a href="#" className="game-detail-download-btn" onClick={(e) => e.preventDefault()}>
                   <FaAndroid className="game-detail-download-btn-icon" />
                   <div className="game-detail-download-btn-content">
-                    <span className="game-detail-download-btn-label">Android</span>
-                    <span className="game-detail-download-btn-subtitle">Download APK</span>
+                    <div className="game-detail-download-btn-header">
+                      <span className="game-detail-download-btn-label">Android</span>
+                      <span className="game-detail-download-btn-new">New</span>
+                    </div>
+                    <span className="game-detail-download-btn-subtitle">Version 2.1.5</span>
+                    <span className="game-detail-download-btn-version">Android 8.0+</span>
                   </div>
                   <FaDownload className="game-detail-download-icon" />
                 </a>
