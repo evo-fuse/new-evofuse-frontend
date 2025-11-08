@@ -21,7 +21,7 @@ function Header() {
           </NavLink>
           <NavLink to="/games" className="nav-item">
             <FaGamepad className="nav-icon" />
-            <span className="nav-text">Games</span>
+            <span className="nav-text">Game</span>
           </NavLink>
           <NavLink to="/blog" className="nav-item">
             <FaBookOpen className="nav-icon" />

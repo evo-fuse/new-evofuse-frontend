@@ -78,77 +78,18 @@ function HeroSlideshow() {
   }
 
   const getDragTransform = () => {
-    if (dragStart === null || dragCurrent === null || !isDragging) {
-      return { 
-        transform: 'perspective(1500px) rotateY(0deg) rotateX(0deg) translateZ(0px) scale(1)',
-        transformStyle: 'preserve-3d' as const
-      }
-    }
-    
-    const diff = dragCurrent - dragStart
-    const maxRotation = 30 // Increased maximum rotation angle in degrees
-    const maxTranslation = 120 // Increased maximum translation in pixels
-    const maxScale = 0.05 // Scale effect (5% scale change)
-    const containerWidth = containerRef.current?.offsetWidth || 1200
-    
-    // Calculate rotation based on drag distance (normalized to container width)
-    const rotation = (diff / containerWidth) * maxRotation
-    // Clamp rotation to max values
-    const clampedRotation = Math.max(-maxRotation, Math.min(maxRotation, rotation))
-    
-    // Calculate translation (move in the direction of drag)
-    const translation = (diff / containerWidth) * maxTranslation
-    const clampedTranslation = Math.max(-maxTranslation, Math.min(maxTranslation, translation))
-    
-    // Stronger vertical tilt based on horizontal drag for more dramatic 3D effect
-    const verticalTilt = (clampedRotation / maxRotation) * 12 // Up to 12 degrees vertical tilt
-    
-    // Scale effect - slightly scale down when dragging for depth
-    const scale = 1 - (Math.abs(clampedRotation) / maxRotation) * maxScale
-    
-    return {
-      transform: `perspective(1500px) rotateY(${clampedRotation}deg) rotateX(${verticalTilt}deg) translateZ(${clampedTranslation}px) scale(${scale})`,
-      transformStyle: 'preserve-3d' as const,
-      transition: 'none' // No transition during drag for immediate response
-    }
+    // No visual transform effects during dragging
+    return {}
   }
 
   const getImageTransform = () => {
-    if (dragStart === null || dragCurrent === null || !isDragging) {
-      return {}
-    }
-    
-    const diff = dragCurrent - dragStart
-    const containerWidth = containerRef.current?.offsetWidth || 1200
-    const rotation = (diff / containerWidth) * 30
-    const clampedRotation = Math.max(-30, Math.min(30, rotation))
-    
-    // Parallax effect - image moves slightly in opposite direction
-    const parallaxOffset = (clampedRotation / 30) * 20
-    
-    return {
-      transform: `translateX(${parallaxOffset}px) translateZ(30px)`,
-      transition: 'none'
-    }
+    // No visual transform effects during dragging
+    return {}
   }
 
   const getCaptionTransform = () => {
-    if (dragStart === null || dragCurrent === null || !isDragging) {
-      return {}
-    }
-    
-    const diff = dragCurrent - dragStart
-    const containerWidth = containerRef.current?.offsetWidth || 1200
-    const rotation = (diff / containerWidth) * 30
-    const clampedRotation = Math.max(-30, Math.min(30, rotation))
-    
-    // Parallax effect - caption moves in opposite direction for depth
-    const parallaxOffset = (clampedRotation / 30) * -15
-    
-    return {
-      transform: `translateX(${parallaxOffset}px) translateZ(20px)`,
-      transition: 'none'
-    }
+    // No visual transform effects during dragging
+    return {}
   }
 
   return (
@@ -169,7 +110,6 @@ function HeroSlideshow() {
               onTouchMove={index === currentIndex ? handleDragMove : undefined}
               onTouchEnd={index === currentIndex ? handleDragEnd : undefined}
               style={{ 
-                cursor: index === currentIndex ? (isDragging ? 'grabbing' : 'grab') : 'default',
                 ...(index === currentIndex && isDragging ? getDragTransform() : {})
               }}
             >

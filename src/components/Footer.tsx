@@ -51,7 +51,7 @@ function Footer() {
       <div className="footer-bottom">
         <div className="footer-separator"></div>
         <div className="footer-bottom-content">
-          <div className="footer-copyright">© 2025 EvoFuse. All rights reserved.</div>
+          <div className="footer-copyright">© 2025 EvoFuse LLC. All rights reserved.</div>
           <div className="footer-legal-links">
             <Link to="/terms" className="footer-legal-link">Terms & Conditions</Link>
             <a href="#" className="footer-legal-link">Privacy Policy</a>

@@ -100,7 +100,7 @@ function GameDetailPage() {
           <section className="section">
             <h2 className="section-title">Game not found</h2>
             <p>We couldn't find the game you're looking for.</p>
-            <Link to="/games" className="btn btn-primary" style={{ marginTop: 12 }}>Back to Games</Link>
+            <Link to="/games" className="btn btn-primary" style={{ marginTop: 12 }}>Back to Game</Link>
           </section>
         </div>
       </div>
@@ -148,10 +148,10 @@ function GameDetailPage() {
                 alt={`${game.title} gameplay`} 
                 className="game-detail-gameplay-image"
               />
-              {/* <button className="game-detail-watch-video-btn" aria-label="Play Game">
+              <button className="game-detail-watch-video-btn" aria-label="Play Game">
                 <FaPlay className="game-detail-watch-video-icon" />
                 <span className="game-detail-watch-video-text">Play Game</span>
-              </button> */}
+              </button>
             </div>
             
             {/* Download App Buttons */}
@@ -165,7 +165,7 @@ function GameDetailPage() {
                       <span className="game-detail-download-btn-label">Windows</span>
                       <span className="game-detail-download-btn-new">New</span>
                     </div>
-                    <span className="game-detail-download-btn-subtitle">Version 2.1.4</span>
+                    <span className="game-detail-download-btn-subtitle">Version 1.0.0</span>
                     <span className="game-detail-download-btn-version">Latest Release</span>
                   </div>
                   <FaDownload className="game-detail-download-icon" />
@@ -176,7 +176,7 @@ function GameDetailPage() {
                     <div className="game-detail-download-btn-header">
                       <span className="game-detail-download-btn-label">Mac</span>
                     </div>
-                    <span className="game-detail-download-btn-subtitle">Version 2.1.3</span>
+                    <span className="game-detail-download-btn-subtitle">Version 1.0.0</span>
                     <span className="game-detail-download-btn-version">macOS 10.15+</span>
                   </div>
                   <FaDownload className="game-detail-download-icon" />
@@ -188,7 +188,7 @@ function GameDetailPage() {
                       <span className="game-detail-download-btn-label">Android</span>
                       <span className="game-detail-download-btn-new">New</span>
                     </div>
-                    <span className="game-detail-download-btn-subtitle">Version 2.1.5</span>
+                    <span className="game-detail-download-btn-subtitle">Version 1.0.0</span>
                     <span className="game-detail-download-btn-version">Android 8.0+</span>
                   </div>
                   <FaDownload className="game-detail-download-icon" />
@@ -198,7 +198,7 @@ function GameDetailPage() {
           </div>
         </div>
         <div className="game-detail-footer">
-          <Link to="/games" className="btn btn-outline">Back to Games</Link>
+          <Link to="/games" className="btn btn-outline">Back to Game</Link>
         </div>
       </div>
     </div>

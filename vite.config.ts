@@ -12,6 +12,9 @@ export default defineConfig({
       '@slides': fileURLToPath(new URL('./src/assets/slides', import.meta.url)),
     },
   },
+  server: {
+    host: "0.0.0.0"
+  },
   build: {
     rollupOptions: {
       onwarn(warning, warn) {
