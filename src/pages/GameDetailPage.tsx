@@ -11,6 +11,282 @@ import thumbCarcassonne from '@thumbnails/carcassonne.png'
 
 const gameplayImage2048 = 'https://i.ibb.co/mkLhSvj/2048play.png'
 
+type FeatureRow = {
+  name: string
+  icon: React.ReactNode
+  tooltip: string
+  web: 'check' | 'cross' | 'coming-soon'
+  pc: 'check' | 'cross' | 'coming-soon'
+  mobile: 'check' | 'cross' | 'coming-soon'
+}
+
+const gameFeatures: Record<string, FeatureRow[]> = {
+  '2048': [
+    {
+      name: 'Core Fusion',
+      icon: <FaGamepad />,
+      tooltip: 'Classic 2048 gameplay with our signature evolving history theme',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'Theme Playground',
+      icon: <FaPalette />,
+      tooltip: 'Buy, play, or even create your own themed tile sets',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'Power Tools',
+      icon: <FaTools />,
+      tooltip: 'Smash or upgrade tiles with cool in-game items',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'DWAT Rush',
+      icon: <FaCoins />,
+      tooltip: 'Earn real DWAT tokens with your high scores',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'My Vault',
+      icon: <FaWallet />,
+      tooltip: 'Create & manage a crypto wallet directly in-game',
+      web: 'cross',
+      pc: 'check',
+      mobile: 'cross'
+    },
+    {
+      name: 'Crypto Carnival',
+      icon: <FaDice />,
+      tooltip: 'Play betting games like SportBingo',
+      web: 'check',
+      pc: 'check',
+      mobile: 'cross'
+    },
+    {
+      name: 'Replay Magic',
+      icon: <FaVideo />,
+      tooltip: 'Save your genius moves or learn from top players\' replays',
+      web: 'cross',
+      pc: 'check',
+      mobile: 'cross'
+    },
+    {
+      name: 'AI Theme Wizard',
+      icon: <FaRobot />,
+      tooltip: 'AI builds a whole new 2048 theme based on your idea!',
+      web: 'cross',
+      pc: 'coming-soon',
+      mobile: 'cross'
+    }
+  ],
+  'othello': [
+    {
+      name: 'Classic Othello',
+      icon: <FaGamepad />,
+      tooltip: 'Traditional Othello gameplay with modern Web3 integration',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'Multiplayer Battles',
+      icon: <FaGamepad />,
+      tooltip: 'Challenge players worldwide in real-time matches',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'Strategy Modes',
+      icon: <FaTools />,
+      tooltip: 'Multiple game modes including timed matches and tournaments',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'DWAT Rewards',
+      icon: <FaCoins />,
+      tooltip: 'Earn DWAT tokens for victories and achievements',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'My Vault',
+      icon: <FaWallet />,
+      tooltip: 'Create & manage a crypto wallet directly in-game',
+      web: 'cross',
+      pc: 'check',
+      mobile: 'cross'
+    },
+    {
+      name: 'NFT Pieces',
+      icon: <FaPalette />,
+      tooltip: 'Collect and trade unique NFT game pieces',
+      web: 'cross',
+      pc: 'check',
+      mobile: 'cross'
+    },
+    {
+      name: 'Match Replays',
+      icon: <FaVideo />,
+      tooltip: 'Review and analyze your best matches',
+      web: 'cross',
+      pc: 'check',
+      mobile: 'cross'
+    },
+    {
+      name: 'AI Opponent',
+      icon: <FaRobot />,
+      tooltip: 'Practice against AI opponents of varying difficulty',
+      web: 'cross',
+      pc: 'coming-soon',
+      mobile: 'cross'
+    }
+  ],
+  'flappy-bird': [
+    {
+      name: 'Classic Flappy',
+      icon: <FaGamepad />,
+      tooltip: 'The classic Flappy Bird gameplay you know and love',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'Progressive Levels',
+      icon: <FaGamepad />,
+      tooltip: 'Unlock new levels and challenges as you progress',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'Daily Challenges',
+      icon: <FaTools />,
+      tooltip: 'Complete daily missions for bonus rewards',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'DWAT Rewards',
+      icon: <FaCoins />,
+      tooltip: 'Earn DWAT tokens based on your high scores',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'My Vault',
+      icon: <FaWallet />,
+      tooltip: 'Create & manage a crypto wallet directly in-game',
+      web: 'cross',
+      pc: 'check',
+      mobile: 'cross'
+    },
+    {
+      name: 'Social Sharing',
+      icon: <FaPalette />,
+      tooltip: 'Share your achievements and compete with friends',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'Replay System',
+      icon: <FaVideo />,
+      tooltip: 'Watch replays of your best runs',
+      web: 'cross',
+      pc: 'check',
+      mobile: 'cross'
+    },
+    {
+      name: 'Custom Skins',
+      icon: <FaRobot />,
+      tooltip: 'Unlock and customize bird skins and backgrounds',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    }
+  ],
+  'carcassonne': [
+    {
+      name: 'Tile Placement',
+      icon: <FaGamepad />,
+      tooltip: 'Strategic tile placement gameplay with medieval themes',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'Multiplayer Mode',
+      icon: <FaGamepad />,
+      tooltip: 'Play with friends or compete against players worldwide',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'Tournament Mode',
+      icon: <FaTools />,
+      tooltip: 'Join tournaments and compete for top rankings',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'DWAT Rewards',
+      icon: <FaCoins />,
+      tooltip: 'Earn DWAT tokens for victories and strategic plays',
+      web: 'check',
+      pc: 'check',
+      mobile: 'check'
+    },
+    {
+      name: 'My Vault',
+      icon: <FaWallet />,
+      tooltip: 'Create & manage a crypto wallet directly in-game',
+      web: 'cross',
+      pc: 'check',
+      mobile: 'cross'
+    },
+    {
+      name: 'NFT Tiles',
+      icon: <FaPalette />,
+      tooltip: 'Collect rare NFT tiles and character pieces',
+      web: 'cross',
+      pc: 'check',
+      mobile: 'cross'
+    },
+    {
+      name: 'Game Replays',
+      icon: <FaVideo />,
+      tooltip: 'Review your best strategic moves and learn from others',
+      web: 'cross',
+      pc: 'check',
+      mobile: 'cross'
+    },
+    {
+      name: 'Custom Expansions',
+      icon: <FaRobot />,
+      tooltip: 'Create and share custom game expansions',
+      web: 'cross',
+      pc: 'coming-soon',
+      mobile: 'cross'
+    }
+  ]
+}
+
 const games: Record<string, { title: string; imageSrc: string; gameplayImage?: string; description: string; category: string; features: string[]; gameUrl?: string }> = {
   '2048': {
     title: 'EvoFuse 2048',
@@ -262,117 +538,68 @@ function GameDetailPage() {
         </div>
         
         {/* Feature Comparison Table */}
-        <div className="game-detail-feature-comparison">
-          <h2 className="game-detail-comparison-title">Feature Comparison</h2>
-          <div className="game-detail-comparison-table-wrapper">
-            <table className="game-detail-comparison-table">
-              <thead>
-                <tr>
-                  <th className="game-detail-comparison-feature-col">
-                    <FaRocket className="game-detail-comparison-header-icon" />
-                    <span>Feature</span>
-                  </th>
-                  <th className="game-detail-comparison-version-col">
-                    <FaGlobe className="game-detail-comparison-header-icon" />
-                    <span>Web Version</span>
-                  </th>
-                  <th className="game-detail-comparison-version-col">
-                    <FaDesktop className="game-detail-comparison-header-icon" />
-                    <span>PC App Version</span>
-                  </th>
-                  <th className="game-detail-comparison-version-col">
-                    <FaMobileAlt className="game-detail-comparison-header-icon" />
-                    <span>Mobile App Version</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
-                    <FaGamepad className="game-detail-comparison-feature-icon" />
-                    <span>Core Fusion</span>
-                    <div className="game-detail-comparison-tooltip">Classic 2048 gameplay with our signature evolving history theme</div>
-                  </td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                </tr>
-                <tr>
-                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
-                    <FaPalette className="game-detail-comparison-feature-icon" />
-                    <span>Theme Playground</span>
-                    <div className="game-detail-comparison-tooltip">Buy, play, or even create your own themed tile sets</div>
-                  </td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                </tr>
-                <tr>
-                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
-                    <FaTools className="game-detail-comparison-feature-icon" />
-                    <span>Power Tools</span>
-                    <div className="game-detail-comparison-tooltip">Smash or upgrade tiles with cool in-game items</div>
-                  </td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                </tr>
-                <tr>
-                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
-                    <FaCoins className="game-detail-comparison-feature-icon" />
-                    <span>DWAT Rush</span>
-                    <div className="game-detail-comparison-tooltip">Earn real DWAT tokens with your high scores</div>
-                  </td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                </tr>
-                <tr>
-                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
-                    <FaWallet className="game-detail-comparison-feature-icon" />
-                    <span>My Vault</span>
-                    <div className="game-detail-comparison-tooltip">Create & manage a crypto wallet directly in-game</div>
-                  </td>
-                  <td className="game-detail-comparison-cross"><FaTimes /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-cross"><FaTimes /></td>
-                </tr>
-                <tr>
-                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
-                    <FaDice className="game-detail-comparison-feature-icon" />
-                    <span>Crypto Carnival</span>
-                    <div className="game-detail-comparison-tooltip">Play betting games like SportBingo</div>
-                  </td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-cross"><FaTimes /></td>
-                </tr>
-                <tr>
-                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
-                    <FaVideo className="game-detail-comparison-feature-icon" />
-                    <span>Replay Magic</span>
-                    <div className="game-detail-comparison-tooltip">Save your genius moves or learn from top players' replays</div>
-                  </td>
-                  <td className="game-detail-comparison-cross"><FaTimes /></td>
-                  <td className="game-detail-comparison-check"><FaCheck /></td>
-                  <td className="game-detail-comparison-cross"><FaTimes /></td>
-                </tr>
-                <tr>
-                  <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
-                    <FaRobot className="game-detail-comparison-feature-icon" />
-                    <span>AI Theme Wizard</span>
-                    <div className="game-detail-comparison-tooltip">AI builds a whole new 2048 theme based on <em>your</em> idea!</div>
-                  </td>
-                  <td className="game-detail-comparison-cross"><FaTimes /></td>
-                  <td className="game-detail-comparison-coming-soon">
-                    <FaCheck /> <span>(Coming Soon)</span>
-                  </td>
-                  <td className="game-detail-comparison-cross"><FaTimes /></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        {(() => {
+          const currentGameSlug = slug?.toLowerCase() || ''
+          const features = gameFeatures[currentGameSlug] || gameFeatures['2048']
+          
+          const renderFeatureCell = (status: 'check' | 'cross' | 'coming-soon') => {
+            if (status === 'check') {
+              return <td className="game-detail-comparison-check"><FaCheck /></td>
+            } else if (status === 'coming-soon') {
+              return (
+                <td className="game-detail-comparison-coming-soon">
+                  <FaCheck /> <span>(Coming Soon)</span>
+                </td>
+              )
+            } else {
+              return <td className="game-detail-comparison-cross"><FaTimes /></td>
+            }
+          }
+
+          return (
+            <div className="game-detail-feature-comparison">
+              <h2 className="game-detail-comparison-title">Feature Comparison</h2>
+              <div className="game-detail-comparison-table-wrapper">
+                <table className="game-detail-comparison-table">
+                  <thead>
+                    <tr>
+                      <th className="game-detail-comparison-feature-col">
+                        <FaRocket className="game-detail-comparison-header-icon" />
+                        <span>Feature</span>
+                      </th>
+                      <th className="game-detail-comparison-version-col">
+                        <FaGlobe className="game-detail-comparison-header-icon" />
+                        <span>Web Version</span>
+                      </th>
+                      <th className="game-detail-comparison-version-col">
+                        <FaDesktop className="game-detail-comparison-header-icon" />
+                        <span>PC App Version</span>
+                      </th>
+                      <th className="game-detail-comparison-version-col">
+                        <FaMobileAlt className="game-detail-comparison-header-icon" />
+                        <span>Mobile App Version</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {features.map((feature, index) => (
+                      <tr key={index}>
+                        <td className="game-detail-comparison-feature-name game-detail-comparison-tooltip-wrapper">
+                          <span className="game-detail-comparison-feature-icon">{feature.icon}</span>
+                          <span>{feature.name}</span>
+                          <div className="game-detail-comparison-tooltip">{feature.tooltip}</div>
+                        </td>
+                        {renderFeatureCell(feature.web)}
+                        {renderFeatureCell(feature.pc)}
+                        {renderFeatureCell(feature.mobile)}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )
+        })()}
         
         <div className="game-detail-footer">
           <Link to="/games" className="btn btn-outline">Back to Game</Link>

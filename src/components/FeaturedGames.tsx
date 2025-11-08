@@ -35,7 +35,7 @@ function GameBanner({ title, imageSrc, description, slug, category }: { title: s
         <div className="game-separator"></div>
         <div className="game-description">{description}</div>
       </div>
-      <div className="game-banner-cta">
+      {/* <div className="game-banner-cta">
         {isComingSoon ? (
           <div className="btn btn-secondary" aria-label="Coming Soon" onClick={handleComingSoonClick}>
             Coming Soon
@@ -43,10 +43,10 @@ function GameBanner({ title, imageSrc, description, slug, category }: { title: s
         ) : (
           <div className="btn btn-primary" aria-label="Play">
             <FaPlay/>
-            Play
+            Go
           </div>
         )}
-      </div>
+      </div> */}
     </>
   )
   
@@ -81,7 +81,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
       subtitle: 'Crypto Kings', 
       imageSrc: thumbOthello, 
       popularity: 4,
-      category: 'top' as const,
+      category: 'coming-soon' as const,
       slug: 'othello',
       description: 'No quiet board game here — this is mind warfare on-chain. Outsmart, outflip, and outshine as your every move earns power, pride, and maybe a few DWAT brags.'
     },
