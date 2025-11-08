@@ -1,25 +1,33 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FaChevronLeft, FaChevronRight, FaPlay, FaTimes } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight, FaPlay } from 'react-icons/fa'
+import { useComingSoonModal } from '../contexts/ComingSoonModalContext'
 import thumb2048 from '@thumbnails/2048.jpg'
 import thumbFlappy from '@thumbnails/flappy_bird.jpg'
 import thumbOthello from '@thumbnails/Othello.jpg'
 import thumbCarcassonne from '@thumbnails/carcassonne.png'
 
-function GameBanner({ title, imageSrc, description, slug, category, onComingSoonClick }: { title: string; imageSrc: string; description: string; slug: string; category: 'top' | 'coming-soon'; onComingSoonClick?: () => void }) {
+function GameBanner({ title, imageSrc, description, slug, category }: { title: string; imageSrc: string; description: string; slug: string; category: 'top' | 'coming-soon' }) {
   const isComingSoon = category === 'coming-soon'
+  const { openModal } = useComingSoonModal()
   
   const handleComingSoonClick = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    if (onComingSoonClick) {
-      onComingSoonClick()
+    openModal(title)
+  }
+  
+  const handleBannerClick = (e: React.MouseEvent) => {
+    if (isComingSoon) {
+      e.preventDefault()
+      e.stopPropagation()
+      openModal(title)
     }
   }
   
-  return (
-    <Link to={`/game/${slug}`} className="game-item" style={{ textDecoration: 'none' }}>
-      <div className="game-banner">
+  const bannerContent = (
+    <>
+      <div className="game-banner" onClick={isComingSoon ? handleBannerClick : undefined}>
         <img className="game-banner-img" src={imageSrc} alt={title} />
       </div>
       <div className="game-banner-info">
@@ -39,6 +47,20 @@ function GameBanner({ title, imageSrc, description, slug, category, onComingSoon
           </div>
         )}
       </div>
+    </>
+  )
+  
+  if (isComingSoon) {
+    return (
+      <div className="game-item" style={{ textDecoration: 'none', cursor: 'pointer' }} onClick={handleBannerClick}>
+        {bannerContent}
+      </div>
+    )
+  }
+  
+  return (
+    <Link to={`/game/${slug}`} className="game-item" style={{ textDecoration: 'none' }}>
+      {bannerContent}
     </Link>
   )
 }
@@ -90,18 +112,6 @@ function FeaturedGames({ limit }: { limit?: number }) {
   const itemsPerPage = 6
   const [currentPage, setCurrentPage] = useState(1)
   const [currentPageComingSoon, setCurrentPageComingSoon] = useState(1)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [selectedGame, setSelectedGame] = useState<string | null>(null)
-
-  const handleComingSoonClick = (gameTitle: string) => {
-    setSelectedGame(gameTitle)
-    setModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setModalOpen(false)
-    setSelectedGame(null)
-  }
 
   if (limit) {
     const games = topGames.slice(0, limit)
@@ -111,31 +121,10 @@ function FeaturedGames({ limit }: { limit?: number }) {
           <h2 className="section-title" style={{ margin: 0 }}>Top Games</h2>
           <div className="card-grid">
             {games.map((game, index) => (
-              <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} slug={game.slug} category={game.category} onComingSoonClick={() => handleComingSoonClick(game.title)} />
+              <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} slug={game.slug} category={game.category} />
             ))}
           </div>
         </section>
-        
-        {/* Coming Soon Modal */}
-        {modalOpen && (
-          <div className="coming-soon-modal-overlay" onClick={closeModal}>
-            <div className="coming-soon-modal" onClick={(e) => e.stopPropagation()}>
-              <button className="coming-soon-modal-close" onClick={closeModal} aria-label="Close">
-                <FaTimes />
-              </button>
-              <div className="coming-soon-modal-content">
-                <h2 className="coming-soon-modal-title">Coming Soon</h2>
-                <p className="coming-soon-modal-game">{selectedGame}</p>
-                <p className="coming-soon-modal-message">
-                  We're working hard to bring you an amazing gaming experience. Stay tuned for updates!
-                </p>
-                <button className="btn btn-primary coming-soon-modal-btn" onClick={closeModal}>
-                  Got it
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </>
     )
   }
@@ -166,7 +155,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
         <h2 className="section-title" style={{ margin: 0 }}>Top Games</h2>
         <div className="card-grid">
           {topGamesPage.map((game, index) => (
-            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} slug={game.slug} category={game.category} onComingSoonClick={() => handleComingSoonClick(game.title)} />
+            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} slug={game.slug} category={game.category} />
           ))}
         </div>
         {topTotalPages > 1 && (
@@ -206,7 +195,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
         <h2 className="section-title" style={{ margin: 0 }}>Coming Soon</h2>
         <div className="card-grid">
           {comingSoonGamesPage.map((game, index) => (
-            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} slug={game.slug} category={game.category} onComingSoonClick={() => handleComingSoonClick(game.title)} />
+            <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} slug={game.slug} category={game.category} />
           ))}
         </div>
         {comingSoonTotalPages > 1 && (
@@ -239,27 +228,6 @@ function FeaturedGames({ limit }: { limit?: number }) {
           </div>
         )}
       </section>
-
-      {/* Coming Soon Modal */}
-      {modalOpen && (
-        <div className="coming-soon-modal-overlay" onClick={closeModal}>
-          <div className="coming-soon-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="coming-soon-modal-close" onClick={closeModal} aria-label="Close">
-              <FaTimes />
-            </button>
-            <div className="coming-soon-modal-content">
-              <h2 className="coming-soon-modal-title">Coming Soon</h2>
-              <p className="coming-soon-modal-game">{selectedGame}</p>
-              <p className="coming-soon-modal-message">
-                We're working hard to bring you an amazing gaming experience. Stay tuned for updates!
-              </p>
-              <button className="btn btn-primary coming-soon-modal-btn" onClick={closeModal}>
-                Got it
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   )
 }

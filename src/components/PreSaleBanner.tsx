@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FaMinus, FaPlus, FaTimes, FaShoppingCart, FaCoins } from 'react-icons/fa'
+import { FaMinus, FaPlus, FaTimes, FaShoppingCart, FaCoins, FaRocket } from 'react-icons/fa'
 
 function PreSaleBanner() {
   const [timeLeft, setTimeLeft] = useState({
@@ -175,6 +175,12 @@ function PreSaleBanner() {
   return (
     <div className={`presale-banner ${isMinimized ? 'presale-banner-minimized' : ''}`}>
       <div className="presale-banner-content">
+        <div className="presale-blur-mask">
+          <div className="presale-upcoming-alert">
+            <FaRocket className="presale-alert-icon" />
+            <span className="presale-alert-text">Upcoming Token Presale</span>
+          </div>
+        </div>
         <div className="presale-banner-controls">
           <button 
             className="presale-control-btn" 

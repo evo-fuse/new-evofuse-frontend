@@ -63,19 +63,28 @@
   opacity: 1;
   color: #7ce6ff;
 }
-.nav-item.active::after,
-.nav-item.selected::after {
+.nav-item::after {
   content: '';
   position: absolute;
   bottom: -20px;
-  left: 0;
-  right: 0;
+  left: 50%;
+  right: 50%;
   height: 3px;
   background: linear-gradient(90deg, #27d5ff, #7ce6ff, #27d5ff);
   border-radius: 3px 3px 0 0;
   box-shadow: 0 0 8px rgba(39, 213, 255, 0.6), 0 0 16px rgba(124, 230, 255, 0.4);
-  animation: nav-border-glow 2s ease-in-out infinite;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1;
+}
+.nav-item.active::after,
+.nav-item.selected::after {
+  left: 0;
+  right: 0;
+  opacity: 1;
+  transform: translateX(0);
+  animation: nav-border-glow 2s ease-in-out infinite;
 }
 @keyframes nav-border-glow {
   0%, 100% {
@@ -771,6 +780,71 @@
 .presale-banner-content { background: linear-gradient(135deg, rgba(18, 34, 50, 0.95) 0%, rgba(13, 26, 39, 0.95) 100%); border: 1px solid rgba(39, 213, 255, 0.3); backdrop-filter: blur(12px); border-radius: 16px; padding: 32px 24px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 24px rgba(39, 213, 255, 0.2); text-align: center; position: relative; overflow: hidden; transition: padding 0.3s ease, height 0.3s ease; }
 .presale-banner-content::before { content: ''; position: absolute; top: -100%; right: -100%; width: 200%; height: 200%; background: linear-gradient(135deg, transparent 0%, transparent 40%, rgba(39, 213, 255, 0.2) 50%, transparent 60%, transparent 100%); z-index: 0; pointer-events: none; animation: presale-shimmer 3s ease-in-out infinite; filter: blur(8px); opacity: 0.8; }
 .presale-banner-content > * { position: relative; z-index: 1; }
+.presale-blur-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.presale-upcoming-alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(39, 213, 255, 0.2) 0%, rgba(124, 230, 255, 0.15) 100%);
+  border: 2px solid rgba(39, 213, 255, 0.5);
+  border-radius: 12px;
+  padding: 16px 24px;
+  z-index: 3;
+  box-shadow: 0 8px 32px rgba(39, 213, 255, 0.3), 0 0 24px rgba(124, 230, 255, 0.2), inset 0 0 20px rgba(39, 213, 255, 0.1);
+  animation: presale-alert-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+.presale-alert-icon {
+  font-size: 24px;
+  color: #7ce6ff;
+  filter: drop-shadow(0 0 8px rgba(39, 213, 255, 0.8));
+  animation: presale-icon-rotate 3s ease-in-out infinite;
+}
+.presale-alert-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: #bff3ff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 12px rgba(39, 213, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+@keyframes presale-alert-pulse {
+  0%, 100% {
+    box-shadow: 0 8px 32px rgba(39, 213, 255, 0.3), 0 0 24px rgba(124, 230, 255, 0.2), inset 0 0 20px rgba(39, 213, 255, 0.1);
+    border-color: rgba(39, 213, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 8px 40px rgba(39, 213, 255, 0.5), 0 0 32px rgba(124, 230, 255, 0.4), inset 0 0 24px rgba(39, 213, 255, 0.2);
+    border-color: rgba(124, 230, 255, 0.7);
+  }
+}
+@keyframes presale-icon-rotate {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-10deg) scale(1.1);
+  }
+  75% {
+    transform: rotate(10deg) scale(1.1);
+  }
+}
 .presale-banner-controls { position: absolute; top: 12px; right: 12px; display: flex; gap: 8px; align-items: center; z-index: 10; }
 .presale-control-btn { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; background: transparent; border: none; border-radius: 6px; color: rgba(214, 235, 255, 0.9); cursor: pointer; transition: all 0.2s ease; font-size: 12px; padding: 0; }
 .presale-control-btn:hover { background: transparent; border: none; color: #7ce6ff; }

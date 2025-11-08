@@ -1,6 +1,7 @@
 import './App.css'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { LoadingProvider, useLoading } from './contexts/LoadingContext'
+import { ComingSoonModalProvider } from './contexts/ComingSoonModalContext'
 import MainLayout from './layout/MainLayout'
 import HomePage from './pages/HomePage'
 import GamesPage from './pages/GamesPage'
@@ -13,6 +14,7 @@ import AboutUsPage from './pages/AboutUsPage'
 import GameDetailPage from './pages/GameDetailPage'
 import PageLoader from './components/PageLoader'
 import PreSaleBanner from './components/PreSaleBanner'
+import ComingSoonModal from './components/ComingSoonModal'
 
 function AppContent() {
   const { loading } = useLoading()
@@ -41,6 +43,7 @@ function AppContent() {
         </Route>
       </Routes>
       <PreSaleBanner />
+      <ComingSoonModal />
     </>
   )
 }
@@ -48,7 +51,9 @@ function AppContent() {
 function App() {
   return (
     <LoadingProvider>
-      <AppContent />
+      <ComingSoonModalProvider>
+        <AppContent />
+      </ComingSoonModalProvider>
     </LoadingProvider>
   )
 }
