@@ -3,7 +3,9 @@ import { useLoading } from '../contexts/LoadingContext'
 import AboutUsSkeleton from '../components/AboutUsSkeleton'
 import { FaLinkedin, FaFacebook, FaCode, FaPalette, FaMapMarkerAlt, FaUser } from 'react-icons/fa'
 import { FaDiscord } from 'react-icons/fa6'
-import chikoAvatar from '../assets/teams/chiko.png'
+import johnAvatar from '../assets/teams/John Guerrero.png'
+import felixAvatar from '../assets/teams/Felix Hansen.png'
+import leonAvatar from '../assets/teams/Leon Weber.png'
 
 function AboutUsPage() {
   const { loading, setLoading } = useLoading()
@@ -38,9 +40,46 @@ function AboutUsPage() {
               <div className="about-team-grid">
                 <div className="about-team-member">
                   <div className="about-team-avatar">
-                    <img src={chikoAvatar} alt="Chiko" />
+                    <img src={johnAvatar} alt="John Guerrero" />
                   </div>
-                  <h3 className="about-team-name">Chiko</h3>
+                  <h3 className="about-team-name">John Guerrero</h3>
+                  <p className="about-team-role">Co-Founder</p>
+                  <div className="about-team-social">
+                    <a href="#" className="about-team-social-link" aria-label="LinkedIn">
+                      <FaLinkedin />
+                    </a>
+                    <a href="#" className="about-team-social-link" aria-label="Discord">
+                      <FaDiscord />
+                    </a>
+                    <a href="#" className="about-team-social-link" aria-label="Facebook">
+                      <FaFacebook />
+                    </a>
+                  </div>
+                </div>
+                <div className="about-team-member">
+                  <div className="about-team-avatar">
+                    <img src={felixAvatar} alt="Felix Hansen" />
+                  </div>
+                  <h3 className="about-team-name">Felix Hansen</h3>
+                  <p className="about-team-role">CEO</p>
+                  <div className="about-team-social">
+                    <a href="#" className="about-team-social-link" aria-label="LinkedIn">
+                      <FaLinkedin />
+                    </a>
+                    <a href="#" className="about-team-social-link" aria-label="Discord">
+                      <FaDiscord />
+                    </a>
+                    <a href="#" className="about-team-social-link" aria-label="Facebook">
+                      <FaFacebook />
+                    </a>
+                  </div>
+                </div>
+                <div className="about-team-member">
+                  <div className="about-team-avatar">
+                    <img src={leonAvatar} alt="Leon Weber" />
+                  </div>
+                  <h3 className="about-team-name">Leon Weber</h3>
+                  <p className="about-team-role">CTO</p>
                   <div className="about-team-social">
                     <a href="#" className="about-team-social-link" aria-label="LinkedIn">
                       <FaLinkedin />
