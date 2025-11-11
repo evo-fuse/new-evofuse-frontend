@@ -7,19 +7,7 @@ import "./index.css";
 // Import preload utility
 import { preloadCriticalComponents } from "./utils/preloadComponents";
 import { BrowserRouter } from "react-router-dom";
-
-// Use dynamic import with prefetch for App to reduce initial bundle size
-const App = React.lazy(() => {
-  // Add a hint to the browser to prefetch this resource
-  if (document.head && 'prefetch' in document.createElement('link')) {
-    const link = document.createElement('link');
-    link.rel = 'prefetch';
-    link.as = 'script';
-    link.href = './App.tsx';
-    document.head.appendChild(link);
-  }
-  return import("./App");
-});
+import App from "./App";
 
 // Register service worker in production with a delay to not block critical rendering
 if (typeof navigator !== "undefined" &&
@@ -41,13 +29,6 @@ if (typeof navigator !== "undefined" &&
   }
 }
 
-// Loading fallback while App is being loaded
-const LoadingFallback = () => (
-  <div className="flex items-center justify-center h-screen w-full">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
-  </div>
-);
-
 // Optimize initial render
 const rootElement = document.getElementById("root");
 
@@ -55,14 +36,12 @@ if (rootElement) {
   // Create root outside of render to avoid extra work
   const root = createRoot(rootElement);
 
-  // Render with Suspense for lazy-loaded App
+  // Render App directly (pages are already lazy-loaded)
   root.render(
     <React.StrictMode>
-      <React.Suspense fallback={<LoadingFallback />}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </React.Suspense>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </React.StrictMode>
   );
 
