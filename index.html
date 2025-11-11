@@ -8,16 +8,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link rel="preconnect" href="https://www.evofuse.xyz" />
-  <link rel="preload" href="/src/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript>
-    <link rel="stylesheet" href="/src/index.css" />
-  </noscript>
   <link rel="modulepreload" href="/src/main.tsx" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Load Google Fonts asynchronously to prevent render blocking -->
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+  </noscript>
   <title>EvoFuse - Earn Games Online | Best Crypto Games with Real Rewards | 2048 & More</title>
   <meta name="description"
     content="Play the best crypto games online and earn real rewards! EvoFuse offers top blockchain games including 2048, Sudoku, and more. Start earning cryptocurrency while playing today." />

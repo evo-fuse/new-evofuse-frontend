@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-// Import critical CSS first
+// Import CSS - Vite will bundle it, but we'll defer loading via script in HTML
 import "./index.css";
 
 // Import preload utility
