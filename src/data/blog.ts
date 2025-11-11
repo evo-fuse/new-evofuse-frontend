@@ -20,6 +20,34 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'best-play-to-earn-games-2025-earn-money-gaming-online',
+    title: 'Earn Online by Playing Games: Best Platforms & Tips for 2025',
+    imageSrc: 'https://i.ibb.co/zTJfmZfW/Blog-2-1.png',
+    variant: 'dark',
+    category: 'game',
+    author: 'EvoFuse Team',
+    postedDate: 'Sep 12, 2025',
+    readingTime: '5 min read',
+    dateValue: new Date('2025-09-12'),
+    content: [
+      { paragraph: '' }
+    ]
+  },
+  {
+    slug: 'earn-online-by-playing-games-best-platforms-and-tips-for-2025',
+    title: 'A Complete Guide to P2E Crypto Gaming: Opportunities, Risks, and the Future',
+    imageSrc: 'https://i.ibb.co/zTJfmZfW/Blog-2-1.png',
+    variant: 'dark',
+    category: 'game',
+    author: 'EvoFuse Team',
+    postedDate: 'Sep 25, 2025',
+    readingTime: '5 min read',
+    dateValue: new Date('2025-09-25'),
+    content: [
+      { paragraph: '' }
+    ]
+  },
+  {
     slug: 'earn-crypto-playing-games',
     title: 'How to Earn Crypto via EvoFuse2048 (and Become the Hero of Your Own Tile Story)',
     imageSrc: blog1,
@@ -240,7 +268,7 @@ export const blogPosts: BlogPost[] = [
       { paragraph: 'As we celebrate these achievements, we\'re also looking forward to new challenges and milestones. Upcoming goals include reaching 50,000 active players, launching our mobile applications, and introducing new games that expand the EvoFuse ecosystem.' },
       { paragraph: 'We\'re grateful to our community for making these achievements possible. Every player, every game session, and every achievement contributes to building something special. Together, we\'re not just playing games—we\'re shaping the future of Web3 gaming.' }
     ]
-  }
+  },
 ]
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
