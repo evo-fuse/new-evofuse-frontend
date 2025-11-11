@@ -113,6 +113,8 @@ function HeroSlideshow() {
                 src={slide.src} 
                 alt={slide.title} 
                 draggable="false"
+                loading={index === 0 ? "eager" : "lazy"}
+                fetchPriority={index === 0 ? "high" : "auto"}
                 style={index === currentIndex && isDragging ? getImageTransform() : {}}
               />
               <div 

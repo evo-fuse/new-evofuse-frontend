@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 import react from '@vitejs/plugin-react'
-import { readFileSync, writeFileSync } from 'fs'
-import { resolve } from 'path'
+import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs'
+import { resolve, join } from 'path'
 
 // Plugin to defer CSS loading to prevent render blocking
 function deferCSSPlugin() {
@@ -64,9 +64,64 @@ function deferCSSPlugin() {
   }
 }
 
+// Plugin to preload LCP image
+function preloadLCPImagePlugin() {
+  return {
+    name: 'preload-lcp-image',
+    writeBundle(options: any) {
+      // After build, find the LCP image and inject preload link
+      if (options.dir) {
+        const htmlPath = resolve(options.dir, 'index.html')
+        const assetsDir = resolve(options.dir, 'assets')
+
+        try {
+          // Find the running.png image in assets directory
+          let lcpImagePath: string | null = null
+
+          if (statSync(assetsDir).isDirectory()) {
+            const findImageInDir = (dir: string): string | null => {
+              try {
+                const entries = readdirSync(dir, { withFileTypes: true })
+                for (const entry of entries) {
+                  const fullPath = join(dir, entry.name)
+                  if (entry.isDirectory()) {
+                    const found = findImageInDir(fullPath)
+                    if (found) return found
+                  } else if (entry.name.includes('running') && entry.name.endsWith('.png')) {
+                    const relativePath = fullPath.replace(options.dir, '').replace(/\\/g, '/')
+                    return relativePath.startsWith('/') ? relativePath : '/' + relativePath
+                  }
+                }
+              } catch (error) {
+                // Ignore errors
+              }
+              return null
+            }
+
+            lcpImagePath = findImageInDir(assetsDir)
+          }
+
+          if (lcpImagePath) {
+            let html = readFileSync(htmlPath, 'utf-8')
+            const preloadLink = `  <link rel="preload" as="image" href="${lcpImagePath}" fetchpriority="high">\n`
+
+            // Insert preload link in the head, before other links
+            if (html.includes('</head>')) {
+              html = html.replace('</head>', preloadLink + '</head>')
+              writeFileSync(htmlPath, html, 'utf-8')
+            }
+          }
+        } catch (error) {
+          console.warn('Could not add LCP image preload:', error)
+        }
+      }
+    }
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), deferCSSPlugin()],
+  plugins: [react(), deferCSSPlugin(), preloadLCPImagePlugin()],
   resolve: {
     alias: {
       '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
