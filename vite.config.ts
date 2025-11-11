@@ -119,9 +119,124 @@ function preloadLCPImagePlugin() {
   }
 }
 
+// Plugin to optimize critical request chains by adding preload hints
+function optimizeCriticalChainsPlugin() {
+  return {
+    name: 'optimize-critical-chains',
+    writeBundle(options: any) {
+      if (options.dir) {
+        const htmlPath = resolve(options.dir, 'index.html')
+        try {
+          let html = readFileSync(htmlPath, 'utf-8')
+
+          // Find the main entry script
+          const scriptRegex = /<script[^>]*src=["']([^"']+)["'][^>]*>/gi
+          let mainScript: string | null = null
+          let match
+
+          while ((match = scriptRegex.exec(html)) !== null) {
+            const href = match[1]
+            if (href.includes('/assets/js/index-')) {
+              mainScript = href
+              break
+            }
+          }
+
+          // Find all modulepreload links
+          const modulepreloadRegex = /<link\s+rel=["']modulepreload["'][^>]*href=["']([^"']+)["'][^>]*>/gi
+          const modulepreloadLinks: Array<{ href: string; fullTag: string }> = []
+
+          while ((match = modulepreloadRegex.exec(html)) !== null) {
+            const href = match[1]
+            const fullTag = match[0]
+            modulepreloadLinks.push({ href, fullTag })
+          }
+
+          // Optimize: Add fetchpriority="high" to main entry script's modulepreload
+          // and ensure vendor chunks are properly prioritized for parallel loading
+          if (mainScript) {
+            let hasOptimizations = false
+
+            // Update main script modulepreload to have high priority
+            const mainScriptModulepreload = modulepreloadLinks.find(link => link.href === mainScript)
+            if (mainScriptModulepreload && !mainScriptModulepreload.fullTag.includes('fetchpriority')) {
+              html = html.replace(
+                mainScriptModulepreload.fullTag,
+                mainScriptModulepreload.fullTag.replace(
+                  /crossorigin/,
+                  'crossorigin fetchpriority="high"'
+                )
+              )
+              hasOptimizations = true
+            }
+
+            // Ensure critical vendor chunks (react-vendor) have modulepreload with proper priority
+            const reactVendorLink = modulepreloadLinks.find(link =>
+              link.href.includes('react-vendor')
+            )
+            if (reactVendorLink && !reactVendorLink.fullTag.includes('fetchpriority')) {
+              html = html.replace(
+                reactVendorLink.fullTag,
+                reactVendorLink.fullTag.replace(
+                  /crossorigin/,
+                  'crossorigin fetchpriority="high"'
+                )
+              )
+              hasOptimizations = true
+            }
+
+            // If main script doesn't have a modulepreload link, add one with high priority
+            if (!mainScriptModulepreload) {
+              const preloadLink = `  <link rel="modulepreload" href="${mainScript}" crossorigin fetchpriority="high">\n`
+
+              // Insert early in the head, right after viewport meta tag
+              const viewportMatch = html.match(/<meta\s+name=["']viewport["'][^>]*>/i)
+              if (viewportMatch && viewportMatch.index !== undefined) {
+                const insertAfter = viewportMatch.index + viewportMatch[0].length
+                html = html.slice(0, insertAfter) + '\n' + preloadLink + html.slice(insertAfter)
+                hasOptimizations = true
+              }
+            }
+
+            // Move all modulepreload links to early in the head if they're not already there
+            // This ensures they're discovered as early as possible
+            const allModulepreloadTags = html.match(/<link\s+rel=["']modulepreload["'][^>]*>/gi) || []
+            if (allModulepreloadTags.length > 0) {
+              // Check if modulepreload links are after viewport (they should be)
+              const viewportMatch = html.match(/<meta\s+name=["']viewport["'][^>]*>/i)
+              const firstModulepreloadMatch = html.match(/<link\s+rel=["']modulepreload["'][^>]*>/i)
+
+              if (viewportMatch && firstModulepreloadMatch &&
+                viewportMatch.index !== undefined && firstModulepreloadMatch.index !== undefined &&
+                firstModulepreloadMatch.index > viewportMatch.index + 500) {
+                // Modulepreload links are too far down, move them up
+                // Remove existing modulepreload links
+                let optimizedHtml = html.replace(/<link\s+rel=["']modulepreload["'][^>]*>/gi, '')
+
+                // Re-insert them right after viewport
+                const insertAfter = viewportMatch.index! + viewportMatch[0].length
+                const modulepreloadBlock = allModulepreloadTags.join('\n') + '\n'
+                optimizedHtml = optimizedHtml.slice(0, insertAfter) + '\n' + modulepreloadBlock + optimizedHtml.slice(insertAfter)
+                html = optimizedHtml
+                hasOptimizations = true
+              }
+            }
+
+            if (hasOptimizations) {
+              writeFileSync(htmlPath, html, 'utf-8')
+            }
+          }
+        } catch (error) {
+          console.warn('Could not optimize critical chains:', error)
+        }
+      }
+    }
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), deferCSSPlugin(), preloadLCPImagePlugin()],
+  plugins: [react(), deferCSSPlugin(), preloadLCPImagePlugin(), optimizeCriticalChainsPlugin()],
   resolve: {
     alias: {
       '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
