@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import { useLoading } from '../contexts/LoadingContext'
 import TermsSkeleton from '../components/TermsSkeleton'
-import Lottie from 'lottie-react'
-import v14Animation from '../assets/v1.4.json'
+import LazyLottie from '../components/LazyLottie'
+// Import as URL to prevent bundling the large JSON file
+import v14AnimationUrl from '../assets/v1.4.json?url'
 
 function PrivacyPolicyPage() {
   const { loading, setLoading } = useLoading()
@@ -26,7 +27,7 @@ function PrivacyPolicyPage() {
         <section className="section page-fade-in">
           <div className="terms-content">
             <div className="terms-header-image">
-              <Lottie animationData={v14Animation} className="terms-lottie" loop={true} />
+              <LazyLottie animationUrl={v14AnimationUrl} className="terms-lottie" loop={true} />
             </div>
             <h1 className="section-title">EvoFuse Privacy and Policy</h1>
 

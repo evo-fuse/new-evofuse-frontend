@@ -59,6 +59,48 @@ function BlogDetailPage() {
               <div key={i} className="blog-detail-block">
                 {block.heading && <h2>{block.heading}</h2>}
                 {block.paragraph && <p>{block.paragraph}</p>}
+                {block.list && (
+                  block.list.type === 'ordered' ? (
+                    <ol>
+                      {block.list.items.map((item, idx) => (
+                        <li key={idx}>{item}</li>
+                      ))}
+                    </ol>
+                  ) : (
+                    <ul>
+                      {block.list.items.map((item, idx) => (
+                        <li key={idx}>{item}</li>
+                      ))}
+                    </ul>
+                  )
+                )}
+                {block.table && (
+                  <table>
+                    <thead>
+                      <tr>
+                        {block.table.headers.map((header, idx) => (
+                          <th key={idx}>{header}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {block.table.rows.map((row, rowIdx) => (
+                        <tr key={rowIdx}>
+                          {row.map((cell, cellIdx) => (
+                            <td key={cellIdx}>{cell}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+                {block.image && (
+                  <img
+                    src={block.image.src}
+                    alt={block.image.alt || post.title}
+                    className={block.image.className}
+                  />
+                )}
               </div>
             ))}
           </div>
