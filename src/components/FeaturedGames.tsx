@@ -29,18 +29,6 @@ function GameBanner({ title, imageSrc, description, slug, category }: { title: s
         <div className="game-separator"></div>
         <div className="game-description">{description}</div>
       </div>
-      {/* <div className="game-banner-cta">
-        {isComingSoon ? (
-          <div className="btn btn-secondary" aria-label="Coming Soon" onClick={handleComingSoonClick}>
-            Coming Soon
-          </div>
-        ) : (
-          <div className="btn btn-primary" aria-label="Play">
-            <FaPlay/>
-            Go
-          </div>
-        )}
-      </div> */}
     </>
   )
   
@@ -63,7 +51,6 @@ function FeaturedGames({ limit }: { limit?: number }) {
   const allGames = [
     { 
       title: '2048', 
-      subtitle: 'Play & Earn', 
       imageSrc: thumb2048, 
       popularity: 5,
       category: 'top' as const,
@@ -72,7 +59,6 @@ function FeaturedGames({ limit }: { limit?: number }) {
     },
     { 
       title: 'Othello', 
-      subtitle: 'Crypto Kings', 
       imageSrc: thumbOthello, 
       popularity: 4,
       category: 'coming-soon' as const,
@@ -81,7 +67,6 @@ function FeaturedGames({ limit }: { limit?: number }) {
     },
     { 
       title: 'Flappy Bird', 
-      subtitle: 'Crypto Flight', 
       imageSrc: thumbFlappy, 
       popularity: 3,
       category: 'coming-soon' as const,
@@ -90,7 +75,6 @@ function FeaturedGames({ limit }: { limit?: number }) {
     },
     { 
       title: 'Carcassonne', 
-      subtitle: 'Strategic Build', 
       imageSrc: thumbCarcassonne, 
       popularity: 2,
       category: 'coming-soon' as const,
