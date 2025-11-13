@@ -1,6 +1,6 @@
 import './App.css'
 import { lazy, Suspense } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { LoadingProvider, useLoading } from './contexts/LoadingContext'
 import { ComingSoonModalProvider } from './contexts/ComingSoonModalContext'
 import { ApplyingModalProvider } from './contexts/ApplyingModalContext'
@@ -39,6 +39,7 @@ function AppContent() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/2048" element={<Navigate to="/game/2048" />} />
             <Route path="/games" element={<GamesPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogDetailPage />} />
