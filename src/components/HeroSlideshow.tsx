@@ -8,12 +8,12 @@ import slideMac from '@slides/mac.png'
 
 function HeroSlideshow() {
   const slides = [
-    { src: slideRunning, title: 'EvoFuse: Classic Games Reborn on Web3', desc: 'Rediscover the games you love—EvoFuse fuses timeless gameplay with real blockchain rewards on the Fuse Network.' },
+    { src: slideRunning, title: 'Classic Games Reborn on Web3', desc: 'Rediscover the games you love—EvoFuse fuses timeless gameplay with real blockchain rewards on the Fuse Network.' },
     { src: slideImagine, title: 'One Ecosystem, Infinite Play', desc: 'From 2048 to Othello and Flappybird, EvoFuse unites classic titles into one connected, reward-powered arcade universe.' },
-    { src: slideSell, title: 'Earn DWAT by Playing Smart', desc: 'Your skills generate value—hit milestones, climb leaderboards, and collect DWAT tokens to use throughout the platform.' },
-    { src: slideTree, title: 'Customize, Create, and Share', desc: 'Shape EvoFuse your way—build new themes, adjust mechanics, and release original creations to showcase or monetize.' },
+    { src: slideSell, title: 'Customize, Create, and Share', desc: 'Shape EvoFuse your way—build new themes, adjust mechanics, and release original creations to showcase or monetize.' },
+    { src: slideTree, title: 'Earn DWAT by Playing Smart', desc: 'Your skills generate value—hit milestones, climb leaderboards, and collect DWAT tokens to use throughout the platform.' },
     { src: slideGround, title: 'Powered by Players, Built for the Future', desc: 'With NFTs, betting modes, and a creator economy ahead, EvoFuse is crafting the next-generation Web3 arcade.' },
-    { src: slideMac, title: 'EvoFuse PC App: Evolve Your Mastery', desc: 'Unlock advanced tools like AI Theme Agent for instant theme creation and Play Record Replay for strategic learning—exclusive to the PC app.' },
+    { src: slideMac, title: 'EvoFuse PC App, Evolve Your Mastery', desc: 'Unlock advanced tools like AI Theme Agent for theme creation and Play Record Replay for strategic learning—exclusive to the PC app.' },
   ]
 
   // Random vertical positions for each slide: 'top', 'middle', 'bottom'
