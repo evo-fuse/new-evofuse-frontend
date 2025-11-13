@@ -1,13 +1,47 @@
-import { FaTimes, FaEnvelope, FaCheck } from 'react-icons/fa'
+import { useState, useRef, useEffect } from 'react'
+import { FaTimes, FaEnvelope, FaCheck, FaFileUpload, FaFile } from 'react-icons/fa'
 import { useApplyingModal } from '../contexts/ApplyingModalContext'
 
 function ApplyingModal() {
   const { isOpen, positionData, closeModal } = useApplyingModal()
+  const [coverLetter, setCoverLetter] = useState('')
+  const [resumeFile, setResumeFile] = useState<File | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (!isOpen) {
+      // Reset form when modal closes
+      setCoverLetter('')
+      setResumeFile(null)
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ''
+      }
+    }
+  }, [isOpen])
 
   if (!isOpen || !positionData) return null
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setResumeFile(file)
+    }
+  }
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click()
+  }
+
+  const handleRemoveFile = () => {
+    setResumeFile(null)
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
+  }
+
   const emailSubject = `${positionData.title} Application`
-  const emailLink = `mailto:careers@evofuse.games?subject=${encodeURIComponent(emailSubject)}`
+  const emailBody = coverLetter ? `\n\nCover Letter:\n${coverLetter}` : ''
+  const emailLink = `mailto:careers@evofuse.games?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
 
   return (
     <div className="applying-modal-overlay" onClick={closeModal}>
@@ -51,6 +85,52 @@ function ApplyingModal() {
           <div className="applying-modal-section">
             <h3 className="applying-modal-section-title">Compensation</h3>
             <p className="applying-modal-compensation">{positionData.compensation}</p>
+          </div>
+
+          <div className="applying-modal-section">
+            <h3 className="applying-modal-section-title">Cover Letter</h3>
+            <textarea
+              className="applying-modal-textarea"
+              placeholder="Tell us why you're interested in this position..."
+              value={coverLetter}
+              onChange={(e) => setCoverLetter(e.target.value)}
+              rows={6}
+            />
+          </div>
+
+          <div className="applying-modal-section">
+            <h3 className="applying-modal-section-title">Resume</h3>
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              accept=".pdf,.doc,.docx"
+              style={{ display: 'none' }}
+            />
+            {!resumeFile ? (
+              <button
+                type="button"
+                className="applying-modal-upload-btn"
+                onClick={handleUploadClick}
+              >
+                <FaFileUpload />
+                Upload Resume
+              </button>
+            ) : (
+              <div className="applying-modal-file-info">
+                <div className="applying-modal-file-name">
+                  <FaFile />
+                  <span>{resumeFile.name}</span>
+                </div>
+                <button
+                  type="button"
+                  className="applying-modal-remove-btn"
+                  onClick={handleRemoveFile}
+                >
+                  Remove
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="applying-modal-actions">
