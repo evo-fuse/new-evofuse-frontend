@@ -95,12 +95,6 @@ function HeroSlideshow() {
                 src={slide.src} 
                 alt={slide.title} 
                 draggable="false"
-<<<<<<< HEAD
-=======
-                loading={index === 0 ? "eager" : "lazy"}
-                fetchPriority={index === 0 ? "high" : "auto"}
-                style={index === currentIndex && isDragging ? getImageTransform() : {}}
->>>>>>> eb814c80fc3ce87e00a1f7433ceec9005d4aeea2
               />
               <div 
                 className={`slide-caption slide-caption-${getSlidePosition(index)}`}
