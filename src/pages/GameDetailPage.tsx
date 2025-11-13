@@ -471,7 +471,11 @@ function GameDetailPage() {
             <div className="game-detail-download-section">
               <div className="game-detail-download-title">Download App</div>
               <div className="game-detail-download-buttons">
-                <a href="#" className="game-detail-download-btn" onClick={(e) => e.preventDefault()}>
+                <a 
+                  href="https://github.com/evo-fuse/2048-frontend/releases/download/PC-App(v1.2)/EvoFuse.2048.rar" 
+                  className="game-detail-download-btn"
+                  download
+                >
                   <div className="game-detail-download-btn-new-banner">
                     <span className="game-detail-download-btn-new-text">New</span>
                   </div>
@@ -480,7 +484,7 @@ function GameDetailPage() {
                     <div className="game-detail-download-btn-header">
                       <span className="game-detail-download-btn-label">Windows</span>
                     </div>
-                    <span className="game-detail-download-btn-subtitle">Version 1.0.0</span>
+                    <span className="game-detail-download-btn-subtitle">Version 1.2</span>
                   </div>
                   <FaDownload className="game-detail-download-icon" />
                 </a>

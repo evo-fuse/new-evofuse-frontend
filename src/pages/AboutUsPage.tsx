@@ -96,13 +96,13 @@ function AboutUsPage() {
                   <h3 className="about-team-name">Felix Hansen</h3>
                   <p className="about-team-role">CEO</p>
                   <div className="about-team-social">
-                    <a href="#" className="about-team-social-link" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/felix-hansen-334040254/" className="about-team-social-link" aria-label="LinkedIn">
                       <FaLinkedin />
                     </a>
-                    <a href="#" className="about-team-social-link" aria-label="Discord">
+                    <a href="https://discord.com/users/750641854555480114" className="about-team-social-link" aria-label="Discord">
                       <FaDiscord />
                     </a>
-                    <a href="#" className="about-team-social-link" aria-label="Facebook">
+                    <a href="https://www.facebook.com/profile.php?id=100072105534212" className="about-team-social-link" aria-label="Facebook">
                       <FaFacebook />
                     </a>
                   </div>
@@ -114,13 +114,13 @@ function AboutUsPage() {
                   <h3 className="about-team-name">Leon Weber</h3>
                   <p className="about-team-role">Founding Engineer</p>
                   <div className="about-team-social">
-                    <a href="#" className="about-team-social-link" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/leon-weber-334040254/" className="about-team-social-link" aria-label="LinkedIn">
                       <FaLinkedin />
                     </a>
-                    <a href="#" className="about-team-social-link" aria-label="Discord">
+                    <a href="https://discord.com/users/51233535480716810" className="about-team-social-link" aria-label="Discord">
                       <FaDiscord />
                     </a>
-                    <a href="#" className="about-team-social-link" aria-label="Facebook">
+                    <a href="https://www.facebook.com/profile.php?id=100081445071508" className="about-team-social-link" aria-label="Facebook">
                       <FaFacebook />
                     </a>
                   </div>
@@ -132,13 +132,13 @@ function AboutUsPage() {
                   <h3 className="about-team-name">John Guerrero</h3>
                   <p className="about-team-role">Founding Engineer</p>
                   <div className="about-team-social">
-                    <a href="#" className="about-team-social-link" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/john-guerrero-56425b254/" className="about-team-social-link" aria-label="LinkedIn">
                       <FaLinkedin />
                     </a>
-                    <a href="#" className="about-team-social-link" aria-label="Discord">
+                    <a href="https://discord.com/users/32941329534215345694" className="about-team-social-link" aria-label="Discord">
                       <FaDiscord />
                     </a>
-                    <a href="#" className="about-team-social-link" aria-label="Facebook">
+                    <a href="https://www.facebook.com/profile.php?id=100063729296202" className="about-team-social-link" aria-label="Facebook">
                       <FaFacebook />
                     </a>
                   </div>

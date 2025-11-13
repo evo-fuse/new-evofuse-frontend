@@ -10,6 +10,7 @@ function ContactUsPage() {
     message: ''
   })
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -28,14 +29,67 @@ function ContactUsPage() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Simulate form submission
-    setSubmitStatus('success')
-    setTimeout(() => {
-      setSubmitStatus('idle')
-      setFormData({ name: '', email: '', message: '' })
-    }, 3000)
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+
+    try {
+      const formDataToSend = new FormData()
+      formDataToSend.append('name', formData.name)
+      formDataToSend.append('email', formData.email)
+      formDataToSend.append('message', formData.message)
+      // Note: _to field may not work on all Formspree plans
+      // Make sure contact@evofuse.xyz is set as the recipient in Formspree dashboard
+      formDataToSend.append('_to', 'contact@evofuse.xyz')
+      formDataToSend.append('_subject', `Contact Form Submission from ${formData.name}`)
+      // Set reply-to to the user's email
+      formDataToSend.append('_replyto', formData.email)
+
+      const response = await fetch('https://formspree.io/f/mkgkgoev', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+
+      // Parse response
+      let responseData = null
+      const contentType = response.headers.get('content-type')
+      if (contentType && contentType.includes('application/json')) {
+        try {
+          responseData = await response.json()
+        } catch (e) {
+          console.warn('Failed to parse JSON response:', e)
+        }
+      }
+
+      if (response.ok) {
+        if (responseData) {
+          console.log('Formspree success:', responseData)
+        }
+        setSubmitStatus('success')
+        setFormData({ name: '', email: '', message: '' })
+        setTimeout(() => {
+          setSubmitStatus('idle')
+        }, 5000)
+      } else {
+        // Log error for debugging
+        if (responseData) {
+          console.error('Formspree error:', responseData)
+        } else {
+          console.error('Formspree error - status:', response.status, response.statusText)
+        }
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      // Log error for debugging
+      console.error('Submission error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (loading) {
@@ -51,7 +105,7 @@ function ContactUsPage() {
             Get in touch with us for any inquiries and questions
           </p>
 
-          <form className="contact-form" onSubmit={handleSubmit}>
+          <form className="contact-form" onSubmit={handleSubmit} action="https://formspree.io/f/mkgkgoev" method="POST">
             <div className="contact-form-group">
               <label htmlFor="name" className="contact-label">NAME</label>
               <input
@@ -95,8 +149,12 @@ function ContactUsPage() {
               <p className="contact-form-note">
                 By submitting this form, you agree to EvoFuse's Terms of Service, Privacy Policy, and EvoFuse contacting you.
               </p>
-              <button type="submit" className="btn btn-primary contact-submit-btn">
-                Submit
+              <button 
+                type="submit" 
+                className="btn btn-primary contact-submit-btn"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Submitting...' : 'Submit'}
               </button>
             </div>
 
