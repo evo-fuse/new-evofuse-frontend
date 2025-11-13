@@ -185,7 +185,7 @@ function ApplyingModal() {
             </ul>
           </div>
 
-          <div className="applying-modal-section">
+          <div className="applying-modal-section applying-modal-section-no-border">
             <h3 className="applying-modal-section-title">Compensation</h3>
             <p className="applying-modal-compensation">{positionData.compensation}</p>
           </div>

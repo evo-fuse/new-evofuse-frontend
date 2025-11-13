@@ -517,6 +517,10 @@
   padding-bottom: 0;
 }
 
+.applying-modal-section-no-border {
+  border-bottom: none !important;
+}
+
 .applying-modal-section-title {
   font-size: 20px;
   font-weight: 700;
