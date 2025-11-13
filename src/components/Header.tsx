@@ -1,6 +1,6 @@
 import siteLogo from '@assets/logo.png'
 import { Link, NavLink } from 'react-router-dom'
-import { FaHome, FaGamepad, FaBookOpen, FaTrophy, FaEnvelope, FaInfoCircle } from 'react-icons/fa'
+import { FaHome, FaGamepad, FaBookOpen, FaEnvelope, FaInfoCircle } from 'react-icons/fa'
 
 function Header() {
   return (
