@@ -14,7 +14,7 @@ import ApplyingModal from './components/ApplyingModal'
 const HomePage = lazy(() => import('./pages/HomePage'))
 const GamesPage = lazy(() => import('./pages/GamesPage'))
 const BlogPage = lazy(() => import('./pages/BlogPage'))
-const LeaderboardPage = lazy(() => import('./pages/LeaderboardPage'))
+// const LeaderboardPage = lazy(() => import('./pages/LeaderboardPage'))
 const TermsPage = lazy(() => import('./pages/TermsPage'))
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'))
 const ContactUsPage = lazy(() => import('./pages/ContactUsPage'))
@@ -43,7 +43,7 @@ function AppContent() {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogDetailPage />} />
             <Route path="/game/:slug" element={<GameDetailPage />} />
-            <Route path="/leaderboard" element={<LeaderboardPage />} />
+            {/* <Route path="/leaderboard" element={<LeaderboardPage />} /> */}
             <Route path="/about" element={<AboutUsPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />

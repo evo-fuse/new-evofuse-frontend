@@ -41,7 +41,7 @@ function ApplyingModal() {
 
   const emailSubject = `${positionData.title} Application`
   const emailBody = coverLetter ? `\n\nCover Letter:\n${coverLetter}` : ''
-  const emailLink = `mailto:careers@evofuse.games?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
+  const emailLink = `mailto:contact@evofuse.xyz?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
 
   return (
     <div className="applying-modal-overlay" onClick={closeModal}>

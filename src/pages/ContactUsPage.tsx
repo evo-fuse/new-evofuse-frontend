@@ -30,7 +30,22 @@ function ContactUsPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Simulate form submission
+    
+    // Create email subject and body
+    const subject = encodeURIComponent(`Contact Form Submission from ${formData.name}`)
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n\n` +
+      `Message:\n${formData.message}`
+    )
+    
+    // Create mailto link
+    const mailtoLink = `mailto:contact@evofuse.xyz?subject=${subject}&body=${body}`
+    
+    // Open email client
+    window.location.href = mailtoLink
+    
+    // Show success message
     setSubmitStatus('success')
     setTimeout(() => {
       setSubmitStatus('idle')
