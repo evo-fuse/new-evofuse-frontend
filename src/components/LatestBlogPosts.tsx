@@ -114,7 +114,7 @@ function LatestBlogPosts({ limit }: { limit?: number }) {
   return (
     <section className="section">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }}>
-        <h2 className="section-title" style={{ margin: 0 }}>Top Voices</h2>
+        <h2 className="section-title">Top Voices</h2>
         <select
           className="leaderboard-select"
           value={selectedCategory}

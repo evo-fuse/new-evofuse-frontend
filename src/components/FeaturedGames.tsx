@@ -96,7 +96,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
     return (
       <>
         <section className="section">
-          <h2 className="section-title" style={{ margin: 0 }}>Top Games</h2>
+          <h2 className="section-title">Top Games</h2>
           <div className="card-grid">
             {games.map((game, index) => (
               <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} slug={game.slug} category={game.category} />
@@ -130,7 +130,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
   return (
     <>
       <section className="section">
-        <h2 className="section-title" style={{ margin: 0 }}>Top Games</h2>
+        <h2 className="section-title">Top Games</h2>
         <div className="card-grid">
           {topGamesPage.map((game, index) => (
             <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} slug={game.slug} category={game.category} />
@@ -170,7 +170,7 @@ function FeaturedGames({ limit }: { limit?: number }) {
       <div className="section-separator"></div>
       
       <section className="section">
-        <h2 className="section-title" style={{ margin: 0 }}>Coming Soon</h2>
+        <h2 className="section-title">Coming Soon</h2>
         <div className="card-grid">
           {comingSoonGamesPage.map((game, index) => (
             <GameBanner key={index} title={game.title} imageSrc={game.imageSrc} description={game.description} slug={game.slug} category={game.category} />
