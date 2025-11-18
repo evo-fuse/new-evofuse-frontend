@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import siteLogo from '@assets/logo.png'
-import { FaTwitter, FaDiscord, FaLinkedin, FaYoutube, FaCheck, FaTimes, FaExclamationTriangle } from 'react-icons/fa'
-import { FaTiktok } from 'react-icons/fa6'
+import { FaDiscord, FaLinkedin, FaYoutube, FaFacebook, FaCheck, FaTimes, FaExclamationTriangle } from 'react-icons/fa'
+import { FaTelegram } from 'react-icons/fa6'
 
 function Footer() {
   const [email, setEmail] = useState('')
@@ -101,11 +101,11 @@ function Footer() {
           </div>
           <div className="footer-brand-name">EVOFUSE</div>
           <div className="footer-socials">
-            <a aria-label="Discord" className="footer-social-icon"><FaDiscord /></a>
-            <a aria-label="Twitter" className="footer-social-icon"><FaTwitter /></a>
-            <a aria-label="LinkedIn" className="footer-social-icon"><FaLinkedin /></a>
-            <a aria-label="TikTok" className="footer-social-icon"><FaTiktok /></a>
-            <a aria-label="YouTube" className="footer-social-icon"><FaYoutube /></a>
+            <a href="https://discord.gg/evofuse" target="_blank" rel="noopener noreferrer" aria-label="Discord" className="footer-social-icon"><FaDiscord /></a>
+            <a href="https://t.me/evofuse" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="footer-social-icon"><FaTelegram /></a>
+            <a href="https://youtube.com/@evofuse" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="footer-social-icon"><FaYoutube /></a>
+            <a href="https://linkedin.com/company/evofuse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="footer-social-icon"><FaLinkedin /></a>
+            <a href="https://facebook.com/evofuse" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="footer-social-icon"><FaFacebook /></a>
           </div>
         </div>
         <div className="footer-newsletter">
