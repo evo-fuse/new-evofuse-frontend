@@ -11,11 +11,12 @@ function ApplyingModal() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errors, setErrors] = useState({
-    name: false,
-    email: false,
-    coverLetter: false,
-    resume: false
+    name: '',
+    email: '',
+    coverLetter: '',
+    resume: ''
   })
+  const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -27,7 +28,8 @@ function ApplyingModal() {
       setResumeFile(null)
       setSubmitStatus('idle')
       setIsSubmitting(false)
-      setErrors({ name: false, email: false, coverLetter: false, resume: false })
+      setErrors({ name: '', email: '', coverLetter: '', resume: '' })
+      setHasAttemptedSubmit(false)
       if (fileInputRef.current) {
         fileInputRef.current.value = ''
       }
@@ -40,6 +42,9 @@ function ApplyingModal() {
     const file = e.target.files?.[0]
     if (file) {
       setResumeFile(file)
+      if (hasAttemptedSubmit && errors.resume) {
+        setErrors(prev => ({ ...prev, resume: '' }))
+      }
     }
   }
 
@@ -56,20 +61,24 @@ function ApplyingModal() {
 
   const validateForm = () => {
     const newErrors = {
-      name: !applicantName.trim(),
-      email: !applicantEmail.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(applicantEmail),
-      coverLetter: !coverLetter.trim(),
-      resume: !resumeFile
+      name: !applicantName.trim() ? 'Required' : '',
+      email: !applicantEmail.trim() 
+        ? 'Required' 
+        : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(applicantEmail)
+        ? 'Please type valid contact email'
+        : '',
+      coverLetter: '', // Cover letter is optional
+      resume: !resumeFile ? 'Please upload your resume' : ''
     }
     setErrors(newErrors)
-    return !Object.values(newErrors).some(error => error)
+    return !Object.values(newErrors).some(error => error !== '')
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setHasAttemptedSubmit(true)
     
     if (!validateForm()) {
-      setSubmitStatus('error')
       return
     }
 
@@ -197,6 +206,7 @@ function ApplyingModal() {
             action="https://formspree.io/f/mkgkgoev" 
             method="POST"
             encType="multipart/form-data"
+            noValidate
           >
             <div className="applying-modal-section">
               <h3 className="applying-modal-section-title">Your Information</h3>
@@ -204,40 +214,35 @@ function ApplyingModal() {
                 <div>
                   <input
                     type="text"
-                    className={`applying-modal-input ${errors.name ? 'applying-modal-input-error' : ''}`}
+                    className={`applying-modal-input ${hasAttemptedSubmit && errors.name ? 'applying-modal-input-error' : ''}`}
                     placeholder="Full Name"
                     value={applicantName}
                     onChange={(e) => {
                       setApplicantName(e.target.value)
-                      if (errors.name) {
-                        setErrors(prev => ({ ...prev, name: !e.target.value.trim() }))
+                      if (hasAttemptedSubmit && errors.name && e.target.value.trim()) {
+                        setErrors(prev => ({ ...prev, name: '' }))
                       }
                     }}
-                    onBlur={() => setErrors(prev => ({ ...prev, name: !applicantName.trim() }))}
-                    required
                   />
-                  {errors.name && <div className="applying-modal-error-message">Required</div>}
+                  {hasAttemptedSubmit && errors.name && <div className="applying-modal-error-message">{errors.name}</div>}
                 </div>
                 <div>
                   <input
                     type="email"
-                    className={`applying-modal-input ${errors.email ? 'applying-modal-input-error' : ''}`}
+                    className={`applying-modal-input ${hasAttemptedSubmit && errors.email ? 'applying-modal-input-error' : ''}`}
                     placeholder="Email Address"
                     value={applicantEmail}
                     onChange={(e) => {
                       setApplicantEmail(e.target.value)
-                      if (errors.email) {
-                        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.target.value)
-                        setErrors(prev => ({ ...prev, email: !e.target.value.trim() || !isValid }))
+                      if (hasAttemptedSubmit && errors.email) {
+                        const isValid = e.target.value.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.target.value)
+                        if (isValid) {
+                          setErrors(prev => ({ ...prev, email: '' }))
+                        }
                       }
                     }}
-                    onBlur={() => {
-                      const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(applicantEmail)
-                      setErrors(prev => ({ ...prev, email: !applicantEmail.trim() || !isValid }))
-                    }}
-                    required
                   />
-                  {errors.email && <div className="applying-modal-error-message">Required</div>}
+                  {hasAttemptedSubmit && errors.email && <div className="applying-modal-error-message">{errors.email}</div>}
                 </div>
               </div>
             </div>
@@ -245,19 +250,12 @@ function ApplyingModal() {
             <div className="applying-modal-section">
               <h3 className="applying-modal-section-title">Cover Letter</h3>
               <textarea
-                className={`applying-modal-textarea ${errors.coverLetter ? 'applying-modal-input-error' : ''}`}
+                className="applying-modal-textarea"
                 placeholder="Tell us why you're interested in this position..."
                 value={coverLetter}
-                onChange={(e) => {
-                  setCoverLetter(e.target.value)
-                  if (errors.coverLetter) {
-                    setErrors(prev => ({ ...prev, coverLetter: !e.target.value.trim() }))
-                  }
-                }}
-                onBlur={() => setErrors(prev => ({ ...prev, coverLetter: !coverLetter.trim() }))}
+                onChange={(e) => setCoverLetter(e.target.value)}
                 rows={6}
               />
-              {errors.coverLetter && <div className="applying-modal-error-message">Required</div>}
             </div>
 
             <div className="applying-modal-section">
@@ -266,12 +264,7 @@ function ApplyingModal() {
                 type="file"
                 name="upload"
                 ref={fileInputRef}
-                onChange={(e) => {
-                  handleFileChange(e)
-                  if (errors.resume && e.target.files?.[0]) {
-                    setErrors(prev => ({ ...prev, resume: false }))
-                  }
-                }}
+                onChange={handleFileChange}
                 accept=".pdf,.doc,.docx"
                 style={{ display: 'none' }}
               />
@@ -279,13 +272,13 @@ function ApplyingModal() {
                 <div>
                   <button
                     type="button"
-                    className={`applying-modal-upload-btn ${errors.resume ? 'applying-modal-upload-btn-error' : ''}`}
+                    className={`applying-modal-upload-btn ${hasAttemptedSubmit && errors.resume ? 'applying-modal-upload-btn-error' : ''}`}
                     onClick={handleUploadClick}
                   >
                     <FaFileUpload />
                     Upload Resume
                   </button>
-                  {errors.resume && <div className="applying-modal-error-message">Required</div>}
+                  {hasAttemptedSubmit && errors.resume && <div className="applying-modal-error-message">{errors.resume}</div>}
                 </div>
               ) : (
                 <div>

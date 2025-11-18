@@ -1225,6 +1225,142 @@
 .blog-detail-content table tbody tr:hover { background: rgba(39, 213, 255, 0.05); }
 .blog-detail-footer { margin-top: 20px; display: flex; justify-content: flex-end; }
 
+/* Roadmap Animations */
+.roadmap-section {
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 32px 0;
+  padding: 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(39, 213, 255, 0.05) 0%, rgba(39, 213, 255, 0.02) 100%);
+  border: 1px solid rgba(39, 213, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.roadmap-section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, rgba(39, 213, 255, 0.8) 0%, rgba(124, 230, 255, 0.4) 100%);
+  border-radius: 2px;
+  opacity: 0;
+  transform: scaleY(0);
+  transition: opacity 0.6s ease 0.3s, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+
+.roadmap-section.roadmap-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.roadmap-section.roadmap-visible::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.roadmap-heading {
+  position: relative;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  font-size: 32px !important;
+  background: linear-gradient(135deg, #fff 0%, #7ce6ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none !important;
+  margin-bottom: 16px !important;
+  padding-left: 20px;
+}
+
+.roadmap-section.roadmap-visible .roadmap-heading {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.roadmap-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scaleX(0);
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, rgba(39, 213, 255, 1) 0%, rgba(124, 230, 255, 0.6) 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(39, 213, 255, 0.8), 0 0 24px rgba(39, 213, 255, 0.4);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+}
+
+.roadmap-section.roadmap-visible .roadmap-heading::after {
+  transform: translateY(-50%) scaleX(1);
+}
+
+.roadmap-paragraph {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+  line-height: 1.9 !important;
+  color: rgba(214, 235, 255, 0.95) !important;
+  padding-left: 20px;
+  position: relative;
+}
+
+.roadmap-section.roadmap-visible .roadmap-paragraph {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.roadmap-paragraph::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: rgba(39, 213, 255, 0.6);
+  font-weight: bold;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.5s ease 0.6s, transform 0.5s ease 0.6s;
+}
+
+.roadmap-section.roadmap-visible .roadmap-paragraph::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Roadmap section hover effects */
+.roadmap-section:hover {
+  background: linear-gradient(135deg, rgba(39, 213, 255, 0.08) 0%, rgba(39, 213, 255, 0.04) 100%);
+  border-color: rgba(39, 213, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(39, 213, 255, 0.15), 0 0 30px rgba(39, 213, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.roadmap-section:hover .roadmap-heading {
+  background: linear-gradient(135deg, #fff 0%, #7ce6ff 50%, #27d5ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pulse animation for roadmap sections */
+@keyframes roadmap-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(39, 213, 255, 0.15), 0 0 30px rgba(39, 213, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(39, 213, 255, 0.25), 0 0 40px rgba(39, 213, 255, 0.2);
+  }
+}
+
+.roadmap-section.roadmap-visible {
+  animation: roadmap-pulse 3s ease-in-out 1s infinite;
+}
+
 /* Pre-Sale Banner */
 .presale-banner { position: fixed; top: 120px; right: -120px; transform: translateX(-50%); z-index: 90; max-width: 400px; width: calc(100% - 32px); }
 .presale-banner-content { background: linear-gradient(135deg, rgba(18, 34, 50, 0.95) 0%, rgba(13, 26, 39, 0.95) 100%); border: 1px solid rgba(39, 213, 255, 0.3); backdrop-filter: blur(12px); border-radius: 16px; padding: 32px 24px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 24px rgba(39, 213, 255, 0.2); text-align: center; position: relative; overflow: hidden; transition: padding 0.3s ease, height 0.3s ease; }

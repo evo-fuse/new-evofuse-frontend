@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react'
+import { useMemo, useEffect, useRef, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { getPostBySlug } from '../data/blog'
 import { useLoading } from '../contexts/LoadingContext'
@@ -8,6 +8,47 @@ function BlogDetailPage() {
   const { slug } = useParams()
   const post = useMemo(() => (slug ? getPostBySlug(slug) : undefined), [slug])
   const { loading, setLoading } = useLoading()
+  const roadmapRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [visibleRoadmaps, setVisibleRoadmaps] = useState<Set<number>>(new Set())
+
+  // Check if a heading is a roadmap heading (starts with Q and contains a year)
+  const isRoadmapHeading = (heading: string | undefined): boolean => {
+    if (!heading) return false
+    return /^Q[1-4]\s+\d{4}/.test(heading.trim())
+  }
+
+  // Intersection Observer for roadmap animations
+  useEffect(() => {
+    if (loading || !post) return
+
+    const observers: IntersectionObserver[] = []
+
+    roadmapRefs.current.forEach((ref, index) => {
+      if (!ref) return
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setVisibleRoadmaps((prev) => new Set(prev).add(index))
+              observer.unobserve(entry.target)
+            }
+          })
+        },
+        {
+          threshold: 0.2,
+          rootMargin: '0px 0px -50px 0px'
+        }
+      )
+
+      observer.observe(ref)
+      observers.push(observer)
+    })
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect())
+    }
+  }, [loading, post])
 
   useEffect(() => {
     setLoading(true)
@@ -55,10 +96,40 @@ function BlogDetailPage() {
             <img src={post.imageSrc} alt={post.title} />
           </div>
           <div className="blog-detail-content">
-            {post.content.map((block, i) => (
-              <div key={i} className="blog-detail-block">
-                {block.heading && <h2>{block.heading}</h2>}
-                {block.paragraph && <p>{block.paragraph}</p>}
+            {post.content.map((block, i) => {
+              const isRoadmapHeadingBlock = isRoadmapHeading(block.heading)
+              // Check if previous block was a roadmap heading (to include the paragraph)
+              const prevBlock = i > 0 ? post.content[i - 1] : null
+              const isRoadmapParagraph = !block.heading && block.paragraph && prevBlock && isRoadmapHeading(prevBlock.heading)
+              const isRoadmap = isRoadmapHeadingBlock || isRoadmapParagraph
+              
+              // Calculate roadmap index
+              let roadmapIndex = -1
+              if (isRoadmapHeadingBlock) {
+                roadmapIndex = post.content.slice(0, i).filter((b) => isRoadmapHeading(b.heading)).length
+              } else if (isRoadmapParagraph && prevBlock) {
+                // Use the same index as the previous roadmap heading
+                roadmapIndex = post.content.slice(0, i - 1).filter((b) => isRoadmapHeading(b.heading)).length
+              }
+              
+              const isVisible = roadmapIndex >= 0 && visibleRoadmaps.has(roadmapIndex)
+
+              return (
+                <div
+                  key={i}
+                  ref={(el) => {
+                    if (isRoadmapHeadingBlock && roadmapIndex >= 0) {
+                      roadmapRefs.current[roadmapIndex] = el
+                    }
+                  }}
+                  className={`blog-detail-block ${isRoadmap ? 'roadmap-section' : ''} ${isVisible ? 'roadmap-visible' : ''}`}
+                >
+                  {block.heading && (
+                    <h2 className={isRoadmap ? 'roadmap-heading' : ''}>{block.heading}</h2>
+                  )}
+                  {block.paragraph && (
+                    <p className={isRoadmap ? 'roadmap-paragraph' : ''}>{block.paragraph}</p>
+                  )}
                 {block.list && (
                   block.list.type === 'ordered' ? (
                     <ol>
@@ -101,8 +172,9 @@ function BlogDetailPage() {
                     className={block.image.className}
                   />
                 )}
-              </div>
-            ))}
+                </div>
+              )
+            })}
           </div>
           <footer className="blog-detail-footer">
             <Link to="/blog" className="btn btn-outline">Back to Blog</Link>
