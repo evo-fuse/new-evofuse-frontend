@@ -247,7 +247,7 @@ function ApplyingModal() {
               </div>
             </div>
 
-            <div className="applying-modal-section">
+            <div className="applying-modal-section applying-modal-section-no-border">
               <h3 className="applying-modal-section-title">Cover Letter</h3>
               <textarea
                 className="applying-modal-textarea"
@@ -258,7 +258,7 @@ function ApplyingModal() {
               />
             </div>
 
-            <div className="applying-modal-section">
+            <div className="applying-modal-section applying-modal-section-no-border">
               <h3 className="applying-modal-section-title">Resume</h3>
               <input
                 type="file"
