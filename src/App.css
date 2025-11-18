@@ -506,19 +506,31 @@
 }
 
 .applying-modal-section {
-  margin-bottom: 24px;
+  margin-top: 0;
+  /* margin-bottom: 24px; */
+  padding-top: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid rgba(39, 213, 255, 0.15);
 }
 
+.applying-modal-section:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+}
+
 .applying-modal-section:last-of-type {
   border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
+  margin-bottom: 24px;
 }
 
 .applying-modal-section-no-border {
   border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+/* Reduce spacing for Compensation section before separator */
+.applying-modal-section-no-border + .applying-modal-separator {
+  margin-top: 8px;
 }
 
 .applying-modal-section-title {
@@ -581,12 +593,12 @@
 .applying-modal-separator {
   height: 1px;
   background: rgba(39, 213, 255, 0.2);
-  margin: 32px 0;
+  margin: 24px 0;
   width: 100%;
 }
 
 .applying-modal-actions {
-  margin-top: 32px;
+  margin-top: 24px;
   padding-top: 24px;
   border-top: 1px solid rgba(39, 213, 255, 0.15);
   display: flex;
@@ -793,7 +805,8 @@
   border-radius: 8px;
   font-size: 14px;
   font-family: 'Poppins', sans-serif;
-  margin-bottom: 16px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .applying-modal-success {
