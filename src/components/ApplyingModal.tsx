@@ -61,9 +61,9 @@ function ApplyingModal() {
 
   const validateForm = () => {
     const newErrors = {
-      name: !applicantName.trim() ? 'Required' : '',
+      name: !applicantName.trim() ? 'Please input your full name' : '',
       email: !applicantEmail.trim() 
-        ? 'Required' 
+        ? 'Please input your contact mail' 
         : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(applicantEmail)
         ? 'Please type valid contact email'
         : '',
