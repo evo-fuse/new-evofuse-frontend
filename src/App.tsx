@@ -19,7 +19,7 @@ const TermsPage = lazy(() => import('./pages/TermsPage'))
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'))
 const ContactUsPage = lazy(() => import('./pages/ContactUsPage'))
 const BlogDetailPage = lazy(() => import('./pages/BlogDetailPage'))
-const AboutUsPage = lazy(() => import('./pages/AboutUsPage'))
+// const AboutUsPage = lazy(() => import('./pages/AboutUsPage'))
 const GameDetailPage = lazy(() => import('./pages/GameDetailPage'))
 
 function AppContent() {
@@ -45,7 +45,7 @@ function AppContent() {
             <Route path="/blog/:slug" element={<BlogDetailPage />} />
             <Route path="/game/:slug" element={<GameDetailPage />} />
             {/* <Route path="/leaderboard" element={<LeaderboardPage />} /> */}
-            <Route path="/about" element={<AboutUsPage />} />
+            {/* <Route path="/about" element={<AboutUsPage />} /> */}
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
             <Route path="/contact" element={<ContactUsPage />} />

@@ -1,6 +1,6 @@
 import siteLogo from '@assets/logo.png'
 import { Link, NavLink } from 'react-router-dom'
-import { FaHome, FaGamepad, FaBookOpen, FaEnvelope, FaInfoCircle } from 'react-icons/fa'
+import { FaHome, FaGamepad, FaBookOpen, FaEnvelope } from 'react-icons/fa'
 
 function Header() {
   return (
@@ -31,10 +31,10 @@ function Header() {
             <FaTrophy className="nav-icon" />
             <span className="nav-text">Leaderboard</span>
           </NavLink> */}
-          <NavLink to="/about" className="nav-item">
+          {/* <NavLink to="/about" className="nav-item">
             <FaInfoCircle className="nav-icon" />
             <span className="nav-text">About Us</span>
-          </NavLink>
+          </NavLink> */}
         </nav>
         <div className="user-actions">
           <Link to="/contact" className="btn btn-contact">
