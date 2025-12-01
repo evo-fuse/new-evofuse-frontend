@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import siteLogo from '@assets/logo.png'
 import { FaYoutube, FaCheck, FaTimes, FaExclamationTriangle, FaInstagram } from 'react-icons/fa'
-import { FaTelegram, FaX } from 'react-icons/fa6'
+import { FaX } from 'react-icons/fa6'
 
 function Footer() {
   const [email, setEmail] = useState('')
