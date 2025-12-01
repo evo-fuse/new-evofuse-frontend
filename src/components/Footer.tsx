@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import siteLogo from '@assets/logo.png'
-import { FaDiscord, FaLinkedin, FaYoutube, FaFacebook, FaCheck, FaTimes, FaExclamationTriangle } from 'react-icons/fa'
-import { FaTelegram } from 'react-icons/fa6'
+import { FaYoutube, FaCheck, FaTimes, FaExclamationTriangle, FaInstagram } from 'react-icons/fa'
+import { FaTelegram, FaX } from 'react-icons/fa6'
 
 function Footer() {
   const [email, setEmail] = useState('')
@@ -26,7 +26,7 @@ function Footer() {
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     // Validate email
     const emailError = validateEmail(email)
     if (emailError) {
@@ -50,7 +50,7 @@ function Footer() {
 
       // Check if response is successful (status 200-299, including 202)
       const isSuccess = response.ok || (response.status >= 200 && response.status < 300) || response.status === 202
-      
+
       if (isSuccess) {
         // Success response - consume the response but don't show it
         try {
@@ -101,11 +101,9 @@ function Footer() {
           </div>
           <div className="footer-brand-name">EVOFUSE</div>
           <div className="footer-socials">
-            <a href="https://discord.gg/evofuse" target="_blank" rel="noopener noreferrer" aria-label="Discord" className="footer-social-icon"><FaDiscord /></a>
-            <a href="https://t.me/evofuse" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="footer-social-icon"><FaTelegram /></a>
             <a href="https://youtube.com/@evofuse" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="footer-social-icon"><FaYoutube /></a>
-            <a href="https://linkedin.com/company/evofuse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="footer-social-icon"><FaLinkedin /></a>
-            <a href="https://facebook.com/evofuse" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="footer-social-icon"><FaFacebook /></a>
+            <a href="https://x.com/evofuse2048" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="footer-social-icon"><FaX /></a>
+            <a href="https://www.instagram.com/evofuse_ai/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="footer-social-icon"><FaInstagram /></a>
           </div>
         </div>
         <div className="footer-newsletter">
@@ -137,8 +135,8 @@ function Footer() {
                 <div className="footer-validation-error">{validationError}</div>
               )}
             </div>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="footer-subscribe-btn"
               disabled={isSubmitting}
             >
